@@ -1,20 +1,20 @@
-# dashboard-scl
+# SCL DASHBOARD
 
-saat e-DO berstatus :
+Saat e-DO berstatus :
 
-  requested
+  Requested
     ga bisa "print"
     ga bisa "edit"
     ga bisa "send to consignee"
 
 
-  rejected
+  Rejected
     ga bisa "print"
     bisa "edit"
     ga bisa "send to consignee"
 
 
-  approved
+  Approved
     bisa "print"
     ga bisa "edit"
     bisa "send to consignee"
