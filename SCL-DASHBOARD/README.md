@@ -2,22 +2,22 @@
 
 Saat e-DO berstatus :
 
-  Requested
-- ga bisa "print"
-- ga bisa "edit"
-- ga bisa "send to consignee"
+Requested
+- Ga bisa "print"
+- Ga bisa "edit"
+- Ga bisa "send to consignee"
 
 
-  Rejected
-- ga bisa "print"
-- bisa "edit"
-- ga bisa "send to consignee"
+Rejected
+- Ga bisa "print"
+- Bisa "edit"
+- Ga bisa "send to consignee"
 
 
-  Approved
-- bisa "print"
-- ga bisa "edit"
-- bisa "send to consignee"
+Approved
+- Bisa "print"
+- Ga bisa "edit"
+- Bisa "send to consignee"
 
 ## Build Setup
 
