@@ -1,0 +1,3676 @@
+{
+	"info": {
+		"_postman_id": "028746c0-2cf4-4f8a-a7de-2f900e493ab2",
+		"name": "scl",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all EDO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				},
+				"description": "superadmin scl , admin scl, kasir spl , admin spl"
+			},
+			"response": [
+				{
+					"name": "Get all EDO",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:19:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total e-DO\": \"10\",\n    \"total e-DO approved\": \"1\",\n    \"total e-DO rejected\": \"2\",\n    \"total e-DO picked up\": \"0\",\n    \"data\": [\n        {\n            \"edo_id\": \"25\",\n            \"edo_number\": \"2020-09-19-11-51-58\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:51:58\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"26\",\n            \"edo_number\": \"2020-09-19-11-52-37\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:37\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"27\",\n            \"edo_number\": \"2020-09-19-11-52-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:43\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"28\",\n            \"edo_number\": \"2020-09-19-11-52-52\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:52\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"29\",\n            \"edo_number\": \"2020-09-19-11-56-23\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:56:23\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-11-56-23.png\"\n        },\n        {\n            \"edo_id\": \"30\",\n            \"edo_number\": \"2020-09-19-15-28-40\",\n            \"shipper_name\": \"tes\",\n            \"consignee_name\": \"asdasdaseds\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:16:07\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": \"2020-09-21\",\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-28-40.png\"\n        },\n        {\n            \"edo_id\": \"31\",\n            \"edo_number\": \"2020-09-19-15-56-56\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:43\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Rejected\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": \"2020-09-21 16:08:43\",\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-56-56.png\"\n        },\n        {\n            \"edo_id\": \"32\",\n            \"edo_number\": \"2020-09-19-15-57-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:19\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Approved\",\n            \"updated_at\": null,\n            \"approved_at\": \"2020-09-21 16:08:19\",\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-57-43.png\"\n        },\n        {\n            \"edo_id\": \"33\",\n            \"edo_number\": \"2020-09-19-15-58-03\",\n            \"shipper_name\": \"tes\",\n            \"consignee_name\": \"asdasdaseds\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:15:28\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Rejected\",\n            \"updated_at\": \"2020-09-21\",\n            \"approved_at\": null,\n            \"rejected_at\": \"2020-09-21 16:07:50\",\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-58-03.png\"\n        },\n        {\n            \"edo_id\": \"35\",\n            \"edo_number\": \"2020-09-21-16-16-54\",\n            \"shipper_name\": \"asep\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 16:16:54\",\n            \"created_by\": \"bondan renaldy\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-21-16-16-54.png\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Get all EDO",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:19:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total e-DO\": \"10\",\n    \"total e-DO approved\": \"1\",\n    \"total e-DO rejected\": \"2\",\n    \"total e-DO picked up\": \"0\",\n    \"data\": [\n        {\n            \"edo_id\": \"25\",\n            \"edo_number\": \"2020-09-19-11-51-58\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:51:58\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"26\",\n            \"edo_number\": \"2020-09-19-11-52-37\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:37\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"27\",\n            \"edo_number\": \"2020-09-19-11-52-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:43\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"28\",\n            \"edo_number\": \"2020-09-19-11-52-52\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:52:52\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"0\"\n        },\n        {\n            \"edo_id\": \"29\",\n            \"edo_number\": \"2020-09-19-11-56-23\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-19 11:56:23\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-11-56-23.png\"\n        },\n        {\n            \"edo_id\": \"30\",\n            \"edo_number\": \"2020-09-19-15-28-40\",\n            \"shipper_name\": \"tes\",\n            \"consignee_name\": \"asdasdaseds\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:16:07\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": \"2020-09-21\",\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-28-40.png\"\n        },\n        {\n            \"edo_id\": \"31\",\n            \"edo_number\": \"2020-09-19-15-56-56\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:43\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Rejected\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": \"2020-09-21 16:08:43\",\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-56-56.png\"\n        },\n        {\n            \"edo_id\": \"32\",\n            \"edo_number\": \"2020-09-19-15-57-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:19\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Approved\",\n            \"updated_at\": null,\n            \"approved_at\": \"2020-09-21 16:08:19\",\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-57-43.png\"\n        },\n        {\n            \"edo_id\": \"33\",\n            \"edo_number\": \"2020-09-19-15-58-03\",\n            \"shipper_name\": \"tes\",\n            \"consignee_name\": \"asdasdaseds\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:15:28\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Rejected\",\n            \"updated_at\": \"2020-09-21\",\n            \"approved_at\": null,\n            \"rejected_at\": \"2020-09-21 16:07:50\",\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-58-03.png\"\n        },\n        {\n            \"edo_id\": \"35\",\n            \"edo_number\": \"2020-09-21-16-16-54\",\n            \"shipper_name\": \"asep\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 16:16:54\",\n            \"created_by\": \"bondan renaldy\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-21-16-16-54.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get EDO by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"30"
+					]
+				},
+				"description": "admin scl dan superadmin scl"
+			},
+			"response": [
+				{
+					"name": "Get EDO by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"30"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:18:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "990"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total e-DO\": \"10\",\n    \"total e-DO approved\": \"1\",\n    \"total e-DO rejected\": \"2\",\n    \"total e-DO picked up\": \"0\",\n    \"data\": [\n        {\n            \"edo_id\": \"30\",\n            \"edo_number\": \"2020-09-19-15-28-40\",\n            \"shipper_name\": \"tes\",\n            \"consignee_name\": \"asdasdaseds\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:16:07\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": \"2020-09-21\",\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-28-40.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Created EDO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDc4MDY4MiwiZXhwIjoxNjAwNzg0MjgyfQ.NwQuVgB6Ync3KF4QjnoE_0O55teR5S1ancFfK6oA2eo"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "shipper_name",
+							"value": "asep",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "asdsadasd",
+							"type": "text"
+						},
+						{
+							"key": "consignee_email",
+							"value": "adsasdasd",
+							"type": "text"
+						},
+						{
+							"key": "notify",
+							"value": "asdasda",
+							"type": "text"
+						},
+						{
+							"key": "house_bl_number",
+							"value": "dasdasdas",
+							"type": "text"
+						},
+						{
+							"key": "mbl_number",
+							"value": "asdasda",
+							"type": "text"
+						},
+						{
+							"key": "pre_carriage",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "place_of_receipt",
+							"value": "dasdasdsa",
+							"type": "text"
+						},
+						{
+							"key": "arrival_date",
+							"value": "2020-09-01",
+							"type": "text"
+						},
+						{
+							"key": "ocean_vessel",
+							"value": "asdasdsadas",
+							"type": "text"
+						},
+						{
+							"key": "voyage_number",
+							"value": "aasdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "container_seal_number",
+							"value": "dasdasdas",
+							"type": "text"
+						},
+						{
+							"key": "port_of_loading",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "port_of_discharges",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "final_destination",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "description_of_goods",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "gross_weight",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "measurment",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "package",
+							"value": "12sa",
+							"type": "text"
+						},
+						{
+							"key": "marks_and_number",
+							"value": "asdasd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-dsf",
+							"disabled": true
+						}
+					]
+				},
+				"description": "hanya oleh admin scl"
+			},
+			"response": [
+				{
+					"name": "Created EDO",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "shipper_name",
+									"value": "asep",
+									"type": "text"
+								},
+								{
+									"key": "consignee_name",
+									"value": "asdasdas",
+									"type": "text"
+								},
+								{
+									"key": "shipper_address",
+									"value": "asdsadasd",
+									"type": "text"
+								},
+								{
+									"key": "consignee_email",
+									"value": "adsasdasd",
+									"type": "text"
+								},
+								{
+									"key": "notify",
+									"value": "asdasda",
+									"type": "text"
+								},
+								{
+									"key": "house_bl_number",
+									"value": "dasdasdas",
+									"type": "text"
+								},
+								{
+									"key": "mbl_number",
+									"value": "asdasda",
+									"type": "text"
+								},
+								{
+									"key": "pre_carriage",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "place_of_receipt",
+									"value": "dasdasdsa",
+									"type": "text"
+								},
+								{
+									"key": "arrival_date",
+									"value": "2020-09-01",
+									"type": "text"
+								},
+								{
+									"key": "ocean_vessel",
+									"value": "asdasdsadas",
+									"type": "text"
+								},
+								{
+									"key": "voyage_number",
+									"value": "aasdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "container_seal_number",
+									"value": "dasdasdas",
+									"type": "text"
+								},
+								{
+									"key": "port_of_loading",
+									"value": "asdasdas",
+									"type": "text"
+								},
+								{
+									"key": "port_of_discharges",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "final_destination",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "description_of_goods",
+									"value": "asdasdas",
+									"type": "text"
+								},
+								{
+									"key": "gross_weight",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "measurment",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "package",
+									"value": "12sa",
+									"type": "text"
+								},
+								{
+									"key": "marks_and_number",
+									"value": "asdasd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-dsf",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:16:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "779"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success created e-DO!\",\n    \"data\": {\n        \"edo_number\": \"2020-09-21-16-16-54\",\n        \"shipper_name\": \"asep\",\n        \"consignee_name\": \"asdasdas\",\n        \"shipper_address\": \"asdsadasd\",\n        \"consignee_email\": \"adsasdasd\",\n        \"notify\": \"asdasda\",\n        \"house_bl_number\": \"dasdasdas\",\n        \"mbl_number\": \"asdasda\",\n        \"pre_carriage\": \"asdasdasd\",\n        \"place_of_receipt\": \"dasdasdsa\",\n        \"arrival_date\": \"2020-09-01\",\n        \"ocean_vessel\": \"asdasdsadas\",\n        \"voyage_number\": \"aasdasdasd\",\n        \"container_seal_number\": \"dasdasdas\",\n        \"port_of_loading\": \"asdasdas\",\n        \"port_of_discharges\": \"asdasdasd\",\n        \"final_destination\": \"asdasdasd\",\n        \"description_of_goods\": \"asdasdas\",\n        \"gross_weight\": \"12\",\n        \"measurment\": \"12\",\n        \"package\": \"12sa\",\n        \"marks_and_number\": \"asdasd\",\n        \"created_at\": \"2020-09-21 16:16:54\",\n        \"created_by\": \"bondan renaldy\",\n        \"status\": \"Requested\",\n        \"barcode_image\": \"2020-09-21-16-16-54.png\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Updated EDO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "shipper_name",
+							"value": "tes",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "asdasdaseds",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "asdsadasd",
+							"type": "text"
+						},
+						{
+							"key": "consignee_email",
+							"value": "adsasdasd",
+							"type": "text"
+						},
+						{
+							"key": "notify",
+							"value": "asdasda",
+							"type": "text"
+						},
+						{
+							"key": "house_bl_number",
+							"value": "dasdasdas",
+							"type": "text"
+						},
+						{
+							"key": "mbl_number",
+							"value": "asdasda",
+							"type": "text"
+						},
+						{
+							"key": "pre_carriage",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "place_of_receipt",
+							"value": "dasdasdsa",
+							"type": "text"
+						},
+						{
+							"key": "arrival_date",
+							"value": "2020-09-01",
+							"type": "text"
+						},
+						{
+							"key": "ocean_vessel",
+							"value": "asdasdsadas",
+							"type": "text"
+						},
+						{
+							"key": "voyage_number",
+							"value": "aasdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "container_seal_number",
+							"value": "dasdasdas",
+							"type": "text"
+						},
+						{
+							"key": "port_of_loading",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "port_of_discharges",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "final_destination",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "description_of_goods",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "gross_weight",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "measurment",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "package",
+							"value": "12sa",
+							"type": "text"
+						},
+						{
+							"key": "marks_and_number",
+							"value": "asdasd",
+							"type": "text"
+						},
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"30"
+					]
+				},
+				"description": "hanya oleh admin scl"
+			},
+			"response": [
+				{
+					"name": "Updated EDO",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "shipper_name",
+									"value": "tes",
+									"type": "text"
+								},
+								{
+									"key": "consignee_name",
+									"value": "asdasdaseds",
+									"type": "text"
+								},
+								{
+									"key": "shipper_address",
+									"value": "asdsadasd",
+									"type": "text"
+								},
+								{
+									"key": "consignee_email",
+									"value": "adsasdasd",
+									"type": "text"
+								},
+								{
+									"key": "notify",
+									"value": "asdasda",
+									"type": "text"
+								},
+								{
+									"key": "house_bl_number",
+									"value": "dasdasdas",
+									"type": "text"
+								},
+								{
+									"key": "mbl_number",
+									"value": "asdasda",
+									"type": "text"
+								},
+								{
+									"key": "pre_carriage",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "place_of_receipt",
+									"value": "dasdasdsa",
+									"type": "text"
+								},
+								{
+									"key": "arrival_date",
+									"value": "2020-09-01",
+									"type": "text"
+								},
+								{
+									"key": "ocean_vessel",
+									"value": "asdasdsadas",
+									"type": "text"
+								},
+								{
+									"key": "voyage_number",
+									"value": "aasdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "container_seal_number",
+									"value": "dasdasdas",
+									"type": "text"
+								},
+								{
+									"key": "port_of_loading",
+									"value": "asdasdas",
+									"type": "text"
+								},
+								{
+									"key": "port_of_discharges",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "final_destination",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "description_of_goods",
+									"value": "asdasdas",
+									"type": "text"
+								},
+								{
+									"key": "gross_weight",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "measurment",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "package",
+									"value": "12sa",
+									"type": "text"
+								},
+								{
+									"key": "marks_and_number",
+									"value": "asdasd",
+									"type": "text"
+								},
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"30"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:16:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Updated e-DO!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Rejected EDO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzA0NDQ0LCJleHAiOjE2MDA3MDgwNDR9.uYeAiqsPifKua4YqYXK3goURfC-VziRFq7D8aYG_TRQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/reject/31",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"reject",
+						"31"
+					]
+				},
+				"description": "hanya oleh superadmin scl"
+			},
+			"response": [
+				{
+					"name": "Rejected EDO",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzA0NDQ0LCJleHAiOjE2MDA3MDgwNDR9.uYeAiqsPifKua4YqYXK3goURfC-VziRFq7D8aYG_TRQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/reject/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"reject",
+								"31"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:08:42 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Rejected e-DO!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Approved EDO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgzMDg0LCJleHAiOjE2MDA3ODY2ODR9.p0WVcDoSSEBxW5hhjWFaXYTPmNDvDvnWFJPjDDHOKLM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/approve/36",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"approve",
+						"36"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Approved EDO",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzA0NDQ0LCJleHAiOjE2MDA3MDgwNDR9.uYeAiqsPifKua4YqYXK3goURfC-VziRFq7D8aYG_TRQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/reject/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"reject",
+								"33"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:07:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Rejected e-DO!\"\n}"
+				},
+				{
+					"name": "Approved EDO",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzA0NDQ0LCJleHAiOjE2MDA3MDgwNDR9.uYeAiqsPifKua4YqYXK3goURfC-VziRFq7D8aYG_TRQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/approve/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"approve",
+								"32"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:08:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Approved e-DO!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete EDO",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/34",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"34"
+					]
+				},
+				"description": "oleh admin scl"
+			},
+			"response": [
+				{
+					"name": "Delete EDO",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"34"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:06:46 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Delete e-DO!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "search EDO by e-do number",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDc4MDY4MiwiZXhwIjoxNjAwNzg0MjgyfQ.NwQuVgB6Ync3KF4QjnoE_0O55teR5S1ancFfK6oA2eo"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/search?e_do_number=220200922131847",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"search"
+					],
+					"query": [
+						{
+							"key": "e_do_number",
+							"value": "220200922131847"
+						}
+					]
+				},
+				"description": "bisa di akses ole 4 role:\r\nsuperadmin scl\r\nadmin scl\r\nkasir spl\r\nadmin spl\r\n\r\nbisa digunakan di dashboard untuk mencari by e-do number dan digunakan juga untuk search by e do number di aplikasi scan"
+			},
+			"response": [
+				{
+					"name": "search EDO by e-do number",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/search?e_do_number=2020-09-19-15-57-43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"search"
+							],
+							"query": [
+								{
+									"key": "e_do_number",
+									"value": "2020-09-19-15-57-43"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:21:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "908"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"edo_id\": \"32\",\n            \"edo_number\": \"2020-09-19-15-57-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:19\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Approved\",\n            \"updated_at\": null,\n            \"approved_at\": \"2020-09-21 16:08:19\",\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-57-43.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all users by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"users",
+						"5"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all users by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/users/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"users",
+								"5"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:03:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "268"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total users\": \"4\",\n    \"data\": [\n        {\n            \"user_id\": \"5\",\n            \"email\": \"dimas123\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"adminspl\",\n            \"password\": \"$2y$10$jGX0oVorigxtin7rCNYefOUMLN5DArICY3w.pd10BJRA6s08vSiKC\",\n            \"created_at\": \"2020-09-21 20:09:56\",\n            \"updated_at\": \"2020-09-21 14:36:28\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNjkxMzU3LCJleHAiOjE2MDA2OTQ5NTd9.VL75j51VdigYA9PfChhZuWchw7YRB7QAQdYfGglEBDQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"users"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				},
+				"description": "hanya bisa di akses superadmin"
+			},
+			"response": [
+				{
+					"name": "Get all users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"users"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:02:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "932"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total users\": \"4\",\n    \"data\": [\n        {\n            \"user_id\": \"2\",\n            \"email\": \"dimas1243\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"admin\",\n            \"password\": \"$2y$10$npaI5/KJS121WuSVzYcv7OqZk6oE1jeWer3CfpipOC7krIi6Uu14m\",\n            \"created_at\": \"2020-09-21 19:59:44\",\n            \"updated_at\": \"2020-09-19 18:53:23\"\n        },\n        {\n            \"user_id\": \"4\",\n            \"email\": \"dimasmaspur@gmail.com\",\n            \"name\": \"dimasmaspur\",\n            \"role\": \"superadmin\",\n            \"password\": \"$2y$10$vF6eVSN/toyirPey88qY4eWAfV55Enoo2TOdCozldzls2B1LHweFq\",\n            \"created_at\": \"2020-09-21 22:57:39\",\n            \"updated_at\": null\n        },\n        {\n            \"user_id\": \"5\",\n            \"email\": \"dimas123\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"adminspl\",\n            \"password\": \"$2y$10$jGX0oVorigxtin7rCNYefOUMLN5DArICY3w.pd10BJRA6s08vSiKC\",\n            \"created_at\": \"2020-09-21 20:09:56\",\n            \"updated_at\": \"2020-09-21 14:36:28\"\n        },\n        {\n            \"user_id\": \"24\",\n            \"email\": \"tes2@gmail.com\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"admin\",\n            \"password\": \"$2y$10$qg9wky2A/QICprFM2eW4JevQ12hPfrn1hveE3TWDQ6hje.6w7/17W\",\n            \"created_at\": \"2020-09-21 22:59:58\",\n            \"updated_at\": \"2020-09-21 15:59:58\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Get all users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"users"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:02:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "932"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"total users\": \"4\",\n    \"data\": [\n        {\n            \"user_id\": \"2\",\n            \"email\": \"dimas1243\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"admin\",\n            \"password\": \"$2y$10$npaI5/KJS121WuSVzYcv7OqZk6oE1jeWer3CfpipOC7krIi6Uu14m\",\n            \"created_at\": \"2020-09-21 19:59:44\",\n            \"updated_at\": \"2020-09-19 18:53:23\"\n        },\n        {\n            \"user_id\": \"4\",\n            \"email\": \"dimasmaspur@gmail.com\",\n            \"name\": \"dimasmaspur\",\n            \"role\": \"superadmin\",\n            \"password\": \"$2y$10$vF6eVSN/toyirPey88qY4eWAfV55Enoo2TOdCozldzls2B1LHweFq\",\n            \"created_at\": \"2020-09-21 22:57:39\",\n            \"updated_at\": null\n        },\n        {\n            \"user_id\": \"5\",\n            \"email\": \"dimas123\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"adminspl\",\n            \"password\": \"$2y$10$jGX0oVorigxtin7rCNYefOUMLN5DArICY3w.pd10BJRA6s08vSiKC\",\n            \"created_at\": \"2020-09-21 20:09:56\",\n            \"updated_at\": \"2020-09-21 14:36:28\"\n        },\n        {\n            \"user_id\": \"24\",\n            \"email\": \"tes2@gmail.com\",\n            \"name\": \"bondan renaldy\",\n            \"role\": \"admin\",\n            \"password\": \"$2y$10$qg9wky2A/QICprFM2eW4JevQ12hPfrn1hveE3TWDQ6hje.6w7/17W\",\n            \"created_at\": \"2020-09-21 22:59:58\",\n            \"updated_at\": \"2020-09-21 15:59:58\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Create  user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNjkzOTM0LCJleHAiOjE2MDA2OTc1MzR9.Zbwy_r2eTyW-mEeANeWsrrdYO1-zbX2ZtGF8YFHbEyc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test6@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "bondan renaldy",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "kasir",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dimas123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"users"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				},
+				"description": "hanya bisa di akses oleh superadmin scl"
+			},
+			"response": [
+				{
+					"name": "Create  user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test6@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "bondan renaldy",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "kasir",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "dimas123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"users"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 15:55:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "218"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success created user\",\n    \"data\": {\n        \"email\": \"test6@gmail.com\",\n        \"name\": \"bondan renaldy\",\n        \"role\": \"kasir\",\n        \"password\": \"$2y$10$qg9wky2A/QICprFM2eW4JevQ12hPfrn1hveE3TWDQ6hje.6w7/17W\",\n        \"created_at\": \"2020-09-21 15:55:52\"\n    }\n}"
+				},
+				{
+					"name": "Create  user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test6@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "bondan renaldy",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "kasir",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "dimas123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"users"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 15:55:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "218"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success created user\",\n    \"data\": {\n        \"email\": \"test6@gmail.com\",\n        \"name\": \"bondan renaldy\",\n        \"role\": \"kasir\",\n        \"password\": \"$2y$10$qg9wky2A/QICprFM2eW4JevQ12hPfrn1hveE3TWDQ6hje.6w7/17W\",\n        \"created_at\": \"2020-09-21 15:55:52\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "search users by name/email",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/search_user?email=tes6@gmail.com&name=bondan renaldy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"search_user"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "tes6@gmail.com"
+						},
+						{
+							"key": "name",
+							"value": "bondan renaldy"
+						}
+					]
+				},
+				"description": "bisa di akses oleh superadmin scl "
+			},
+			"response": [
+				{
+					"name": "search users by name/email",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/search_user?email=tes6@gmail.com&name=bondan renaldy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"search_user"
+							],
+							"query": [
+								{
+									"key": "edo_number",
+									"value": "2020-09-01-210:90",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "tes6@gmail.com"
+								},
+								{
+									"key": "name",
+									"value": "bondan renaldy"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:01:01 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "247"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"user_id\": \"2\",\n        \"email\": \"dimas1243\",\n        \"name\": \"bondan renaldy\",\n        \"role\": \"admin\",\n        \"password\": \"$2y$10$npaI5/KJS121WuSVzYcv7OqZk6oE1jeWer3CfpipOC7krIi6Uu14m\",\n        \"created_at\": \"2020-09-21 19:59:44\",\n        \"updated_at\": \"2020-09-19 18:53:23\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "tes2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "bondan renaldy",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dimas123",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/users/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"users",
+						"24"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				},
+				"description": "bisa di akses hanya oleh superadmin scl"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "sampis@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "bondan renaldy",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dimas123",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/users/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"users",
+						"8"
+					],
+					"query": [
+						{
+							"key": "edo_number",
+							"value": "2020-09-01-210:90",
+							"disabled": true
+						}
+					]
+				},
+				"description": "bisa di akses hanya oleh superadmin scl"
+			},
+			"response": []
+		},
+		{
+			"name": "edit password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzAyODc5LCJleHAiOjE2MDA3MDY0Nzl9.NhM7AYBhNLMf8e2mlg7vKRK-wKBt--n3cTeIZK_GmkM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "dimas123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/edit_password/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"edit_password",
+						"4"
+					]
+				},
+				"description": "bisa di akses oleh 4 role : \r\nsuperadmin scl\r\nadmin scl\r\nkasir spl\r\nadmin spl"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "dimasmaspur@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dimas123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"login"
+					]
+				},
+				"description": "api login untuk 4 roles\r\nsuperadmin scl\r\nadmin scl\r\nkasir spl\r\nadmin spl\r\n\r\nrole di database \r\nsuperadmin scl == 'superadmin'\r\nadmin scl == 'admin'\r\n\r\nkasir spl == 'kasir'\r\nadmin spl == 'adminspl'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "print",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwMjUzOSwiZXhwIjoxNjAwNzA2MTM5fQ.uUrGEO95-2YTiGFVHGryt088ywoFQB9SWli0eKYOhg8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "emailReceipt",
+							"value": "dimasmaspur@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "subject",
+							"value": "dimas123",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "tes",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/print/32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"print",
+						"32"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "print",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwMjUzOSwiZXhwIjoxNjAwNzA2MTM5fQ.uUrGEO95-2YTiGFVHGryt088ywoFQB9SWli0eKYOhg8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "emailReceipt",
+									"value": "dimasmaspur@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "dimas123",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "tes",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/print/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"print",
+								"32"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:26:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "940"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"edo_id\": \"32\",\n            \"edo_number\": \"2020-09-19-15-57-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:24:17\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"bondan renaldy\",\n            \"status\": \"Picked Up\",\n            \"updated_at\": null,\n            \"approved_at\": \"2020-09-21 16:08:19\",\n            \"rejected_at\": null,\n            \"picked_up_at\": \"2020-09-21 16:24:17\",\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-57-43.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "picked up",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJlbWFpbCI6ImRpbWFzMTIzIiwibmFtZSI6ImJvbmRhbiByZW5hbGR5Iiwicm9sZSI6ImFkbWluc3BsIiwiaWF0IjoxNjAwNzgzMTQ3LCJleHAiOjE2MDA3ODY3NDd9.JkzyPVa8qaBawtE7TQaQ8Ig_c3LhVAWSHzKUS5t9Xew",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/picked_up/36",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"picked_up",
+						"36"
+					]
+				},
+				"description": "admin spl"
+			},
+			"response": [
+				{
+					"name": "picked up",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJlbWFpbCI6ImRpbWFzMTIzIiwibmFtZSI6ImJvbmRhbiByZW5hbGR5Iiwicm9sZSI6ImFkbWluc3BsIiwiaWF0IjoxNjAwNzA1NDAwLCJleHAiOjE2MDA3MDkwMDB9.DAFhYrqjHX5kwV6clzfGTbMlB77Fan21jxlJV0oSeLs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/picked_up/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"picked_up",
+								"32"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:24:17 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Picked Up e-DO!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "send to consignee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwMjUzOSwiZXhwIjoxNjAwNzA2MTM5fQ.uUrGEO95-2YTiGFVHGryt088ywoFQB9SWli0eKYOhg8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "emailReceipt",
+							"value": "dimasmaspur@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "subject",
+							"value": "dimas123",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "tes",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/send_to_consignee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"send_to_consignee"
+					]
+				},
+				"description": "admin scl"
+			},
+			"response": []
+		},
+		{
+			"name": "Scan barcode EDO ",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjI0IiwiZW1haWwiOiJ0ZXMyQGdtYWlsLmNvbSIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJrYXNpciIsImlhdCI6MTYwMDc4MTM2OCwiZXhwIjoxNjAwNzg0OTY4fQ.GC4Kjh7Odw1GlEymyQDw0ao25pNfSxULNmB8nJJlX8c"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/scan_barcode?e_do_number=220200922131847",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"scan_barcode"
+					],
+					"query": [
+						{
+							"key": "e_do_number",
+							"value": "220200922131847"
+						}
+					]
+				},
+				"description": "admin spl dan kasir"
+			},
+			"response": [
+				{
+					"name": "Scan barcode EDO ",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjI0IiwiZW1haWwiOiJ0ZXMyQGdtYWlsLmNvbSIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJrYXNpciIsImlhdCI6MTYwMDc4MTM2OCwiZXhwIjoxNjAwNzg0OTY4fQ.GC4Kjh7Odw1GlEymyQDw0ao25pNfSxULNmB8nJJlX8c"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/scan_barcode?e_do_number=220200922131847",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"scan_barcode"
+							],
+							"query": [
+								{
+									"key": "e_do_number",
+									"value": "220200922131847"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:29:41 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "893"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success scan e-DO\",\n    \"data\": [\n        {\n            \"edo_id\": \"36\",\n            \"edo_number\": \"220200922131847\",\n            \"shipper_name\": \"asep\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-22 13:18:47\",\n            \"created_by\": \"bondan renaldy\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Requested\",\n            \"updated_at\": null,\n            \"approved_at\": null,\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"220200922131847.png\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "search EDO by e-do number",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImRpbWFzMTI0MyIsIm5hbWUiOiJib25kYW4gcmVuYWxkeSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwMDcwNDM3MywiZXhwIjoxNjAwNzA3OTczfQ.wsq9KP3g3MtjRifJR6S7DuIeD9mh8v9VDk4gcIgkLeI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/search?e_do_number=2020-09-19-15-57-43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"search"
+							],
+							"query": [
+								{
+									"key": "e_do_number",
+									"value": "2020-09-19-15-57-43"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 21 Sep 2020 16:21:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "908"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"edo_id\": \"32\",\n            \"edo_number\": \"2020-09-19-15-57-43\",\n            \"shipper_name\": \"mamang kesbor\",\n            \"consignee_name\": \"asdasdas\",\n            \"shipper_address\": \"asdsadasd\",\n            \"consignee_email\": \"adsasdasd\",\n            \"notify\": \"asdasda\",\n            \"house_bl_number\": \"dasdasdas\",\n            \"mbl_number\": \"asdasda\",\n            \"pre_carriage\": \"asdasdasd\",\n            \"place_of_receipt\": \"dasdasdsa\",\n            \"arrival_date\": \"2020-09-01\",\n            \"ocean_vessel\": \"asdasdsadas\",\n            \"voyage_number\": \"aasdasdasd\",\n            \"container_seal_number\": \"dasdasdas\",\n            \"port_of_loading\": \"asdasdas\",\n            \"port_of_discharges\": \"asdasdasd\",\n            \"final_destination\": \"asdasdasd\",\n            \"description_of_goods\": \"asdasdas\",\n            \"gross_weight\": \"12\",\n            \"measurment\": \"12\",\n            \"package\": \"12sa\",\n            \"marks_and_number\": \"asdasd\",\n            \"created_at\": \"2020-09-21 23:08:19\",\n            \"created_by\": \"asnhor\",\n            \"picked_up_by\": \"\",\n            \"status\": \"Approved\",\n            \"updated_at\": null,\n            \"approved_at\": \"2020-09-21 16:08:19\",\n            \"rejected_at\": null,\n            \"picked_up_at\": null,\n            \"send_mail\": \"0\",\n            \"barcode_image\": \"2020-09-19-15-57-43.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get consignee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/consignee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"consignee"
+					]
+				},
+				"description": "superadmin scl"
+			},
+			"response": [
+				{
+					"name": "get consignee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get consignee by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "consignee_email",
+							"value": "dimasmaspur4@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "consignee_name",
+							"value": "pt clevara",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "consignee_address",
+							"value": "jaln jalan yu",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/consignee/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"consignee",
+						"2"
+					]
+				},
+				"description": "superadmin scl"
+			},
+			"response": [
+				{
+					"name": "get consignee by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=98"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "get consignee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "get consignee by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "consignee_email",
+									"value": "dimasmaspur4@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "consignee_name",
+									"value": "pt clevara",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "consignee_address",
+									"value": "jaln jalan yu",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:51:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "148"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"2\",\n            \"consignee_name\": \"pt clevara\",\n            \"consignee_email\": \"dimasmaspur@gmail.com\",\n            \"consignee_address\": \"jaln jalan yu\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create consigne",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "consignee_email",
+							"value": "dimasmaspur4@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "pt clevara",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "jaln jalan yu",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/consignee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"consignee"
+					]
+				},
+				"description": "superadmin scl"
+			},
+			"response": [
+				{
+					"name": "get consignee by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=98"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "get consignee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "edit consigne",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "consignee_email",
+							"value": "dimasmaspur4@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "pt clevara yuhu",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "jaln jalan yu",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/consignee/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"consignee",
+						"2"
+					]
+				},
+				"description": "superadmin scl"
+			},
+			"response": [
+				{
+					"name": "edit consigne",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "consignee_email",
+									"value": "dimasmaspur4@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "consignee_name",
+									"value": "pt clevara yuhu",
+									"type": "text"
+								},
+								{
+									"key": "consignee_address",
+									"value": "jaln jalan yu",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"2"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:52:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Updated consignee!\"\n}"
+				},
+				{
+					"name": "get consignee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "get consignee by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=98"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "delete consigne",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "consignee_email",
+							"value": "dimasmaspur4@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "consignee_name",
+							"value": "pt clevara yuhu",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "consignee_address",
+							"value": "jaln jalan yu",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/e-do/api/e_do/consignee/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"e-do",
+						"api",
+						"e_do",
+						"consignee",
+						"2"
+					]
+				},
+				"description": "superadmin scl"
+			},
+			"response": [
+				{
+					"name": "get consignee by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=98"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "edit consigne",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "consignee_email",
+									"value": "dimasmaspur4@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "consignee_name",
+									"value": "pt clevara yuhu",
+									"type": "text"
+								},
+								{
+									"key": "consignee_address",
+									"value": "jaln jalan yu",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee",
+								"2"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:52:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Success Updated consignee!\"\n}"
+				},
+				{
+					"name": "get consignee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJlbWFpbCI6ImRpbWFzbWFzcHVyQGdtYWlsLmNvbSIsIm5hbWUiOiJkaW1hc21hc3B1ciIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNjAwNzgyNDczLCJleHAiOjE2MDA3ODYwNzN9.CwFi2jcHGN9F4mPvZ-cugHPuPKyEIfg3a8s9JhgfIhs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/e-do/api/e_do/consignee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"e-do",
+								"api",
+								"e_do",
+								"consignee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 22 Sep 2020 13:48:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.43 (Win64) OpenSSL/1.1.1g PHP/7.4.8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"consignee_name\": \"PT HIT\",\n            \"consignee_email\": \"hit@hit.com\",\n            \"consignee_address\": \"jalanasdansldsa\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
