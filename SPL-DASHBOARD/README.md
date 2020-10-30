@@ -1,4 +1,4 @@
-# SPL-DASHBOARD
+# SPL DASHBOARD
 
 ## Build Setup
 
