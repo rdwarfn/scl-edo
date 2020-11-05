@@ -52,9 +52,9 @@
     </v-dialog>
     <!-- end dialog reject -->
 
-    <!-- dialog paid -->
-    <dialog-paid :dialog="paid.showDialog" :loading="paidRejectLoading" @onSubmit="_onDialogPaidSubmit" @onCancel="_onDialogPaidCancel"></dialog-paid>
-    <!-- end dialog paid -->
+    <!-- dialog house bl number -->
+    <dialog-house-bl-number :dialog="paid.showDialog" :loading="paidRejectLoading" @onSubmit="_onDialogPaidSubmit" @onCancel="_onDialogPaidCancel"></dialog-house-bl-number>
+    <!-- end dialog house bl number -->
 
     <!-- status e-do: total, unpaid, paid, rejected -->
     <card-list-status-edo :count="count" />
@@ -408,7 +408,7 @@ import {
   setDisabledActions
 } from '@/utils';
 import CardListStatusEdo from '@/components/CardListStatusEdo.vue';
-import DialogPaid from '@/components/DialogPaid.vue';
+import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
 
 setInteractionMode ('eager');
 
@@ -422,7 +422,7 @@ export default {
   },
   components: {
     CardListStatusEdo,
-    DialogPaid,
+    DialogHouseBlNumber,
     ValidationObserver,
     ValidationProvider
   },
@@ -486,16 +486,18 @@ export default {
   },
   watch: {
     tabelData: function (val) {
-      // const newEdo = _.filter (val, function (o) {
-      //   let status = _.upperCase (o.status)
-      //   return status === 'UNPAID';
-      // });
-      // const history = _.filter (val, function (obj) {
-      //   let status = _.upperCase (obj.status);
-      //   return status !== 'UNPAID';
-      // })
-      this.tabItems[0].data = this.tabelDataFilter;
-      this.tabItems[1].data = this.tabelDataFilter;
+      const newEdo = _.filter (val, function (o) {
+        let status = _.upperCase (o.status)
+        return status === 'UNPAID';
+      });
+      const history = _.filter (val, function (obj) {
+        let status = _.upperCase (obj.status);
+        return status !== 'UNPAID';
+      })
+      // this.tabItems[0].data = this.tabelDataFilter;
+      // this.tabItems[1].data = this.tabelDataFilter;
+      this.tabItems[0].data = newEdo;
+      this.tabItems[1].data = history;
     },
 
     statusSearch (val) {

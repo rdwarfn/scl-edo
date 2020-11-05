@@ -6,18 +6,14 @@ export default {
   // },
 
   /*
-  ** Nuxt rendering mode
-  */
-  mode: 'universal',
-  /*
   ** Nuxt target
   */
   target: 'server',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - dashboard-scl',
-    title: 'dashboard-scl',
+    titleTemplate: '%s - SCL e-DO',
+    title: 'SCL e-DO',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -50,12 +50,16 @@
       </v-alert>
     </v-dialog>
 
+    <!-- dialog house_bl_number -->
+    <dialog-house-bl-number :dialog="house_bl.showDialog" :loading="house_bl.loading" @onSubmit="_onDialogHouseBLSubmit" @onCancel="_onDialogHouseBLCancel"></dialog-house-bl-number>
+    <!-- end dialog house_bl_number -->
+
     <v-alert
-      outlined
+      :outlined="alertStatus.outline"
       transition="slide-x-reverse-transition"
       :color="alertStatus.color"
       :value="alertStatus.show"
-      icon="mdi-checkbox-marked-circle-outline"
+      :icon="alertStatus.icon"
     >
       {{ alertStatus.message }}
     </v-alert>
@@ -72,7 +76,7 @@
       </v-col>
 
       <v-col class="text-right">
-        <v-btn class="mr-3" color="warning" v-show="isCanReissue" @click="_handleReissue (edo.edo_id, edo.edo_number)" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+        <v-btn class="mr-3" color="warning" @click.prevent="_openDialogPaid" :disabled="!isCanReissue" :loading="$fetchState.pending">
           Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
         </v-btn>
 
@@ -83,9 +87,9 @@
     </v-row>
 
 
-    <v-row>
+    <v-row align-md="center">
       <v-col cols="12" sm="6">
-        <v-row>
+        <v-row no-gutters>
           <v-col>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
@@ -110,7 +114,7 @@
       </v-col>
 
       <v-col>
-        <v-row justify="end">
+        <v-row no-gutters justify="end">
           <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
             <qrcode
               :value="edo.edo_number"
@@ -362,14 +366,27 @@
 <script>
 import _ from 'lodash';
 import qs from 'querystring';
-import { getColorStatus, isCanReject, isCanSendToConsignee } from '@/utils';
-import { ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate';
 import pdfmake from 'pdfmake';
+import {
+  getColorStatus,
+  isCanReject,
+  isCanSendToConsignee
+} from '@/utils';
+import {
+  ValidationObserver,
+  ValidationProvider,
+  setInteractionMode
+} from 'vee-validate';
+import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
 
 
 setInteractionMode ('eager');
 export default {
-  components: { ValidationObserver, ValidationProvider },
+  components: {
+    DialogHouseBlNumber,
+    ValidationObserver,
+    ValidationProvider,
+  },
 
   meta: {
     crumbs: [{
@@ -391,7 +408,13 @@ export default {
       alertStatus: {
         show: false,
         message: '',
-        color: ''
+        color: '',
+        icon: 'mdi-checkbox-marked-circle-outline',
+        outline: true
+      },
+      house_bl: {
+        showDialog: false,
+        loading: false
       }
     }
   },
@@ -409,13 +432,19 @@ export default {
 
   watch: {
     edo (val) {
+      const user_role = this.$auth.hasScope('admin') ? 'Superadmin' : ''
       if (val.status !== 'UNPAID' && val.status !== 'PAID' && val.status !== 'REISSUED') {
         let statusReleased = val.status === 'RELEASED' &&
-          `e-DO ${val.edo_number} has been Released at ${this.$moment(val.released_at).format('DD MMMM YYYY - hh:mm')}`
+          `e-DO ${val.edo_number} has been Released at ${(val.released_at)}`
         let statusRejected = val.status === 'REJECTED' &&
-          `e-DO ${val.edo_number} has been Rejected at ${this.$moment(val.rejected_at).format('DD MMMM YYYY - hh:mm')}`
-        this.alertStatus.message = statusReleased || statusRejected
-        this.alertStatus.color = statusRejected ? 'error' : 'purple'
+          `e-DO ${val.edo_number} has been Rejected at ${val.rejected_at}`
+        let statusOnHold = val.status == 'HOLD ON' &&
+          `e-DO ${val.edo_number} is Hold by ${user_role} ${this.$store.state.auth.user.name}`
+        this.alertStatus.message = statusReleased || statusRejected || statusOnHold
+        this.alertStatus.color = statusReleased ? 'purple' : statusRejected ? 'error' : 'warning'
+        // this.alertStatus.outline = !statusOnHold
+        this.alertStatus.icon = statusOnHold ? 'mdi-delta' : this.alertStatus.icon
+        // 'rgba(255, 221, 87, 0.15)'
         this.alertStatus.show = true
       }
     }
@@ -435,12 +464,11 @@ export default {
       // else if (this.isNotEmpty && _.upperCase(this.edo.status) === 'REJECTED') {
       //   return true
       // }
-    }
+    },
   },
 
   methods: {
     colors (params) { return getColorStatus (params) },
-
     // async _handleSenToConsignee (e) {
     //   this.$toast.global.app_loading ();
     //   await this.$axios.post (`/api/e_do/send_to_consignee`)
@@ -461,15 +489,33 @@ export default {
       }
     },
 
-    async _handleReissue (edo_id, edo_number) {
+    _openDialogPaid() {
+      this.house_bl.showDialog = true
+    },
+
+    _onDialogHouseBLSubmit(data) {
+      console.log(data);
+      this._handleReissue(this.edo.edo_id, this.edo.edo_number, data.form)
+    },
+
+    _onDialogHouseBLCancel() {
+      this.house_bl.showDialog = false
+    },
+
+    async _handleReissue (edo_id, edo_number, house_bl_number) {
       this.$toast.global.app_loading ();
+      this.house_bl.loading = true
       try {
-        const response = await this.$axios.put (`/api/e_do/reissued/${edo_id}`)
-        this.$toast.global.app_success (`Success reissued e-DO ${edo_number}`)
+        const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(house_bl_number))
+        this.$toast.clear()
+        this.$toast.global.app_success(`e-DO ${edo_number} successfully Hold.`)
       } catch (error) {
-        this.$toast.global.app_error (`${error.response.data.status}`)
+        this.$toast.clear()
+        this.$toast.global.app_error(`${error.response.data.status}`)
       } finally {
-        this.$fetch ()
+        this.house_bl.loading = false
+        this.$fetch ();
+        this._onDialogHouseBLCancel();
       }
     },
 

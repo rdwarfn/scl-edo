@@ -767,7 +767,9 @@ export default {
     formatDate (date) {
       if (!date) return null
 
-      const [year, month, day] = date.split('-')
+      // const [year, month, day] = date.split('-')
+      // return `${day}/${month}/${year}`
+      const [day, month, year] = date.split('-')
       return `${day}/${month}/${year}`
     },
 

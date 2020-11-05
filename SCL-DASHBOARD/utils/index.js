@@ -26,6 +26,9 @@ export const getColorStatus = (params) => {
 
     case 'PAID':
       return '#00D1B2';
+
+    case 'HOLD ON':
+      return '#FFDD57'
   }
 }
 
