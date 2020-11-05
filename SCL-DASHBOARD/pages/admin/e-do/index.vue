@@ -10,7 +10,7 @@
         elevation="2"
         class="pt-5 ma-0"
       >
-        <validation-observer ref="observer" v-slot="{handleSubmit, invalid}">
+        <validation-observer ref="observer" v-slot="{ handleSubmit, invalid }">
           <v-card flat class="pa-0 mt-n1" tag="form" @submit.prevent="handleSubmit(_handleReject)">
             <v-card-title class="pt-0">
               Reject this e-DO &nbsp;<span style="color: #3273DC !important">{{ reject.edo.edo_number }}</span> ?
@@ -51,6 +51,10 @@
       </v-alert>
     </v-dialog>
     <!-- end dialog reject -->
+
+    <!-- dialog paid -->
+    <dialog-paid :dialog="paid.showDialog" :loading="paidRejectLoading" @onSubmit="_onDialogPaidSubmit" @onCancel="_onDialogPaidCancel"></dialog-paid>
+    <!-- end dialog paid -->
 
     <!-- status e-do: total, unpaid, paid, rejected -->
     <card-list-status-edo :count="count" />
@@ -194,7 +198,7 @@
                       color="#00D1B2"
                       :loading="paidRejectLoading"
                       :disabled="isNotRequested(item.status) || paidRejectLoading"
-                      @click.prevent="_handlePaid (item.edo_id, item.edo_number)"
+                      @click.prevent="_openDialogPaid (item)"
                     >
                       <!-- :dark="!isNotRequested(item.status) || !paidRejectLoading" -->
                       <span style="color: white">Paid</span>
@@ -403,8 +407,9 @@ import {
   getColorStatus,
   setDisabledActions
 } from '@/utils';
-
 import CardListStatusEdo from '@/components/CardListStatusEdo.vue';
+import DialogPaid from '@/components/DialogPaid.vue';
+
 setInteractionMode ('eager');
 
 export default {
@@ -417,9 +422,10 @@ export default {
   },
   components: {
     CardListStatusEdo,
-    ValidationObserver, ValidationProvider
+    DialogPaid,
+    ValidationObserver,
+    ValidationProvider
   },
-
   data () {
     return {
       paidRejectLoading: false,
@@ -428,6 +434,11 @@ export default {
         description: '',
         edo: {}
       },
+      paid: {
+        showDialog: false,
+        edo: {},
+      },
+
       currentItem: 'tab-history',
       tabItems: [{
           text: 'New Edo',
@@ -473,7 +484,6 @@ export default {
       }
     }
   },
-
   watch: {
     tabelData: function (val) {
       // const newEdo = _.filter (val, function (o) {
@@ -493,12 +503,10 @@ export default {
       this.tabItems[1].data = newEdo
     }
   },
-
   async fetch () {
     await this.getAll()
   },
   fetchOnServer: false,
-
   methods: {
     getColor (params) { return getColorStatus (params) },
     isNotRequested: params => setDisabledActions(params),
@@ -540,21 +548,33 @@ export default {
     },
 
 
-    async _handlePaid (edo_id, edo_number) {
+    _openDialogPaid(edo) {
+      this.paid.showDialog = true
+      this.paid.edo = _.assign(this.paid.edo, edo)
+    },
+    async _onDialogPaidSubmit(data) {
+      await this.putApprove(data)
+    },
+    _onDialogPaidCancel() {
+      this.paid.showDialog = false
+    },
+    async putApprove (obj) {
       this.$toast.global.app_loading();
       this.paidRejectLoading = true
       try {
-        const response = await this.$axios.put (`/api/e_do/approve/${edo_id}`)
+        const response = await this.$axios.put(`/api/e_do/approve/${this.paid.edo.edo_id}`, qs.stringify(obj.form))
         if (response) {
           this.$toast.clear()
-          this.$toast.global.app_success (`e-DO ${edo_number} successfully Paid.`)
+          this.$toast.global.app_success (`e-DO ${this.paid.edo.edo_number} successfully Paid.`)
         }
       } catch (error) {
         this.$toast.clear()
-        this.$toast.global.app_error (`e-DO ${edo_number} failed to Paid.`)
+        this.$toast.global.app_error (`e-DO ${this.paid.edo.edo_number} failed to Paid.`)
       } finally {
         this.paidRejectLoading = false
-        this.$toast.global.app_loading()
+        obj.observer.reset()
+        this.paid.edo = {}
+        this.paid.showDialog = false
         await this.getAll()
       }
     },

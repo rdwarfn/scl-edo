@@ -72,8 +72,8 @@
       </v-col>
 
       <v-col class="text-right">
-        <v-btn class="mr-3" color="primary" v-show="isCanReissue" @click="_handleReissue (edo.edo_id, edo.edo_number)" :disabled="$fetchState.pending" :loading="$fetchState.pending">
-          Re-Issue <v-icon class="ml-2">mdi-undo-variant</v-icon>
+        <v-btn class="mr-3" color="warning" v-show="isCanReissue" @click="_handleReissue (edo.edo_id, edo.edo_number)" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+          Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
         </v-btn>
 
         <v-btn :dark="isCanReject" color="#FF3860" :disabled="!isCanReject" :loading="$fetchState.pending" @click.stop="reject.showDialog = true">
