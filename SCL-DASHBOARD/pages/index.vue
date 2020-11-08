@@ -9,9 +9,11 @@ export default {
     if (!store.state.auth.loggedIn) {
       return redirect ('/login');
     } else if (role === 'ADMIN') {
-      redirect  ('/admin')
+      return redirect  ('/admin')
     } else if (role === 'DOKUMEN') {
       return redirect ('/dokumen')
+    } else if (role === 'SUPERADMIN') {
+      return redirect('/superadmin')
     } else {
       return redirect ('/logout')
     }

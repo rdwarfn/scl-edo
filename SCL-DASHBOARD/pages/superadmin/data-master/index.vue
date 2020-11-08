@@ -85,7 +85,8 @@ export default {
   meta: {
     crumbs: [{
       text: 'Master',
-      href: '/admin/master',
+      href: '/admin/data-master',
+      exact: true,
       disabled: true
     }]
   },
