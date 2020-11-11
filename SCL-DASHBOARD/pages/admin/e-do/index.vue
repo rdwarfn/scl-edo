@@ -1,60 +1,32 @@
 <template>
   <v-container fluid class="px-md-5">
     <!-- dialog reject -->
-    <v-dialog transition="slide-y-transition" max-width="768px" v-model="reject.showDialog" persistent>
-      <v-alert
-        tile
-        border="right"
-        colored-border
-        type="error"
-        elevation="2"
-        class="pt-5 ma-0"
-      >
-        <validation-observer ref="observer" v-slot="{ handleSubmit, invalid }">
-          <v-card flat class="pa-0 mt-n1" tag="form" @submit.prevent="handleSubmit(_handleReject)">
-            <v-card-title class="pt-0">
-              Reject this e-DO &nbsp;<span style="color: #3273DC !important">{{ reject.edo.edo_number }}</span> ?
-              <v-spacer></v-spacer>
-              <v-btn icon @click.prevent="_closeDialogReject">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-card-title>
-
-            <v-card-text class="py-0">
-              <validation-provider name="Note rejection" rules="required" v-slot="{errors}">
-                <label for="rejectNotes">Notes</label>
-                <v-textarea
-                  id="rejectNotes"
-                  class="mt-3"
-                  v-model="reject.description"
-                  :loading="paidRejectLoading"
-                  :disabled="paidRejectLoading"
-                  :error-messages="errors"
-                  placeholder="Enter your comment here"
-                  solo
-                ></v-textarea>
-              </validation-provider>
-            </v-card-text>
-
-            <v-card-actions class="px-5">
-              <v-spacer></v-spacer>
-              <v-btn text color="error" @click.prevent="_closeDialogReject">Cancel</v-btn>
-              <v-btn
-                color="error"
-                :disabled="paidRejectLoading || invalid"
-                :loading="paidRejectLoading"
-                type="submit"
-              >Yes, Reject</v-btn>
-            </v-card-actions>
-          </v-card>
-        </validation-observer>
-      </v-alert>
-    </v-dialog>
+    <dialog-rejection-edo
+      :loading="paidRejectLoading"
+      :dialog="reject.showDescriptionDialog"
+      :edo-number="reject.edo.edo_number"
+      @onSubmit="on_submit_dialog_reject_description"
+      @onCancel="close_dialog_reject"
+    ></dialog-rejection-edo>
     <!-- end dialog reject -->
 
-    <!-- dialog house bl number -->
-    <dialog-house-bl-number :dialog="paid.showDialog" :loading="paidRejectLoading" @onSubmit="_onDialogPaidSubmit" @onCancel="_onDialogPaidCancel"></dialog-house-bl-number>
-    <!-- end dialog house bl number -->
+    <!-- dialog reject house bl number -->
+    <dialog-house-bl-number
+      :dialog="reject.showHouseBLDialog"
+      :loading="paidRejectLoading"
+      @onSubmit="on_submit_dialog_reject_house_bl"
+      @onCancel="close_dialog_reject"
+    ></dialog-house-bl-number>
+    <!-- end dialog reject house bl number -->
+
+    <!-- dialog paid house bl number -->
+    <dialog-house-bl-number
+      :dialog="paid.showDialog"
+      :loading="paidRejectLoading"
+      @onSubmit="on_submit_dialog_paid_house_bl"
+      @onCancel="close_dialog_paid"
+    ></dialog-house-bl-number>
+    <!-- end paid dialog house bl number -->
 
     <!-- status e-do: total, unpaid, paid, rejected -->
     <card-list-status-edo :count="count" />
@@ -198,7 +170,7 @@
                       color="#00D1B2"
                       :loading="paidRejectLoading"
                       :disabled="isNotRequested(item.status) || paidRejectLoading"
-                      @click.prevent="_openDialogPaid (item)"
+                      @click.prevent="open_dialog_paid (item)"
                     >
                       <!-- :dark="!isNotRequested(item.status) || !paidRejectLoading" -->
                       <span style="color: white">Paid</span>
@@ -212,7 +184,7 @@
                       color="#FF3860"
                       :loading="paidRejectLoading"
                       :disabled="isNotRequested(item.status) || paidRejectLoading"
-                      @click="_openDialogReject (item)"
+                      @click.prevent="open_dialog_reject (item)"
                     >
                       <!-- :dark="!isNotRequested(item.status) || !paidRejectLoading" -->
                       <span style="color: white">Reject</span>
@@ -407,8 +379,10 @@ import {
   getColorStatus,
   setDisabledActions
 } from '@/utils';
+
 import CardListStatusEdo from '@/components/CardListStatusEdo.vue';
 import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
+import DialogRejectionEdo from '@/components/DialogRejectionEdo.vue';
 
 setInteractionMode ('eager');
 
@@ -423,6 +397,7 @@ export default {
   components: {
     CardListStatusEdo,
     DialogHouseBlNumber,
+    DialogRejectionEdo,
     ValidationObserver,
     ValidationProvider
   },
@@ -430,9 +405,13 @@ export default {
     return {
       paidRejectLoading: false,
       reject: {
-        showDialog: false,
-        description: '',
-        edo: {}
+        showHouseBLDialog: false,
+        showDescriptionDialog: false,
+        edo: {},
+        formDialog: {
+          description: null,
+          house_bl_number: null,
+        }
       },
       paid: {
         showDialog: false,
@@ -506,7 +485,7 @@ export default {
     }
   },
   async fetch () {
-    await this.getAll()
+    await this.get_all()
   },
   fetchOnServer: false,
   methods: {
@@ -515,18 +494,21 @@ export default {
     kebabCase (params) { return _.kebabCase (params) },
     inputSearch (event) { this.itemsPerPage = _.toInteger(event, 10) },
 
-    async getAll () {
+    async get_all () {
       this.$toast.global.app_loading()
       await Promise.all([
-        this.getAllEdo(),
-        this.getCountEdos()
+        this.get_all_edo(),
+        this.get_count_edos()
       ])
       .then (() => {
         this.$toast.clear()
       })
     },
 
-    async getAllEdo () {
+    /**
+     * Get All e-DO
+     */
+    async get_all_edo () {
       try {
         const response = await this.$axios.get (`/api/e_do`)
         if (response.status === 200) {
@@ -540,27 +522,37 @@ export default {
         this.$toast.global.app_error(`Failed to load all e-DO${message}`)
       }
     },
-
-    async getCountEdos () {
+    /**
+     * Get Count e-DO
+     */
+    async get_count_edos () {
       const response = await this.$axios.get ('/api/e_do/total_e_do')
       if (response.status === 200) {
         const { data } = response
         this.count = data;
       }
     },
-
-
-    _openDialogPaid(edo) {
+    /**
+     * Block Approve/Paid Action
+     */
+    open_dialog_paid(edo) {
       this.paid.showDialog = true
       this.paid.edo = _.assign(this.paid.edo, edo)
     },
-    async _onDialogPaidSubmit(data) {
-      await this.putApprove(data)
-    },
-    _onDialogPaidCancel() {
+    close_dialog_paid() {
       this.paid.showDialog = false
+      this.paid.edo = {}
     },
-    async putApprove (obj) {
+    /**
+     * On submit house bl form dialog
+     */
+    async on_submit_dialog_paid_house_bl(data) {
+      await this.put_paid(data)
+    },
+    /**
+     * Action Paid
+     */
+    async put_paid(obj) {
       this.$toast.global.app_loading();
       this.paidRejectLoading = true
       try {
@@ -574,29 +566,58 @@ export default {
         this.$toast.global.app_error (`e-DO ${this.paid.edo.edo_number} failed to Paid.`)
       } finally {
         this.paidRejectLoading = false
-        obj.observer.reset()
-        this.paid.edo = {}
-        this.paid.showDialog = false
+        this.close_dialog_paid()
         await this.getAll()
       }
     },
 
-
-    _openDialogReject (params) {
-      this.reject.edo = params
-      this.reject.showDialog = true
+    /**
+     * Block Reject Actions
+     */
+    open_dialog_reject(edo) {
+      this.reject.edo = edo
+      this.reject.showHouseBLDialog = true
     },
-
-    _closeDialogReject () {
-      this.reject.showDialog = false
-      this.$refs.observer.reset ()
+    close_dialog_reject() {
+      this.reject.showDescriptionDialog = false
+      this.reject.showHouseBLDialog = false
+      this.reject.edo = {}
     },
-
-    async _handleReject () {
-      this.$toast.global.app_loading ()
-      this.paidRejectLoading = true
+    /**
+     * On submit house bl form dialog
+     */
+    on_submit_dialog_reject_house_bl(data) {
       try {
-        const response = await this.$axios.put (`/api/e_do/reject/${this.reject.edo.edo_id}`)
+        this.reject.formDialog = _.assign(this.reject.formDialog, data.form);
+      } finally {
+        this.reject.showHouseBLDialog = false
+        this.reject.showDescriptionDialog = true
+      }
+    },
+    /**
+     * On submit description form dialog
+     */
+    async on_submit_dialog_reject_description(data) {
+      try {
+        this.paidRejectLoading = true
+        this.reject.formDialog = _.assign(this.reject.formDialog, data.form);
+        await this.handle_reject()
+      } finally {
+        this.paidRejectLoading = false
+        this.reject.showDescriptionDialog = false
+        await this.get_all()
+      }
+    },
+    /**
+     * Action Reject
+     */
+    async handle_reject () {
+      try {
+        this.$toast.global.app_loading ()
+        const response = await this.$axios.put(
+          `/api/e_do/reject/${this.reject.edo.edo_id}`,
+          qs.stringify(this.reject.formDialog)
+        )
         if (response) {
           this.$toast.clear()
           this.$toast.global.app_success (`e-DO ${this.reject.edo.edo_number} successfully Rejected.`)
@@ -604,12 +625,6 @@ export default {
       } catch (error) {
         this.$toast.clear()
         this.$toast.global.app_error (`e-DO ${this.reject.edo.edo_number} failed to Reject.`)
-      } finally {
-        this.paidRejectLoading = false
-        this.reject.showDialog = false
-        this.$refs.observer.reset()
-
-        await this.getAll()
       }
     }
   }
@@ -625,47 +640,4 @@ export default {
 a.v-tab.v-tab--active {
   background-color: #FFFFFF !important;
 }
-
-// ::v-deep .v-data-table {
-//   tr {
-//     border-bottom: none !important;
-//   }
-
-//   .v-data-table__wrapper > table > thead > tr {
-//     @media #{map-get($display-breakpoints, 'md-and-up')} {
-//       padding: {
-//         left: 22px !important;
-//         right: 22px !important;
-//       }
-//     }
-//     th {
-//       font-size: 14px !important;
-//       color: rgba(0, 0, 0, 0.8) !important;
-//       font-weight: normal;
-//       line-height: 21px;
-//     }
-//   }
-
-//   tbody {
-//     tr {
-//       .data-item-tbody-tr-div {
-//         border-radius: 10px !important;
-//         margin-bottom: 16px !important;
-//         // width: 100%;
-//         // max-width: 100vw;
-//         display: flex;
-//       }
-//       padding-top: 8px !important;
-//       padding-bottom: 8px !important;
-//       border: unset !important;
-//       &:hover:not(.v-data-table__expanded__content) {
-//         background: #ffffff !important;
-//       }
-//       td {
-//         padding-left: 0 !important;
-//         padding-right: 0 !important;
-//       }
-//     }
-//   }
-// }
 </style>

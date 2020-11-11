@@ -1,12 +1,12 @@
 export default {
   "superadmin": [{
     title: 'Data Master',
-    to: '/admin/data-master',
+    to: '/superadmin/data-master',
     icon: 'mdi-database-outline'
   },
   {
     title: 'User management',
-    to: '/admin/user-management',
+    to: '/superadmin/user-management',
     icon: 'mdi-account-multiple-outline'
   },{
     title: 'Setting',

@@ -18,7 +18,7 @@
     <card-list-status-edo :count="count" />
 
     <v-row justify="space-between" align="end" class="my-10">
-      <v-col cols="6">
+      <v-col cols="7">
         <v-row align="end" class="py-0">
           <v-col cols="auto">
             <v-text-field
@@ -328,8 +328,8 @@ export default {
   meta: {
     crumbs: [{
       text: 'Dashboard',
-      href: '/dokumen/e-do',
-      disabled: true
+      exact: true,
+      href: '/dokumen/e-do'
     }]
   },
 
@@ -385,7 +385,7 @@ export default {
     allEdo (val) {
       const notPickedUp = _.filter (val, function (o) {
         return _.upperCase(o.status) !== 'PICKED UP'
-       });
+      });
 
       this.tabelData = notPickedUp && notPickedUp;
       this.tabelDataFilter = notPickedUp && notPickedUp;

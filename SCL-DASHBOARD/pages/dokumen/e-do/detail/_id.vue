@@ -41,7 +41,7 @@
           <v-col cols="12" sm>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
-              {{ edo.created_at }}
+              {{ created_at_formated }}
               <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
@@ -108,7 +108,6 @@
         <v-row>
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. shipper_email || '-' }}
               <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -127,7 +126,6 @@
 
         <v-row>
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Shipper address</div>
             <div class="text-h5">
               {{ edo. shipper_address }}
@@ -136,7 +134,6 @@
           </v-col>
 
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Consignee address</div>
             <div class="text-h5">
               {{ edo. consignee_address }}
@@ -184,7 +181,6 @@
 
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <!-- belum ada field api -->
             <div class="text-h5">
               {{ edo. house_bl_date }}
                 <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -291,7 +287,6 @@
         <v-row>
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. package_number }}
               <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -399,25 +394,17 @@ export default {
   },
 
   computed: {
-    isNotEmpty () {
-      return !_.isEmpty(this.edo)
-    },
-
-    isCanSend () {
-      return this.isNotEmpty && isCanSendToConsignee(this.edo.status)
-    },
-
-    isCanReject () {
-      return this.isNotEmpty && isCanReject (this.edo.status)
-    },
-
+    isNotEmpty () { return !_.isEmpty(this.edo) },
+    isCanSend () { return this.isNotEmpty && isCanSendToConsignee(this.edo.status) },
+    isCanReject () { return this.isNotEmpty && isCanReject (this.edo.status) },
     isCandDelete () { return this.isNotEmpty && isAdminCanDelete (this.edo.status) },
-
     isCanEdit () { return this.isNotEmpty && isAdminCanEdit (this.edo.status) },
-
     isCanPrint () { return this.isNotEmpty && isAdminCanPrint (this.edo.status) },
-
-    computeConfirmDelete () { return this.confirmDelete === this.edo.edo_number }
+    computeConfirmDelete () { return this.confirmDelete === this.edo.edo_number },
+    created_at_formated () {
+      const dateFormated = this.$moment(this.edo.created_at, "DD-MM-YYYY hh:mm:ss", 'id')
+      return dateFormated.isValid() ? dateFormated.format('DD/MM/YYYY - hh:mm:ss') : this.edo.created_at
+    }
   },
 
   methods: {

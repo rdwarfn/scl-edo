@@ -1,23 +1,23 @@
 <template>
   <!-- <v-app-bar fixed flat tile app> -->
-  <v-sheet color="transparent" tile>
-    <v-row no-gutters align="center" justify="space-between" class="container--fluid mx-auto">
-      <v-col cols="12">
+  <v-sheet color="transparent" tile class="mt-sm-10">
+    <v-row align="center" justify="space-between" class="container--fluid mx-auto">
+      <v-col cols="12" class="pb-0">
         <v-skeleton-loader type="chip" width="200px">
           <crumbs />
         </v-skeleton-loader>
       </v-col>
 
-      <v-col cols="auto">
+      <v-col cols="auto" class="pt-0">
         {{ date }} [ {{ time }} ]
       </v-col>
 
-      <v-col cols="auto">
+      <v-col cols="auto" class="pt-0">
         <v-skeleton-loader :loading="!$auth.$state.loggedIn" type="chip">
           <v-menu transition="slide-y-transition" offset-y open-on-hover close-on-content-click>
             <template #activator="{on, attrs}">
               <div class="text-h6 text-capitalize">
-                Hi, {{ $auth.hasScope("admin") ? 'superadmin' : 'admin' }} {{ $auth.user.name }}
+                Hi, {{ $auth.hasScope("admin") ? 'superadmin' : $auth.hasScope("superadmin") ? 'superadmin' : 'admin' }} {{ $auth.user.name }}
 
                 <v-btn icon v-on="on" v-bind="attrs">
                   <v-icon>mdi-chevron-down</v-icon>

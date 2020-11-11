@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="px-md-5 py-5">
-    <v-dialog transition="slide-y-transition" max-width="768px" v-model="reject.showDialog" persistent>
+    <!-- <v-dialog transition="slide-y-transition" max-width="768px" v-model="reject.showDescriptionDialog" persistent>
       <v-alert
         tile
         border="right"
@@ -10,11 +10,11 @@
         class="pt-5 ma-0"
       >
         <validation-observer ref="observer" v-slot="{handleSubmit, invalid}">
-          <v-card flat class="pa-0 mt-n1" tag="form" @submit.prevent="handleSubmit(_handleReject)">
+          <v-card flat class="pa-0 mt-n1" tag="form" @submit.prevent="handleSubmit(handle_reject)">
             <v-card-title class="pt-0">
               Reject this e-DO &nbsp;<span style="color: #3273DC !important">{{ edo.edo_number }}</span> ?
               <v-spacer></v-spacer>
-              <v-btn icon @click.prevent="_closeDialogReject">
+              <v-btn icon @click.prevent="close_dialog_reject">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-card-title>
@@ -37,7 +37,7 @@
 
             <v-card-actions class="px-5">
               <v-spacer></v-spacer>
-              <v-btn text color="error" @click.prevent="_closeDialogReject">Cancel</v-btn>
+              <v-btn text color="error" @click.prevent="close_dialog_reject">Cancel</v-btn>
               <v-btn
                 color="error"
                 :disabled="reject.loading || invalid"
@@ -48,12 +48,39 @@
           </v-card>
         </validation-observer>
       </v-alert>
-    </v-dialog>
+    </v-dialog> -->
 
-    <!-- dialog house_bl_number -->
-    <dialog-house-bl-number :dialog="house_bl.showDialog" :loading="house_bl.loading" @onSubmit="_onDialogHouseBLSubmit" @onCancel="_onDialogHouseBLCancel"></dialog-house-bl-number>
-    <!-- end dialog house_bl_number -->
+    <!-- dialog house bl number - reject -->
+    <dialog-house-bl-number
+      :loading="reject.loading"
+      :dialog="reject.showHouseBLDialog"
+      @onSubmit="on_submit_dialog_house_bl_reject"
+      @onCancel="close_dialog_reject"
+    ></dialog-house-bl-number>
+    <!-- end dialog house bl number - reject -->
 
+    <!-- Dialog Reject -->
+    <dialog-rejection-edo
+      :loading="reject.loading"
+      :dialog="reject.showDescriptionDialog"
+      :edo-number="edo.edo_number"
+      @onSubmit="on_submit_dialog_reject_description"
+      @onCancel="close_dialog_reject"
+    >
+    </dialog-rejection-edo>
+    <!-- End Dialog Reject -->
+
+
+    <!-- dialog house bl number - on hold -->
+    <dialog-house-bl-number
+      :dialog="house_bl.showDialog"
+      :loading="house_bl.loading"
+      @onSubmit="on_dialog_house_bl_on_hold_submit"
+      @onCancel="close_dialog_house_bl_on_hold"
+    ></dialog-house-bl-number>
+    <!-- end dialog house bl number - on hold -->
+
+    <!-- Alert Status e-DO -->
     <v-alert
       :outlined="alertStatus.outline"
       transition="slide-x-reverse-transition"
@@ -63,24 +90,29 @@
     >
       {{ alertStatus.message }}
     </v-alert>
+    <!-- end Alert Status e-DO -->
 
     <v-row class="mt-8">
       <v-col cols="auto">
-        <v-btn class="mr-3" @click="cretePdf" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+        <!-- Action Print -->
+        <v-btn class="mr-3" @click="crete_pdf" :disabled="$fetchState.pending" :loading="$fetchState.pending">
           Print <v-icon class="ml-2">mdi-printer</v-icon>
         </v-btn>
 
+        <!-- Action Send to Consignee  -->
         <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="">
           Send to Consignee <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
       </v-col>
 
       <v-col class="text-right">
-        <v-btn class="mr-3" color="warning" @click.prevent="_openDialogPaid" :disabled="!isCanReissue" :loading="$fetchState.pending">
+        <!-- Action Hold -->
+        <v-btn class="mr-3" color="warning" @click.prevent="open_dialog_house_bl_on_hold" :disabled="!isCanReissue" :loading="$fetchState.pending">
           Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
         </v-btn>
 
-        <v-btn :dark="isCanReject" color="#FF3860" :disabled="!isCanReject" :loading="$fetchState.pending" @click.stop="reject.showDialog = true">
+        <!-- Action Reject -->
+        <v-btn :dark="isCanReject" color="#FF3860" :disabled="!isCanReject" :loading="$fetchState.pending" @click.prevent="open_dialog_house_bl_reject">
           Reject <v-icon class="ml-2">mdi-close-circle-outline</v-icon>
         </v-btn>
       </v-col>
@@ -90,20 +122,21 @@
     <v-row align-md="center">
       <v-col cols="12" sm="6">
         <v-row no-gutters>
+          <!-- Created By e-DO -->
           <v-col>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
               {{ edo.created_at }} <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Created By e-DO -->
           <v-col>
             <div class="label">Created By</div>
             <div class="font-weight-bold text-capitalize">
               {{ edo.created_by }} <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Status e-DO -->
           <v-col>
             <div class="label">Status</div>
             <div class="font-weight-bold" :style="{color: colors(edo.status)}">
@@ -115,12 +148,14 @@
 
       <v-col>
         <v-row no-gutters justify="end">
+          <!-- QrCode-->
           <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
             <qrcode
               :value="edo.edo_number"
               :options="{width: 80, height: 80}"
             />
           </v-skeleton-loader>
+          <!-- e-DO Number -->
           <div class="ml-3 d-flex flex-column justify-center">
             <div class="label">e-DO Number</div>
             <div class="font-weight-bold">
@@ -135,13 +170,14 @@
     <v-row>
       <v-col>
         <v-row>
+          <!-- Shipper Name -->
           <v-col cols="12" sm>
             <div class="label">Shipper name</div>
             <div class="text-h5">
               {{ edo. shipper_name }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Consignee Name -->
           <v-col cols="12" sm>
             <div class="label">Consignee name</div>
             <div class="text-h5">
@@ -152,14 +188,14 @@
 
 
         <v-row>
+          <!-- Shipper e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. shipper_email || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Consignee e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Consignee e-mail</div>
             <div class="text-h5">
@@ -170,16 +206,15 @@
 
 
         <v-row>
+          <!-- Shipper Address -->
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Shipper address</div>
             <div class="text-h5">
               {{ edo. shipper_address || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Consignee Address -->
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Consignee address</div>
             <div class="text-h5">
               {{ edo. consignee_address || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -189,13 +224,14 @@
 
 
         <v-row>
+          <!-- Notify -->
           <v-col cols="12" sm>
             <div class="label">Notify</div>
             <div class="text-h5">
               {{ edo. notify }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- House BL Number -->
           <v-col cols="12" sm>
             <div class="label">House BL Number</div>
             <div class="text-h5">
@@ -206,6 +242,7 @@
 
 
         <v-row>
+          <!-- Notify Address -->
           <v-col cols="12" sm>
             <div class="label">Notify Address</div>
             <div class="text-h5">
@@ -216,14 +253,14 @@
 
 
         <v-row>
+          <!-- MB/L Number -->
           <v-col cols="12" sm>
             <div class="label">MB/L Number</div>
             <div class="text-h5">{{ edo. mbl_number }}</div>
           </v-col>
-
+          <!-- House BL Date -->
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <!-- belum ada field api -->
             <div class="text-h5">
               {{ edo. house_bl_date }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
@@ -232,13 +269,14 @@
 
 
         <v-row>
+          <!-- Arrival Date -->
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
             <div class="text-h5">
               {{ edo. arrival_date }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Place of Receipt -->
           <v-col cols="12" sm>
             <div class="label">Place of receipt</div>
             <div class="text-h5">
@@ -249,13 +287,14 @@
 
 
         <v-row>
+          <!-- Container / Seal Number -->
           <v-col cols="12" sm>
             <div class="label">Container/Seal number</div>
             <div class="text-h5">
               {{ edo. container_seal_number }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Ocean Vessel -->
           <v-col cols="12" sm>
             <div class="label">Ocean vessel</div>
             <div class="text-h5">
@@ -266,13 +305,14 @@
 
 
         <v-row>
+          <!-- Port of lading -->
           <v-col cols="12" sm>
             <div class="label">Port of lading</div>
             <div class="text-h5">
               {{ edo. port_of_loading }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Voyage Number -->
           <v-col cols="12" sm>
             <div class="label">Voyage Number</div>
             <div class="text-h5">
@@ -283,13 +323,14 @@
 
 
         <v-row>
+          <!-- Final Destination -->
           <v-col cols="12" sm>
             <div class="label">Final Destination</div>
             <div class="text-h5">
               {{ edo. final_destination }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Port of Discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
             <div class="text-h5">
@@ -300,13 +341,14 @@
 
 
         <v-row>
+          <!-- Gross Weight -->
           <v-col cols="12" sm>
             <div class="label">Gross weight (Kg)</div>
             <div class="text-h5">
               {{ edo. gross_weight }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Package -->
           <v-col cols="12" sm>
             <div class="label">Package</div>
             <div class="text-h5">
@@ -317,14 +359,14 @@
 
 
         <v-row>
+          <!-- Number of Package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. number_of_package }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Measurement -->
           <v-col cols="12" sm>
             <div class="label">Measurement</div>
             <div class="text-h5">
@@ -335,16 +377,16 @@
 
 
         <v-row>
+          <!-- Description of goods -->
           <v-col cols="12" sm>
             <div class="label">Description of goods</div>
             <div class="text-h5">
               {{ edo. description_of_goods }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
-
+          <!-- Marks and Number -->
           <v-col cols="12" sm>
             <div class="label">Marks and number</div>
-
             <div class="text-h5">
               {{ edo. marks_and_number }} <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
@@ -367,6 +409,7 @@
 import _ from 'lodash';
 import qs from 'querystring';
 import pdfmake from 'pdfmake';
+import DialogRejectionEdo from '@/components/DialogRejectionEdo.vue';
 import {
   getColorStatus,
   isCanReject,
@@ -397,13 +440,17 @@ export default {
       text: 'Detail e-DO',
     }]
   },
-
   data () {
     return {
       edo: {},
       reject: {
-        showDialog: false,
-        description: ''
+        loading: false,
+        showHouseBLDialog: false,
+        showDescriptionDialog: false,
+        formDialog: {
+          description: null,
+          house_bl_number: null,
+        }
       },
       alertStatus: {
         show: false,
@@ -418,11 +465,10 @@ export default {
       }
     }
   },
-
   async fetch () {
     this.$toast.global.app_loading()
     await Promise.all([
-      this.getEdoByID()
+      this.get_edo_by_id()
     ])
     .then (() => {
       this.$toast.clear()
@@ -449,7 +495,6 @@ export default {
       }
     }
   },
-
   computed: {
     isNotEmpty () { return !_.isEmpty(this.edo) },
     isCanSend () { return this.isNotEmpty && isCanSendToConsignee(this.edo.status) },
@@ -469,15 +514,10 @@ export default {
 
   methods: {
     colors (params) { return getColorStatus (params) },
-    // async _handleSenToConsignee (e) {
-    //   this.$toast.global.app_loading ();
-    //   await this.$axios.post (`/api/e_do/send_to_consignee`)
-    //   .then (response => {
-
-    //   })
-    // },
-
-    async getEdoByID () {
+    /**
+     * Get e-DO By ID
+     */
+    async get_edo_by_id () {
       try {
         const response = await this.$axios.get(`/api/e_do/${this.$route.params.id}`)
         if (response.status === 200) {
@@ -488,21 +528,32 @@ export default {
         this.$toast.global.app_error (`Failed to get e-DO ${this.$route.params.id}`)
       }
     },
-
-    _openDialogPaid() {
+    /**
+     * Block Reissue / on Hold Action
+     */
+    /**
+     * Open dialog house bl - on hold
+     */
+    open_dialog_house_bl_on_hold() {
       this.house_bl.showDialog = true
     },
-
-    _onDialogHouseBLSubmit(data) {
-      console.log(data);
-      this._handleReissue(this.edo.edo_id, this.edo.edo_number, data.form)
-    },
-
-    _onDialogHouseBLCancel() {
+    /**
+     * Close dialog house bl - on hold
+     */
+    close_dialog_house_bl_on_hold() {
       this.house_bl.showDialog = false
     },
-
-    async _handleReissue (edo_id, edo_number, house_bl_number) {
+    /**
+     * On submit house bl - on hold
+     */
+    on_dialog_house_bl_on_hold_submit(data) {
+      console.log(data);
+      this.handle_reissue_on_hold(this.edo.edo_id, this.edo.edo_number, data.form)
+    },
+    /**
+     * Handle Action Reissued / On Hold
+     */
+    async handle_reissue_on_hold(edo_id, edo_number, house_bl_number) {
       this.$toast.global.app_loading ();
       this.house_bl.loading = true
       try {
@@ -515,36 +566,75 @@ export default {
       } finally {
         this.house_bl.loading = false
         this.$fetch ();
-        this._onDialogHouseBLCancel();
+        this.close_dialog_house_bl_on_hold();
       }
     },
+    /**
+     * End Block Reissued Action
+     */
 
-    _closeDialogReject () {
-      this.reject.showDialog = false
-      this.$refs.observer.reset()
+    /**
+     * Block Action Reject
+     */
+    /**
+     * Open dialog house bl
+     */
+    open_dialog_house_bl_reject() {
+      this.reject.showHouseBLDialog = true
     },
-
-    async _handleReject() {
-      this.$toast.global.app_loading()
-      this.reject.loading = true
+    /**
+     * Close dialog house bl & description
+     */
+    close_dialog_reject() {
+      this.reject.showHouseBLDialog = false
+      this.reject.showDescriptionDialog = false
+    },
+    /**
+     * On submit house bl form dialog - reject
+     */
+    on_submit_dialog_house_bl_reject(data) {
       try {
-        const success = await this.$refs.observer.validate()
-        if (!success) return
-        const response = await this.$axios.put(`/api/e_do/reject/${this.edo.edo_id}`, qs.stringify(this.reject.description))
+        this.reject.formDialog = _.assign(this.reject.formDialog, data.form)
+      } finally {
+        this.reject.showHouseBLDialog = false
+        this.reject.showDescriptionDialog = true
+      }
+    },
+    /**
+     * On submit description form dialog - reject
+     */
+    async on_submit_dialog_reject_description(data) {
+      console.log(this.reject.formDialog);
+      try {
+        this.reject.loading = true
+        this.reject.formDialog = _.assign(this.reject.formDialog, data.form)
+        await this.handle_reject()
+      } finally {
+        this.reject.loading = false
+        this.reject.showDescriptionDialog = false
+        await this.$fetch()
+      }
+    },
+    /**
+     * Action Reject
+     */
+    async handle_reject() {
+      try {
+        this.$toast.global.app_loading()
+        const response = await this.$axios.put(
+          `/api/e_do/reject/${this.edo.edo_id}`,
+          qs.stringify(this.reject.formDialog)
+        )
         if (response) {
           this.$toast.global.app_success(`e-DO ${this.edo.edo_number} successfully rejected.`)
         }
       } catch (error) {
+        this.$toast.clear()
         this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to reject.`)
-      } finally {
-        this.reject.loading = false
-        this.reject.showDialog = false
-        this.$refs.observer.reset()
-        this.$fetch();
       }
     },
 
-    toDataURL (url, callback) {
+    to_data_url (url, callback) {
       let xhr = new XMLHttpRequest()
       xhr.onload = function () {
         let reader = new FileReader()
@@ -558,11 +648,11 @@ export default {
       xhr.send()
     },
 
-    cretePdf (e) {
+    crete_pdf (e) {
       let edo = this.edo;
       let dateNow = this.$moment().format('DD/MM/YYYY');
 
-      this.toDataURL(require('@/assets/images/logo-scl.png'), function (dataURL) {
+      this.to_data_url(require('@/assets/images/logo-scl.png'), function (dataURL) {
         let docDefinition = {
           content: [
             {

@@ -5,10 +5,11 @@
         <template>
           <v-alert
             v-show="alert.show"
+            :icon="alert.icon"
+            :type="alert.type"
             width="calc(100vw - 200)"
-            icon="mdi-checkbox-marked-circle-outline"
+            transition="slide-x-reverse-transition"
             outlined
-            type="success"
           >
             {{ alert.message  }}
           </v-alert>
@@ -22,7 +23,7 @@
           <v-col cols="12" sm>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
-              {{ edo.created_at }}
+              {{ created_at_formated }}
               <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
@@ -338,46 +339,58 @@ export default {
     }]
   },
 
-  async fetch () {
-    this.$toast.global.app_loading()
-    try {
-      const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
-      if (response.status === 200) {
-        const { data } = response.data
-        this.edo = data[0]
-        this.alert.message = `e-DO ${this.$route.params.id} is valid from SCL System`;
-      }
-    } catch (error) {
-      this.$toast.global.app_error (`Failed to get e-DO` + err.response.message)
-      this.alert.message = `e-DO ${this.$route.params.id} is not valid or has been deleted from SCL System`;
-    } finally {
-      this.alert.show = true
-    }
-  },
-  fetchOnServer: false,
-
   data () {
     return {
       edo: {},
       confirmDelete: "",
       alert: {
         show: false,
-        message: ""
+        message: "",
+        icon: "mdi-checkbox-marked-circle-outline",
+        type: "success"
       }
     }
   },
 
+  async fetch () {
+    this.$toast.global.app_loading()
+    try {
+      await this.searchEdo()
+      this.alert.message = `e-DO ${this.$route.params.id} is valid from SCL System`;
+      this.alert.type = "success"
+      this.alert.icon = "mdi-checkbox-marked-circle-outline"
+    } catch (error) {
+      this.alert.message = `e-DO ${this.$route.params.id} is not valid or has been deleted from SCL System`;
+      this.alert.type = "error"
+      this.alert.icon = "mdi-close-circle-outline"
+    } finally {
+      this.alert.show = true
+    }
+  },
+  fetchOnServer: false,
+
   computed: {
-    isNotEmpty () {
-      return !_.isEmpty(this.edo)
-    },
-    isCanPickedUp () {
-      return this.isNotEmpty && _.isEqual (this.edo.status, 'PAID')
+    isNotEmpty() { return !_.isEmpty(this.edo) },
+    isCanPickedUp() { return this.isNotEmpty && _.isEqual (this.edo.status, 'PAID') },
+    created_at_formated() {
+      const dateFormated = this.$moment(this.edo.created_at, "DD-MM-YYYY hh:mm:ss", 'id');
+      return dateFormated.isValid() ? dateFormated.format('DD/MM/YYYY hh:mm:ss') : this.edo.created_at;
     }
   },
 
   methods: {
     colors (params) { return getColorStatus (params) },
+    async searchEdo() {
+      try {
+        const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
+        if (response) {
+          const { data } = response.data
+          this.edo = data[0]
+        }
+      } catch (error) {
+        this.$toast.global.app_error(`Failed to get e-DO` + err.response.message)
+      }
+    }
   }
 }
 </script>

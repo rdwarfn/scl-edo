@@ -224,6 +224,31 @@
           </validation-provider>
         </v-col>
         <!-- end Notify address -->
+
+        <!-- No of quantity -->
+        <v-col cols="12" sm="6">
+          <validation-provider
+            v-slot="{ errors }"
+            name="No. of quantity"
+            rules="required|numeric"
+          >
+            <label class="labelText" for="noOfQuantity">No. of quantity</label>
+            <v-text-field
+              :loading="loading"
+              :disabled="loading"
+              id="noOfQuantity"
+              placeholder="Input no."
+              type="number"
+              min="1"
+              v-model.trim="models.no_of_quantity"
+              :error-messages="errors"
+              class="mt-3"
+              solo clearable
+              required
+            ></v-text-field>
+          </validation-provider>
+        </v-col>
+        <!-- end No of quantity -->
       </v-row>
 
 
@@ -577,29 +602,6 @@
 
 
       <v-row>
-        <!-- Number of package -->
-        <v-col cols="12" sm="6">
-          <validation-provider
-            v-slot="{ errors }"
-            name="Number of package"
-            rules="required"
-          >
-          <label class="labelText" for="numberOfPackage">Number of package</label>
-          <v-text-field
-            :loading="loading"
-            :disabled="loading"
-            id="numberOfPackage"
-            placeholder="Input number of package"
-            v-model.trim="models.number_of_package"
-            :error-messages="errors"
-            class="mt-3"
-            solo clearable
-            required
-          ></v-text-field>
-          </validation-provider>
-        </v-col>
-        <!-- end Number of package -->
-
         <!-- Measurement -->
         <v-col cols="12" sm="6">
           <validation-provider
@@ -623,6 +625,29 @@
           </validation-provider>
         </v-col>
         <!-- end Measurement -->
+
+        <!-- Number of package -->
+        <v-col cols="12" sm="6">
+          <validation-provider
+            v-slot="{ errors }"
+            name="Number of package"
+            rules="required"
+          >
+          <label class="labelText" for="numberOfPackage">Number of package</label>
+          <v-text-field
+            :loading="loading"
+            :disabled="loading"
+            id="numberOfPackage"
+            placeholder="Input number of package"
+            v-model.trim="models.number_of_package"
+            :error-messages="errors"
+            class="mt-3"
+            solo clearable
+            required
+          ></v-text-field>
+          </validation-provider>
+        </v-col>
+        <!-- end Number of package -->
       </v-row>
 
 
@@ -745,6 +770,7 @@ export default {
         house_bl_number: "",
 
         notify_address: "",
+        no_of_quantity: "",
 
         mbl_number: "",
         house_bl_date: "",
@@ -764,8 +790,8 @@ export default {
         gross_weight: "",
         package: "",
 
-        number_of_package: "",
         measurment: "",
+        number_of_package: "",
 
         description_of_goods: "",
         marks_and_number: "",

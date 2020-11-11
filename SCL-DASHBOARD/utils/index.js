@@ -1,5 +1,6 @@
 import _ from 'lodash';
 export { default as Drawer } from './drawer'
+export * from './colors'
 export {
   HeaderTableTabHistory,
   HeaderTableTabNewEDO,
@@ -32,7 +33,7 @@ export const getColorStatus = (params) => {
   }
 }
 
-export const initRole = ['admin', 'dokumen', 'kasir', 'adminspl'];
+export const initRole = ['admin', 'dokumen', 'kasir', 'adminspl', 'superadmin'];
 
 export const setDisabledActions = params => {
   return _.upperCase (params) !== "UNPAID"

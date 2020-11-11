@@ -1,15 +1,18 @@
 <template>
 </template>
 <script>
+import _ from 'lodash';
 export default {
   middleware ({ store, redirect }) {
     let role = store.state.auth.user.role
-    if (role !== 'dokumen' && role !== 'superadmin' && role === 'admin') {
-      redirect ('/admin')
+    switch (_.upperCase(role)) {
+      case 'ADMIN':
+        return redirect('/admin');
+      case 'SUPERADMIN':
+        return redirect('/superadmin')
+      default:
+        return redirect('/dokumen/e-do');
     }
-    if (role !== 'dokument' && role !== 'admin' && role == 'superadmin')
-      redirect ('/superadmin')
-    return redirect ('/dokumen/e-do')
   }
 }
 </script>

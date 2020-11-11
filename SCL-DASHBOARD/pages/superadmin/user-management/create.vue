@@ -113,11 +113,11 @@ import Snack from '@/components/Snack.vue';
 export default {
   meta: {
     crumbs: [{
-      to: '/admin/user-management/',
+      to: '/superadmin/user-management/',
       exact: true,
       text: 'User Management',
     },{
-      to: '/admin/user-management/create',
+      to: '/superadmin/user-management/create',
       exact: true,
       text: 'Create User',
     }]

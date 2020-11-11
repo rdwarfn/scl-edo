@@ -112,6 +112,10 @@ import { mapState } from 'vuex';
 export default {
   layout: 'auth',
 
+  head: {
+    title: 'Authentication'
+  },
+
   data () {
     return {
       valid: true,

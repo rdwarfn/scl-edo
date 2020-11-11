@@ -43,7 +43,7 @@
           </v-col>
 
           <v-col cols="auto">
-            <v-btn color="primary" nuxt :to="`/admin/user-management/create`"
+            <v-btn color="primary" nuxt :to="`superadmin/user-management/create`"
               :disabled="$fetchState.pending" :loading="$fetchState.pending">
               Create new user <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
             </v-btn>
@@ -51,7 +51,7 @@
         </v-row>
       </v-col>
     </v-row>
-    
+
     <v-row>
       <v-col cols="12">
         <v-skeleton-loader :loading="$fetchState.pending" type="table">
@@ -228,8 +228,8 @@ import Snack from '@/components/Snack.vue';
 export default {
   meta: {
     crumbs: [{
-      to: '/admin/user-management',
-      disabled: true,
+      to: '/superadmin/user-management',
+      exact: true,
       text: 'User Management'
     }]
   },

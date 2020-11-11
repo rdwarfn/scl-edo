@@ -63,7 +63,15 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/auth',
     '@nuxtjs/toast',
+    '@nuxtjs/moment',
   ],
+
+  // Moment module
+  moment: {
+    defaultLocale: 'id',
+    locales: ['id'],
+    defaultTimezone: 'Asia/Jakarta'
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {

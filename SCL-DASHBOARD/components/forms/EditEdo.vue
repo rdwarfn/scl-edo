@@ -674,6 +674,7 @@
 <script>
 import { required, email, numeric } from 'vee-validate/dist/rules';
 import { extend, ValidationProvider, ValidationObserver, setInteractionMode } from 'vee-validate';
+import _ from 'lodash';
 
 setInteractionMode ('eager');
 extend ('required', {
@@ -752,6 +753,18 @@ export default {
     }
   },
 
+  watch: {
+    models(newVal) {
+      // console.log('from edited e-DO', newVal);
+      const [dayAD, monthAD, yearAD] = _.split(newVal.arrival_date, '-')
+      const [dayHD, monthHD, yearHD] = _.split(newVal.house_bl_date, '-')
+      const newDataAD = new Date(yearAD, monthAD, dayAD).toISOString().substr(0, 10)
+      const newDataHD = new Date(yearHD, monthHD, dayHD).toISOString().substr(0, 10)
+      this.models.arrival_date = newDataAD
+      this.models.house_bl_date = newDataHD
+    }
+  },
+
   computed: {
     houseBlDateFormatted () {
       if (!this.models.house_bl_date) return "";
@@ -767,10 +780,10 @@ export default {
     formatDate (date) {
       if (!date) return null
 
-      // const [year, month, day] = date.split('-')
-      // return `${day}/${month}/${year}`
-      const [day, month, year] = date.split('-')
+      const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
+      // const [day, month, year] = date.split('-')
+      // return `${day}/${month}/${year}`
     },
 
     submit() {
