@@ -1,8 +1,17 @@
 <template>
   <v-container fluid class="px-md-5 py-5">
+    <!-- dialo house bl number - paid -->
+    <dialog-house-bl-number
+      :loading="paidRejectLoading"
+      :dialog="paid.showHouseBLDialog"
+      @onSubmit="on_submit_dialog_house_bl_paid"
+      @onCancel="paid.showHouseBLDialog = false"
+    ></dialog-house-bl-number>
+    <!-- end dialog bl number - paid -->
+
     <!-- dialog house bl number - reject -->
     <dialog-house-bl-number
-      :loading="reject.loading"
+      :loading="paidRejectLoading"
       :dialog="reject.showHouseBLDialog"
       @onSubmit="on_submit_dialog_house_bl_reject"
       @onCancel="close_dialog_reject"
@@ -11,7 +20,7 @@
 
     <!-- Dialog Reject -->
     <dialog-rejection-edo
-      :loading="reject.loading"
+      :loading="paidRejectLoading"
       :dialog="reject.showDescriptionDialog"
       :edo-number="edo.edo_number"
       @onSubmit="on_submit_dialog_reject_description"
@@ -57,8 +66,13 @@
 
       <v-col class="text-right">
         <!-- Action Hold -->
-        <v-btn class="mr-3" color="warning" @click.prevent="open_dialog_house_bl_on_hold" :disabled="!isCanReissue" :loading="$fetchState.pending">
+        <v-btn v-show="iNotHoldOn" class="mr-3" color="warning" @click.prevent="open_dialog_house_bl_on_hold" :disabled="!isCanReissue" :loading="$fetchState.pending">
           Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
+        </v-btn>
+
+        <!-- Action Paid -->
+        <v-btn dark v-show="!iNotHoldOn" class="mr-3" color="#00D1B2" @click.stop="paid.showHouseBLDialog = true" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+          Paid <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
 
         <!-- Action Reject -->
@@ -393,8 +407,14 @@ export default {
   data () {
     return {
       edo: {},
+      paidRejectLoading: false,
+      paid: {
+        showHouseBLDialog: false,
+        formDialog: {
+          house_bl_number: null,
+        }
+      },
       reject: {
-        loading: false,
         showHouseBLDialog: false,
         showDescriptionDialog: false,
         formDialog: {
@@ -432,16 +452,21 @@ export default {
       if (val.status !== 'UNPAID' && val.status !== 'PAID' && val.status !== 'REISSUED') {
         let statusReleased = val.status === 'RELEASED' &&
           `e-DO ${val.edo_number} has been Released at ${(val.released_at)}`
+
         let statusRejected = val.status === 'REJECTED' &&
           `e-DO ${val.edo_number} has been Rejected at ${val.rejected_at}`
+
         let statusOnHold = val.status == 'HOLD ON' &&
           `e-DO ${val.edo_number} is Hold by ${user_role} ${this.$store.state.auth.user.name}`
+
         this.alertStatus.message = statusReleased || statusRejected || statusOnHold
         this.alertStatus.color = statusReleased ? 'purple' : statusRejected ? 'error' : 'warning'
         // this.alertStatus.outline = !statusOnHold
         this.alertStatus.icon = statusOnHold ? 'mdi-delta' : this.alertStatus.icon
         // 'rgba(255, 221, 87, 0.15)'
         this.alertStatus.show = true
+      } else {
+        this.alertStatus.show = false
       }
     }
   },
@@ -449,6 +474,7 @@ export default {
     isNotEmpty () { return !_.isEmpty(this.edo) },
     isCanSend () { return this.isNotEmpty && isCanSendToConsignee(this.edo.status) },
     isCanReject () { return this.isNotEmpty && isCanReject (this.edo.status) },
+    iNotHoldOn() { return this.isNotEmpty && this.edo.status !== "HOLD ON"},
 
     isCanReissue () {
       if (this.isNotEmpty && _.upperCase(this.edo.status) === 'PAID') {
@@ -478,9 +504,9 @@ export default {
         this.$toast.global.app_error (`Failed to get e-DO ${this.$route.params.id}`)
       }
     },
-    /**
-     * Block Reissue / on Hold Action
-     */
+/**
+ * Block Reissue / on Hold Action
+ */
     /**
      * Open dialog house bl - on hold
      */
@@ -519,13 +545,13 @@ export default {
         this.close_dialog_house_bl_on_hold();
       }
     },
-    /**
-     * End Block Reissued Action
-     */
+/**
+ * End Block Reissued Action
+ */
 
-    /**
-     * Block Action Reject
-     */
+/**
+ * Block Action Reject
+ */
     /**
      * Open dialog house bl
      */
@@ -554,13 +580,12 @@ export default {
      * On submit description form dialog - reject
      */
     async on_submit_dialog_reject_description(data) {
-      console.log(this.reject.formDialog);
       try {
-        this.reject.loading = true
+        this.paidRejectLoading = true
         this.reject.formDialog = _.assign(this.reject.formDialog, data.form)
         await this.handle_reject()
       } finally {
-        this.reject.loading = false
+        this.paidRejectLoading = false
         this.reject.showDescriptionDialog = false
         await this.$fetch()
       }
@@ -583,6 +608,43 @@ export default {
         this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to reject.`)
       }
     },
+/**
+ * End BLock Reject Action
+ */
+
+/**
+ * Block Paid Action
+ */
+    /**
+     * On submit house bl form dialog - paid
+     */
+    async on_submit_dialog_house_bl_paid(data) {
+      try {
+        this.paidRejectLoading = true
+        this.paid.formDialog = _.assign(this.paid.formDialog, data.form)
+        await this.handle_paid()
+      } finally {
+        this.paidRejectLoading = false
+        this.paid.showHouseBLDialog = false
+        await this.$fetch()
+      }
+    },
+    async handle_paid() {
+      try {
+        this.$toast.global.app_loading();
+        const response = await this.$axios.put(
+          `/api/e_do/approve/${this.edo.edo_id}`,
+          qs.stringify(this.paid.formDialog)
+        )
+        if (response) {
+          this.$toast.clear()
+          this.$toast.global.app_success(`e-DO ${this.edo.edo_number} successfully Paid.`)
+        }
+      } catch (error) {
+        this.$toast.clear()
+        this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to Paid.`)
+      }
+    },
 
     to_data_url (url, callback) {
       let xhr = new XMLHttpRequest()
@@ -602,7 +664,7 @@ export default {
       let edo = this.edo;
       let dateNow = this.$moment().format('DD/MM/YYYY');
 
-      this.to_data_url(require('@/assets/images/logo-scl.png'), function (dataURL) {
+      this.to_data_url(require('@/static/logo-scl-new.png'), function (dataURL) {
         let docDefinition = {
           content: [
             {
@@ -707,7 +769,7 @@ export default {
                             {
                               image: dataURL,
                               width: 150,
-                              margin: [0, 2, 0, 10]
+                              margin: [0, 20, 0, 20]
                             }
                           ],
                           [
@@ -752,7 +814,7 @@ export default {
                           style: 'label'
                         },
                         {
-                          text: '',
+                          text: '-',
                           style: 'content'
                         }
                       ]

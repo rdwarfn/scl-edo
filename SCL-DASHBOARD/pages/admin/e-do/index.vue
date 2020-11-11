@@ -553,9 +553,9 @@ export default {
      * Action Paid
      */
     async put_paid(obj) {
-      this.$toast.global.app_loading();
-      this.paidRejectLoading = true
       try {
+        this.$toast.global.app_loading();
+        this.paidRejectLoading = true
         const response = await this.$axios.put(`/api/e_do/approve/${this.paid.edo.edo_id}`, qs.stringify(obj.form))
         if (response) {
           this.$toast.clear()
