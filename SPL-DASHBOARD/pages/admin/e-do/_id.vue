@@ -1,5 +1,6 @@
 <template>
   <div class="px-5 py-5">
+    <!-- Alert Status e-DO -->
     <v-row>
       <v-col cols="12">
         <template>
@@ -16,10 +17,12 @@
         </template>
       </v-col>
     </v-row>
+    <!-- end Alert -->
 
+    <!-- Action Released -->
     <v-row class="mt-sm-8">
       <v-col cols="12" md="sm">
-        <v-btn :dark="isCanPickedUp" color="#BB6BD9" class="mr-3" :disabled="!isCanPickedUp" :loading="$fetchState.pending" @click.prevent="_handlePickedUp">
+        <v-btn :dark="isCanPickedUp" color="#BB6BD9" class="mr-3" :disabled="!isCanPickedUp" :loading="$fetchState.pending" @click.prevent="handle_picked_up">
           Released this e-DO <v-icon class="ml-2">mdi-truck</v-icon>
         </v-btn>
       </v-col>
@@ -29,6 +32,7 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-row>
+          <!-- Created At -->
           <v-col cols="12" sm>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
@@ -37,6 +41,7 @@
             </div>
           </v-col>
 
+          <!-- Created By -->
           <v-col cols="12" sm>
             <div class="label">Created By</div>
             <div class="font-weight-bold text-capitalize">
@@ -45,6 +50,7 @@
             </div>
           </v-col>
 
+          <!-- Status e-DO -->
           <v-col cols="12" sm>
             <div class="label">Status</div>
             <div class="font-weight-bold" :style="{color: colors(edo.status)}">
@@ -57,6 +63,7 @@
 
       <v-col cols="12" sm>
         <v-row justify-sm="end">
+          <!-- QrCode -->
           <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
             <qrcode
               :value="edo.edo_number"
@@ -64,6 +71,7 @@
             />
           </v-skeleton-loader>
           <div class="ml-3 d-flex flex-column justify-center">
+            <!-- e-DO Number -->
             <div class="label">e-DO Number</div>
             <div class="font-weight-bold">
               {{ edo.edo_number }}
@@ -78,6 +86,7 @@
     <v-row>
       <v-col>
         <v-row>
+          <!-- Shipper Name -->
           <v-col cols="12" sm>
             <div class="label">Shipper name</div>
             <div class="text-h5">
@@ -86,6 +95,7 @@
             </div>
           </v-col>
 
+          <!-- Consignee Name -->
           <v-col cols="12" sm>
             <div class="label">Consignee name</div>
             <div class="text-h5">
@@ -97,6 +107,7 @@
 
 
         <v-row>
+          <!-- Shipper e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
             <!-- belum ada field di api -->
@@ -106,6 +117,7 @@
             </div>
           </v-col>
 
+          <!-- Consignee e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Consignee e-mail</div>
             <div class="text-h5">
@@ -117,6 +129,7 @@
 
 
         <v-row>
+          <!-- Shipper Address -->
           <v-col cols="12" sm>
             <div class="label">Shipper address</div>
             <div class="text-h5">
@@ -125,6 +138,7 @@
             </div>
           </v-col>
 
+          <!-- Consignee Adress -->
           <v-col cols="12" sm>
             <div class="label">Consignee address</div>
             <div class="text-h5">
@@ -136,6 +150,7 @@
 
 
         <v-row>
+          <!-- Notify -->
           <v-col cols="12" sm>
             <div class="label">Notify</div>
             <div class="text-h5">
@@ -144,6 +159,7 @@
             </div>
           </v-col>
 
+          <!-- House BL Number -->
           <v-col cols="12" sm>
             <div class="label">House BL Number</div>
             <div class="text-h5">
@@ -155,6 +171,7 @@
 
 
         <v-row>
+          <!-- Notify Address -->
           <v-col cols="12" sm>
             <div class="label">Notify Address</div>
             <div class="text-h5">
@@ -166,11 +183,13 @@
 
 
         <v-row>
+          <!-- MB/L Number -->
           <v-col cols="12" sm>
             <div class="label">MB/L Number</div>
             <div class="text-h5">{{ edo. mbl_number }}</div>
           </v-col>
 
+          <!-- House BL Date -->
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
             <div class="text-h5">
@@ -182,6 +201,7 @@
 
 
         <v-row>
+          <!-- Arrival Date (ETA) -->
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
             <div class="text-h5">
@@ -190,6 +210,7 @@
             </div>
           </v-col>
 
+          <!-- Place Of Receipt -->
           <v-col cols="12" sm>
             <div class="label">Place of receipt</div>
             <div class="text-h5">
@@ -201,6 +222,7 @@
 
 
         <v-row>
+          <!-- Container Seal Number -->
           <v-col cols="12" sm>
             <div class="label">Container/Seal number</div>
             <div class="text-h5">
@@ -209,6 +231,7 @@
             </div>
           </v-col>
 
+          <!-- Ocean Vessel -->
           <v-col cols="12" sm>
             <div class="label">Ocean vessel</div>
             <div class="text-h5">
@@ -220,6 +243,7 @@
 
 
         <v-row>
+          <!-- Port Of Loading -->
           <v-col cols="12" sm>
             <div class="label">Port of loading</div>
             <div class="text-h5">
@@ -228,6 +252,7 @@
             </div>
           </v-col>
 
+          <!-- Voyage Number -->
           <v-col cols="12" sm>
             <div class="label">Voyage Number</div>
             <div class="text-h5">
@@ -239,6 +264,7 @@
 
 
         <v-row>
+          <!-- Final Destination -->
           <v-col cols="12" sm>
             <div class="label">Final Destination</div>
             <div class="text-h5">
@@ -247,6 +273,7 @@
             </div>
           </v-col>
 
+          <!-- Port Of Discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
             <div class="text-h5">
@@ -258,6 +285,7 @@
 
 
         <v-row>
+          <!-- Gross Weight -->
           <v-col cols="12" sm>
             <div class="label">Gross weight (Kg)</div>
             <div class="text-h5">
@@ -266,6 +294,7 @@
             </div>
           </v-col>
 
+          <!-- Package -->
           <v-col cols="12" sm>
             <div class="label">Package</div>
             <div class="text-h5">
@@ -277,15 +306,16 @@
 
 
         <v-row>
+          <!-- Number Of Package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. number_of_package }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
 
+          <!-- Measurement -->
           <v-col cols="12" sm>
             <div class="label">Measurement</div>
             <div class="text-h5">
@@ -297,6 +327,7 @@
 
 
         <v-row>
+          <!-- Description Of Goods -->
           <v-col cols="12" sm>
             <div class="label">Description of goods</div>
             <div class="text-h5">
@@ -305,9 +336,9 @@
             </div>
           </v-col>
 
+          <!-- Marks And Number -->
           <v-col cols="12" sm>
             <div class="label">Marks and number</div>
-
             <div class="text-h5">
               {{ edo. marks_and_number }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -363,7 +394,7 @@ export default {
   async fetch () {
     this.$toast.global.app_loading()
     try {
-      await this.searchEdo ()
+      await this.search_edo ()
       this.alert.message = `e-DO ${this.$route.params.id} is valid from SCL System`;
       this.alert.type = "success"
       this.alert.icon = "mdi-checkbox-marked-circle-outline"
@@ -389,7 +420,7 @@ export default {
   methods: {
     colors (params) { return getColorStatus (params) },
 
-    async _handlePickedUp (e) {
+    async handle_picked_up (e) {
       this.$toast.global.app_loading ();
       try {
         const response = await this.$axios.put (`/api/e_do/picked_up/${this.edo.edo_id}`)
@@ -399,11 +430,11 @@ export default {
       } catch (error) {
         this.$toast.global.app_error (`e-DO ${this.edo.edo_number} failed to picked up`, err.response.message)
       } finally {
-        this.searchEdo ()
+        this.search_edo ()
       }
     },
 
-    async searchEdo () {
+    async search_edo () {
       try {
         const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
         if (response) {

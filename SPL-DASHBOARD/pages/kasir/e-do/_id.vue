@@ -377,7 +377,7 @@ export default {
   async fetch () {
     this.$toast.global.app_loading()
     try {
-      await this.searchEdo()
+      await this.search_edo()
       this.alert.message = `e-DO ${this.$route.params.id} is valid from SCL System`;
       this.alert.type = "success"
       this.alert.icon = "mdi-checkbox-marked-circle-outline"
@@ -409,7 +409,7 @@ export default {
 
   methods: {
     colors (params) { return getColorStatus (params) },
-    async searchEdo() {
+    async search_edo() {
       try {
         const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
         if (response) {
