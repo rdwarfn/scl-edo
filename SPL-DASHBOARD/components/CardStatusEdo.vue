@@ -1,0 +1,38 @@
+<template>
+  <v-card :color="color" class="pa-5 card-edo-status" min-height="104px">
+    <v-row no-gutters>
+      <v-col cols="12" md="auto">
+        <v-icon dark size="40">{{ icon }}</v-icon>
+        <span :style="{color: 'white'}" class="ml-4 text-subtitle-1 text-md-h6 nowra">{{ title }}</span>
+      </v-col>
+
+      <v-col cols="12" class="ml-7 pl-9 font-weight-bold">
+        <v-skeleton-loader :loading="loading" type="text" min-width="30" min-height="27">
+        <span :style="{color: 'white'}">{{ status }}</span>
+        </v-skeleton-loader>
+      </v-col>
+    </v-row>
+  </v-card>
+</template>
+
+<script>
+export default {
+  props: {
+    color: { type: String },
+    icon: { type: String },
+    title: { type: String },
+    status: { type: String },
+    loading: { type: Boolean, default: false }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/variables.scss";
+
+@media #{map-get($display-breakpoints, 'sm-and-up')} {
+  .card-edo-status {
+    min-width: 90px;
+  }
+}
+</style>

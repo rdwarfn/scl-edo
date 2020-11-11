@@ -19,7 +19,7 @@
 
     <v-row class="mt-sm-8">
       <v-col cols="12" md="sm">
-        <v-btn dark color="#BB6BD9" class="mr-3" :disabled="!isCanPickedUp" :loading="$fetchState.pending" @click.prevent="_handlePickedUp">
+        <v-btn :dark="isCanPickedUp" color="#BB6BD9" class="mr-3" :disabled="!isCanPickedUp" :loading="$fetchState.pending" @click.prevent="_handlePickedUp">
           Released this e-DO <v-icon class="ml-2">mdi-truck</v-icon>
         </v-btn>
       </v-col>
@@ -118,7 +118,6 @@
 
         <v-row>
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Shipper address</div>
             <div class="text-h5">
               {{ edo. shipper_address }}
@@ -127,7 +126,6 @@
           </v-col>
 
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Consignee address</div>
             <div class="text-h5">
               {{ edo. consignee_address }}
@@ -175,7 +173,6 @@
 
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <!-- belum ada field api -->
             <div class="text-h5">
               {{ edo. house_bl_date }}
                 <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
@@ -284,7 +281,7 @@
             <div class="label">Number of Package</div>
             <!-- belum ada field di api -->
             <div class="text-h5">
-              {{ edo. package_number }}
+              {{ edo. number_of_package }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>

@@ -19,6 +19,20 @@
 
     <v-row>
       <v-col cols="12" sm="6">
+        <v-skeleton-loader :loading="$fetchState.pending" type="image" min-width="90" height="104">
+          <card-status-edo
+            :loading="$fetchState.pending"
+            :color="card.color"
+            :icon="card.icon"
+            :title="card.title"
+            :status="card.status"
+          />
+        </v-skeleton-loader>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12" sm="6">
         <v-row>
           <v-col cols="12" sm>
             <div class="label">Created At</div>
@@ -323,7 +337,9 @@
 
 <script>
 import _ from 'lodash';
+import CardStatusEdo from '@/components/CardStatusEdo.vue';
 import { getColorStatus } from '@/utils';
+import * as Colors from '@/utils/colors';
 
 export default {
   meta: {
@@ -348,6 +364,12 @@ export default {
         message: "",
         icon: "mdi-checkbox-marked-circle-outline",
         type: "success"
+      },
+      card: {
+        title: 'e-DO Status',
+        icon: '',
+        color: '',
+        status: ''
       }
     }
   },
@@ -369,6 +391,13 @@ export default {
   },
   fetchOnServer: false,
 
+  watch: {
+    edo(newVal) {
+      const { status } = newVal
+      this.get_card_status(status)
+    }
+  },
+
   computed: {
     isNotEmpty() { return !_.isEmpty(this.edo) },
     isCanPickedUp() { return this.isNotEmpty && _.isEqual (this.edo.status, 'PAID') },
@@ -389,6 +418,32 @@ export default {
         }
       } catch (error) {
         this.$toast.global.app_error(`Failed to get e-DO` + err.response.message)
+      }
+    },
+    get_card_status(params) {
+      const context = _.upperCase(params);
+      this.card.status = _.isEqual("Hold on") ? "On Hold" : _.capitalize(params)
+      switch (context) {
+        case 'PAID':
+          this.card.icon = "mdi-checkbox-marked-circle-outline"
+          this.card.color = Colors.primary
+          break;
+        case 'REJECTED':
+          this.card.icon = "mdi-close-circle-outline"
+          this.card.color = Colors.danger
+          break;
+        case 'RELEASED':
+          this.card.icon = "mdi-truck-outline"
+          this.card.color = Colors.purple
+          break;
+        case 'HOLD ON':
+          this.card.icon = "mdi-delta"
+          this.card.color = Colors.warning
+          break;
+        default:
+          this.card.icon = "mdi-magnify"
+          this.card.color = Colors.link
+          break;
       }
     }
   }

@@ -1,55 +1,5 @@
 <template>
   <v-container fluid class="px-md-5 py-5">
-    <!-- <v-dialog transition="slide-y-transition" max-width="768px" v-model="reject.showDescriptionDialog" persistent>
-      <v-alert
-        tile
-        border="right"
-        colored-border
-        type="error"
-        elevation="2"
-        class="pt-5 ma-0"
-      >
-        <validation-observer ref="observer" v-slot="{handleSubmit, invalid}">
-          <v-card flat class="pa-0 mt-n1" tag="form" @submit.prevent="handleSubmit(handle_reject)">
-            <v-card-title class="pt-0">
-              Reject this e-DO &nbsp;<span style="color: #3273DC !important">{{ edo.edo_number }}</span> ?
-              <v-spacer></v-spacer>
-              <v-btn icon @click.prevent="close_dialog_reject">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-card-title>
-
-            <v-card-text class="py-0">
-              <validation-provider name="Note rejection" rules="required" v-slot="{errors}">
-                <label for="rejectNotes">Notes</label>
-                <v-textarea
-                  id="rejectNotes"
-                  class="mt-3"
-                  v-model="reject.description"
-                  :loading="reject.loading"
-                  :disabled="reject.loading"
-                  :error-messages="errors"
-                  placeholder="Enter your comment here"
-                  solo
-                ></v-textarea>
-              </validation-provider>
-            </v-card-text>
-
-            <v-card-actions class="px-5">
-              <v-spacer></v-spacer>
-              <v-btn text color="error" @click.prevent="close_dialog_reject">Cancel</v-btn>
-              <v-btn
-                color="error"
-                :disabled="reject.loading || invalid"
-                :loading="reject.loading"
-                type="submit"
-              >Yes, Reject</v-btn>
-            </v-card-actions>
-          </v-card>
-        </validation-observer>
-      </v-alert>
-    </v-dialog> -->
-
     <!-- dialog house bl number - reject -->
     <dialog-house-bl-number
       :loading="reject.loading"

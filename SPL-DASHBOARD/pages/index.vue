@@ -5,15 +5,15 @@
 import _ from 'lodash';
 export default {
   middleware ({ store, redirect, replace }) {
-    let auth = store.state.auth;
-    if (_.upperCase(auth.user.role) === 'ADMINSPL') {
-      return redirect ('/admin')
-    } else if (_.upperCase(auth.user.role) === 'KASIR') {
-      return redirect ('/kasir')
-    } else {
-      return redirect ('/logout')
+    let role = store.state.auth.user.role;
+    switch (_.upperCase(role)) {
+      case 'ADMINSPL':
+        return redirect('/admin');
+      case 'KASIR':
+        return redirect('/kasir');
+      default:
+        return redirect('/logout');
     }
-
   }
 }
 </script>

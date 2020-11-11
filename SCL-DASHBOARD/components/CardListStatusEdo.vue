@@ -64,8 +64,7 @@
     </v-col>
     <!-- end Released -->
 
-    <!-- Edo Status -->
-    <!-- status itu apa ?, sekarang diambil dari  -->
+    <!-- On Hold -->
     <v-col cols="12" sm="6" md="3">
       <v-skeleton-loader :loading="!count.rejected" type="image" min-width="90" height="104">
         <card-status-edo
@@ -76,7 +75,7 @@
         />
       </v-skeleton-loader>
     </v-col>
-    <!-- end Edo Status -->
+    <!-- end On Hold -->
   </v-row>
 </template>
 

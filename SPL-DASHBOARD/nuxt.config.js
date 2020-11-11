@@ -6,11 +6,6 @@ export default {
   //   API_URL: 'https://cors-anywhere.herokuapp.com/https://api-scl.herokuapp.com'
   // },
   // Global page headers (https://go.nuxtjs.dev/config-head)
-
-  /*
-  ** Nuxt rendering mode
-  */
-  mode: 'universal',
   /*
   ** Nuxt target
   */
@@ -139,9 +134,10 @@ export default {
         name: 'app_loading',
         message: 'Please wait ..',
         options: {
+          type: 'info',
           theme: 'outline',
-          duration: 3000,
-          className: 'px-10 rounded-0'
+          duration: 9000,
+          icon: 'mdi-information-outline'
         }
       },
       {
