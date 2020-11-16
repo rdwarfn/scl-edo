@@ -11,7 +11,7 @@ export default {
       case 'ADMIN':
         return redirect('/admin')
       default:
-        return redirect('/superadmin/data-master');
+        return redirect('/superadmin/user-management');
     }
   }
 }

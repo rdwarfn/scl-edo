@@ -1,5 +1,6 @@
 <template>
   <v-container fluid class="px-md-5">
+    <!-- Dialog Delete -->
     <v-dialog :disabled="loadingDelete" v-model="modalDeleteDialog" max-width="600px" persistent>
       <v-alert colored-border type="warning" border="top" icon="mdi-alert-outline" close-icon class="ma-0 pt-7">
         <div class="text-h6">
@@ -8,18 +9,24 @@
         </div>
         <v-divider class="mt-5"></v-divider>
         <v-card-actions>
+          <!-- Cancel action -->
           <v-btn :disabled="loadingDelete" :loading="loadingDelete" text color="error" @click.stop="modalDeleteDialog = false">Cancel</v-btn>
+          <!-- end Cancel action -->
           <v-spacer></v-spacer>
-          <v-btn :disabled="loadingDelete" :loading="loadingDelete" dark color="error" @click="_handleDeleteEdo">Yes, Delete</v-btn>
+          <!-- Delete action -->
+          <v-btn :disabled="loadingDelete" :loading="loadingDelete" dark color="error" @click="handle_delete_edo">Yes, Delete</v-btn>
+          <!-- end Delete action -->
         </v-card-actions>
       </v-alert>
     </v-dialog>
+    <!-- end Dialog delete -->
 
     <card-list-status-edo :count="count" />
 
     <v-row justify="space-between" align="end" class="my-10">
       <v-col cols="7">
         <v-row align="end" class="py-0">
+          <!-- Search e-DO -->
           <v-col cols="auto">
             <v-text-field
               :disabled="$fetchState.pending"
@@ -31,13 +38,17 @@
               rounded clearable
             ></v-text-field>
           </v-col>
+          <!-- end Search e-DO -->
 
+          <!-- Filter by -->
           <v-col cols="auto">
-            <v-btn large @click.stop="dialog = true" :disabled="$fetchState.pending">
+            <v-btn large @click.stop="dialog_filter = true" :disabled="$fetchState.pending">
               Filter By <v-icon>mdi-filter-outline</v-icon>
             </v-btn>
           </v-col>
+          <!-- end Filter by -->
 
+          <!-- Show data action -->
           <v-col>
             <v-row no-gutters align="end">
               <v-col cols="12">
@@ -57,15 +68,17 @@
               </v-col>
             </v-row>
           </v-col>
+          <!-- end Show data action -->
         </v-row>
       </v-col>
 
-
+      <!-- Created new e-DO -->
       <v-col cols="auto">
         <v-btn color="primary" :disabled="$fetchState.pending" nuxt :to="`${$route.path}/create`">
           Create new e-DO <v-icon>mdi-plus-circle-outline</v-icon>
         </v-btn>
       </v-col>
+      <!-- end Created new e-DO -->
     </v-row>
 
 
@@ -86,78 +99,95 @@
             hide-default-footer
             calculate-widths
           >
-              <template v-slot:[`item.released_at`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  {{ item.released_at || '-' }}
-                </div>
-              </template>
+            <!-- Released at -->
+            <template v-slot:[`item.released_at`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                {{ datetime_formated(item.released_at) }}
+              </div>
+            </template>
+            <!-- end Relased at -->
 
-              <template v-slot:[`item.house_bl_number`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  {{ item.house_bl_number }}
-                </div>
-              </template>
+            <!-- House BL number -->
+            <template v-slot:[`item.house_bl_number`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                {{ item.house_bl_number }}
+              </div>
+            </template>
+            <!-- end House BL number -->
 
-              <template v-slot:[`item.edo_number`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  {{ item.edo_number }}
-                </div>
-              </template>
+            <!-- e-DO number -->
+            <template v-slot:[`item.edo_number`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                {{ item.edo_number }}
+              </div>
+            </template>
+            <!-- end e-DO number -->
 
-              <template v-slot:[`item.consignee_name`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  {{ item.consignee_name }}
-                </div>
-              </template>
+            <!-- Consignee name -->
+            <template v-slot:[`item.consignee_name`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                {{ item.consignee_name }}
+              </div>
+            </template>
+            <!-- end Consignee name -->
 
-              <template v-slot:[`item.created_at`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  {{ item.created_at }}
-                </div>
-              </template>
+            <!-- Created at -->
+            <template v-slot:[`item.created_at`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                {{ datetime_formated(item.created_at) }}
+              </div>
+            </template>
+            <!-- end Created at -->
 
-              <template v-slot:[`item.status`]="{ item }">
-                <div class="py-md-6 text-subtitle-2" :style="`color: ${getColor(item.status)}`">
-                  {{ item.status }}
-                </div>
-              </template>
+            <!-- Status e-DO -->
+            <template v-slot:[`item.status`]="{ item }">
+              <div class="py-md-6 text-subtitle-2" :style="`color: ${getColor(item.status)}`">
+                {{ item.status }}
+              </div>
+            </template>
+            <!-- end Status e-DO -->
 
-              <template v-slot:[`item.actions`]="{ item }">
-                <div class="py-md-6 text-subtitle-2">
-                  <!-- edit action -->
-                  <v-btn icon color="primary" :disabled="!isCanEdit(item.status)" nuxt :to="`${$route.path}/edit/${item.edo_number}`">
-                    <v-icon>mdi-pencil-outline</v-icon>
-                  </v-btn>
-                  <!-- end edit action -->
-
-                  <!-- delete action -->
-                  <v-btn icon color="red" :disabled="!isCandDelete(item.status)" @click.stop="_openDialogDelete(item.edo_id, item.edo_number)">
-                    <v-icon>mdi-trash-can-outline</v-icon>
-                  </v-btn>
-                  <!-- end delete action -->
-                </div>
-              </template>
-
-              <template v-slot:[`item.detail`]="{ item }">
-                  <v-btn
-                  text nuxt
-                  class="text-capitalize"
-                  :to="`${$route.path}/detail/${item.edo_id}`">
-                  Detail
+            <template v-slot:[`item.actions`]="{ item }">
+              <div class="py-md-6 text-subtitle-2">
+                <!-- edit action -->
+                <v-btn icon color="primary" :disabled="!isCanEdit(item.status)" nuxt :to="`${$route.path}/edit/${item.edo_number}`">
+                  <v-icon>mdi-pencil-outline</v-icon>
                 </v-btn>
-              </template>
+                <!-- end edit action -->
+
+                <!-- delete action -->
+                <v-btn icon color="red" :disabled="!isCandDelete(item.status)" @click.stop="open_dialog_delete(item.edo_id, item.edo_number)">
+                  <v-icon>mdi-trash-can-outline</v-icon>
+                </v-btn>
+                <!-- end delete action -->
+              </div>
+            </template>
+
+            <!-- Detail action -->
+            <template v-slot:[`item.detail`]="{ item }">
+                <v-btn
+                text nuxt
+                class="text-capitalize"
+                :to="`${$route.path}/detail/${item.edo_id}`">
+                Detail
+              </v-btn>
+            </template>
+            <!-- end Detail action -->
           </v-data-table>
         </v-skeleton-loader>
       </v-col>
     </v-row>
 
     <v-row justify="space-between" align="center">
+      <!-- Showing -->
       <v-col cols="12" sm="6">
         <v-skeleton-loader :loading="$fetchState.pending" type="text">
           <div>Showing {{ pagination.pageStop - pagination.pageStart }} of {{ pagination.itemsLength }} data</div>
         </v-skeleton-loader>
       </v-col>
+      <!-- end Showing -->
 
+      <!-- Pagination table -->
       <v-col cols="12" sm="6" md="3">
         <v-pagination
           circle
@@ -165,20 +195,21 @@
           :length="pageCount"
         ></v-pagination>
       </v-col>
+      <!-- end Pagination table -->
     </v-row>
 
+    <!-- Dialog Filter -->
     <v-dialog
-      v-model="dialog"
-      scrollable
-      :overlay="false"
-      max-width="500"
-      transition="dialog-transition"
+      v-model="dialog_filter"
+      persistent
+      max-width="500px"
+      transition="slide-y-reverse-transition"
     >
       <v-card>
         <v-toolbar flat>
           <span class="headline">Filter by</span>
           <v-spacer />
-          <v-btn icon @click.stop="dialog = !dialog">
+          <v-btn icon @click.stop="dialog_filter = !dialog_filter">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -198,28 +229,25 @@
                   offset-y
                   min-width="290px"
                 >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-combobox
-                        v-model="dateFrom"
-                        chips
-                        small-chips
-                        clear-icon
-                        clearable
-                        readonly
-                        label="Start from"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-combobox>
-                    </template>
-                    <v-date-picker v-model="dateFrom" no-title>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menuDateFrom = false">
-                        Cancel
-                      </v-btn>
-                      <v-btn text color="primary" @click="$refs.menuDateFrom.save(dateFrom)">
-                        OK
-                      </v-btn>
-                    </v-date-picker>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="dateFrom"
+                      label="Start date from"
+                      prepend-inner-icon="mdi-calendar"
+                      clearable
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="dateFrom" no-title>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menuDateFrom = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menuDateFrom.save(dateFrom)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
                 </v-menu>
               </v-col>
 
@@ -233,28 +261,25 @@
                   offset-y
                   min-width="290px"
                 >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-combobox
-                        v-model="dateTo"
-                        chips
-                        small-chips
-                        clear-icon
-                        clearable
-                        readonly
-                        label="To"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-combobox>
-                    </template>
-                    <v-date-picker v-model="dateTo" no-title>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menuDateTo = false">
-                        Cancel
-                      </v-btn>
-                      <v-btn text color="primary" @click="$refs.menuDateTo.save(dateTo)">
-                        OK
-                      </v-btn>
-                    </v-date-picker>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="dateTo"
+                      label="End date to"
+                      prepend-inner-icon="mdi-calendar"
+                      clearable
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="dateTo" no-title>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menuDateTo = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menuDateTo.save(dateTo)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
                 </v-menu>
               </v-col>
 
@@ -275,6 +300,9 @@
                   }, {
                     text: 'Released',
                     value: 'RELEASED'
+                  }, {
+                    text: 'Hold On',
+                    value: 'HOLD ON'
                   }]"
                   v-model="statusSearch"
                   item-text="text"
@@ -287,6 +315,7 @@
                 <v-text-field
                   label="House BL Number"
                   v-model="houseBlSearch"
+                  clearable
                 ></v-text-field>
               </v-col>
 
@@ -294,6 +323,7 @@
                 <v-text-field
                   label="Vessel Name"
                   v-model="vesselSearch"
+                  clearable
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -304,11 +334,12 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false">Cancel</v-btn>
-          <v-btn color="primary">Filter now</v-btn>
+          <v-btn color="primary" text @click.stop="dialog_filter = false">Cancel</v-btn>
+          <v-btn color="primary" @click.prevent="on_submit_filter">Filter now</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <!-- end Dialog Filter -->
   </v-container>
 </template>
 
@@ -351,7 +382,6 @@ export default {
       },
 
       search: '',
-      dialog: false,
 
       page: 1,
       pageCount: 0,
@@ -365,9 +395,10 @@ export default {
 
 
       // filter
+      dialog_filter: false,
       menuDateFrom: false,
       menuDateTo: false,
-      statusSearch: "",
+      statusSearch: "ALL",
       inputSearch: '',
       vesselSearch: '',
       houseBlSearch: '',
@@ -375,14 +406,13 @@ export default {
       dateFrom: '',
     }
   },
-
-  async fetch () {
-    await this.getAll()
+  async fetch() {
+    await this.get_all()
   },
   fetchOnServer: false,
 
   watch: {
-    allEdo (val) {
+    allEdo(val) {
       const notPickedUp = _.filter (val, function (o) {
         return _.upperCase(o.status) !== 'PICKED UP'
       });
@@ -391,24 +421,42 @@ export default {
       this.tabelDataFilter = notPickedUp && notPickedUp;
     },
 
-    statusSearch (val) {
-      const filteredEdo = val === 'ALL' ? this.tabelData : _.filter (this.tabelData, { status: val })
-      this.tabelDataFilter= filteredEdo
+    // statusSearch (val) {
+    //   const filteredEdo = val === 'ALL' || val === undefined ? this.tabelData : _.filter (this.tabelData, { status: val })
+    //   this.tabelDataFilter= filteredEdo
+    // },
+    houseBlSearch(newVal) {
+      let filtered_edo = !newVal
+        ? this.tabelData
+        : _.filter(this.tabelData, { house_bl_number: newVal })
+      this.tabelDataFilter = filtered_edo
+    },
+    vesselSearch(newVal) {
+      let filtered_edo = !newVal
+        ? this.tabelData
+        : _.filter(this.tabelData, { ocean_vessel: newVal })
+      this.tabelDataFilter = filtered_edo
     }
   },
 
   methods: {
-    async getAll () {
+    /**
+     * Get e-DO & Get total e-DO
+     */
+    async get_all() {
       this.$toast.global.app_loading()
       await Promise.all([
-        this.getAllEdo (),
-        this.getTotalEdo ()
+        this.get_all_edo (),
+        this.get_total_edo ()
       ])
       .then(() => {
         this.$toast.clear()
       })
     },
-    async getAllEdo () {
+    /**
+     * Get e-DO (all e-DO)
+     */
+    async get_all_edo() {
       try {
         const response = await this.$axios.get ('/api/e_do')
         if (response.status === 200) {
@@ -419,8 +467,10 @@ export default {
         this.$toast.global.app_error(`Failed to load e-DO.`)
       }
     },
-
-    async getTotalEdo () {
+    /**
+     * Get total e-DO
+     */
+    async get_total_edo() {
       try {
         const response = await this.$axios.get ('/api/e_do/total_e_do')
         if (response.status === 200) {
@@ -432,31 +482,66 @@ export default {
       }
     },
 
-    async _handleDeleteEdo () {
-      this.$toast.global.app_loading ();
+    /**
+     * Handle delete e-DO
+     */
+    async handle_delete_edo() {
+      this.$toast.global.app_loading();
       this.loadingDelete = true
       try {
-        const response = await this.$axios.delete (`/api/e_do/${this.contextDelete.edo_id}`)
+        const response = await this.$axios.delete(`/api/e_do/${this.contextDelete.edo_id}`)
         if (response) {
           this.$toast.clear()
-          this.$toast.global.app_success (`e-DO ${this.contextDelete.edo_number} successfully deleted.`)
+          this.$toast.global.app_success(`e-DO ${this.contextDelete.edo_number} successfully deleted.`)
         }
       } catch (error) {
         this.$toast.clear()
-        this.$toast.global.app_error (`e-DO ${this.contextDelete.edo_number} failed to delete.`)
+        this.$toast.global.app_error(`e-DO ${this.contextDelete.edo_number} failed to delete.`)
       } finally {
         this.loadingDelete = false
         this.modalDeleteDialog = false
 
-        await this.getAll()
+        await this.get_all()
       }
     },
+    /**
+     * Datetime format
+     */
+    datetime_formated(params) {
+      const date_formated = this.$moment(params)
 
-    getColor (params) { return getColorStatus (params) },
-    isCandDelete (params) { return isAdminCanDelete (params) },
-    isCanEdit (params) { return isAdminCanEdit (params) },
+      if (!date_formated.isValid()) return "-"
+      return date_formated.format("DD/MM/YYYY - hh:mm:ss")
+    },
+    /**
+     * Submit filter
+     */
+    on_submit_filter() {
+      let filtered_status_edo = this.statusSearch === 'ALL' || this.statusSearch === undefined
+        ? this.tabelData
+        : _.filter(this.tabelData, { status: this.statusSearch })
+      let filtered_datebetween_edo = _.filter(filtered_status_edo, (data) => {
+          if (!this.dateFrom && !this.dateTo) { return true }
+          else if (!this.dateTo) {
+            return this.$moment(data.created_at).isSameOrAfter(this.dateFrom)
+          }
+          else if (!this.dateFrom) {
+            return this.$moment(data.created_at).isSameOrBefore(this.dateTo)
+          }
+          else {
+            return this.$moment(data.created_at).isBetween(this.dateFrom, this.dateTo)
+          }
+        })
 
-    _openDialogDelete (edo_id, edo_number) {
+      this.tabelDataFilter = filtered_datebetween_edo || filtered_status_edo
+      this.dialog_filter = false
+    },
+
+    getColor(params) { return getColorStatus (params) },
+    isCandDelete(params) { return isAdminCanDelete (params) },
+    isCanEdit(params) { return isAdminCanEdit (params) },
+
+    open_dialog_delete(edo_id, edo_number) {
       this.contextDelete = { edo_id, edo_number }
       this.modalDeleteDialog = true
     }
@@ -467,7 +552,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

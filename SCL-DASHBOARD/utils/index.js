@@ -44,8 +44,6 @@ export const validateEmail = (params) => {
   return pattern.test(params)
 }
 
-
-
 export const contextDocumentDetailEdo = (params) => {
   let ctx;
   switch (_.upperCase(params)) {
@@ -132,6 +130,7 @@ export const initialEdo = {
     house_bl_number: "",
 
     notify_address: "",
+    number_of_quantity: "",
 
     mbl_number: "",
     house_bl_date: "",
@@ -156,7 +155,4 @@ export const initialEdo = {
 
     description_of_goods: "",
     marks_and_number: "",
-
-    // field ini diapus, tapi masih ada dan masih required di backend
-    pre_carriage: " ",
 }

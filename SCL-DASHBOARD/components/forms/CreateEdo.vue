@@ -6,18 +6,19 @@
         <!-- Shipper name -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Input shipper Name"
             rules="required"
           >
           <label class="labelText" for="shipperName">Shipper name</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.shipper_name"
             id="shipperName"
             placeholder="Input shipper name"
-            v-model.trim="models.shipper_name"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -29,7 +30,7 @@
         <!-- Consignee name -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Consignee Name"
             rules="required"
           >
@@ -37,12 +38,13 @@
             <!-- :items="selectData.consigneeName" -->
             <!-- @change="onChangeConsigneeName" -->
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.consignee_name"
             id="consigneeName"
             placeholder="Input consignee name"
-            v-model.trim="models.consignee_name"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             item-text="consignee_name"
             solo clearable
@@ -58,19 +60,20 @@
         <!-- Shipper e-mail -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Shipper E-mail"
             rules="email"
           >
           <label class="labelText" for="shipperEmail">Shipper e-mail <small>(optional)</small></label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.shipper_email"
             id="shipperEmail"
             type="email"
             placeholder="Input shipper e-mail"
-            v-model.trim="models.shipper_email"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
           ></v-text-field>
@@ -81,19 +84,20 @@
         <!-- Consignee e-mail -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Consignee Email"
             rules="required|email"
           >
           <label class="labelText" for="consigneeEmail">Consignee e-mail</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.consignee_email"
             id="consigneeEmail"
             type="email"
             placeholder="Input consignee e-mail"
-            v-model.trim="models.consignee_email"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -108,18 +112,19 @@
         <!-- Shipper address -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Shipper Address"
             rules="required"
           >
           <label class="labelText" for="shipperAddress">Shipper address</label>
           <v-textarea
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.shipper_address"
             id="shipperAddress"
             placeholder="Input shipper address"
-            v-model.trim="models.shipper_address"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -131,18 +136,19 @@
         <!-- Consignee address -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Consignee Address"
             rules="required"
           >
           <label class="labelText" for="consigneeAddress">Consignee address</label>
           <v-textarea
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.consignee_address"
             id="consigneeAddress"
             placeholder="Input consignee address"
-            v-model.trim="models.consignee_address"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -157,18 +163,19 @@
         <!-- Notify -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Notify"
             rules="required"
           >
           <label class="labelText" for="notify">Notify</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.notify"
             id="notify"
             placeholder="notify to"
-            v-model.trim="models.notify"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -180,18 +187,19 @@
         <!-- House BL number -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="House BL Number"
             rules="required"
           >
           <label class="labelText" for="houseBlNumber">House BL number</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.house_bl_number"
             id="houseBlNumber"
             placeholder="Input House BL no"
-            v-model.trim="models.house_bl_number"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -205,18 +213,19 @@
         <!-- Notify address -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Notify Address"
             rules="required"
           >
           <label class="labelText" for="notifyAddress">Notify address</label>
           <v-textarea
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.notify_address"
             id="notifyAddress"
             placeholder="Input notify address"
-            v-model.trim="models.notify_address"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -228,20 +237,21 @@
         <!-- No of quantity -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="No. of quantity"
             rules="required|numeric"
           >
             <label class="labelText" for="noOfQuantity">No. of quantity</label>
             <v-text-field
-              :loading="loading"
-              :disabled="loading"
+              v-model.trim="models.number_of_quantity"
               id="noOfQuantity"
               placeholder="Input no."
               type="number"
-              min="1"
-              v-model.trim="models.no_of_quantity"
+              :loading="loading"
+              :disabled="loading"
               :error-messages="errors"
+              :success="valid"
+              min="1"
               class="mt-3"
               solo clearable
               required
@@ -256,18 +266,19 @@
         <!-- MB/L number -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Input MB/L Number"
             rules="required"
           >
           <label class="labelText" for="mblNumber">MB/L number</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.mbl_number"
             id="mblNumber"
             placeholder="Input MB/L number"
-            v-model.trim="models.mbl_number"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -289,26 +300,26 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <validation-provider
-                v-slot="{ errors }"
+                v-slot="{ errors, valid }"
                 name="House BL Date"
                 rules="required"
               >
               <v-text-field
-                :loading="loading"
-                :disabled="loading"
+                v-model="house_bl_date_formatted"
                 id="houseBlDate"
-                v-model="houseBlDateFormatted"
                 hint="DD/MM/YYYY"
                 persistent-hint
                 append-icon="mdi-calendar"
                 placeholder="Choose House BL date"
-                class="mt-3"
+                :loading="loading"
+                :disabled="loading"
                 :error-messages="errors"
+                :success="valid"
+                class="mt-3"
                 readonly
                 v-bind="attrs"
                 v-on="on"
-                solo
-                required
+                solo required clearable
               ></v-text-field>
               </validation-provider>
             </template>
@@ -337,20 +348,21 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <validation-provider
-                v-slot="{ errors }"
+                v-slot="{ errors, valid }"
                 name="Arrival Date"
                 rules="required"
               >
               <v-text-field
-                :loading="loading"
-                :disabled="loading"
+                v-model="arrival_date_formatted"
                 id="arrivalDate"
-                v-model="arrivalDateFormatted"
                 hint="DD/MM/YYYY"
                 persistent-hint
                 append-icon="mdi-calendar"
                 placeholder="Choose Arrival date"
+                :loading="loading"
+                :disabled="loading"
                 :error-messages="errors"
+                :success="valid"
                 class="mt-3"
                 readonly
                 v-bind="attrs"
@@ -372,18 +384,19 @@
         <!-- Place of receipt -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Place Of Receipt"
             rules="required"
           >
           <label class="labelText" for="placeOfReceipt">Place of receipt</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.place_of_receipt"
             id="placeOfReceipt"
             placeholder="Input place of receipt"
-            v-model.trim="models.place_of_receipt"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -398,18 +411,19 @@
         <!-- Container seal number -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Container Seal Number"
             rules="required"
           >
           <label class="labelText" for="containerSealNumber">Container seal number</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.container_seal_number"
             id="containerSealNumber"
             placeholder="Input container/seal number"
-            v-model.trim="models.container_seal_number"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -421,18 +435,19 @@
         <!-- Ocean vessel -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Ocean Vessel"
             rules="required"
           >
           <label class="labelText" for="oceanVessel">Ocean vessel</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.ocean_vessel"
             id="oceanVessel"
             placeholder="Input ocean vessel"
-            v-model.trim="models.ocean_vessel"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -447,18 +462,19 @@
         <!-- Port of loading -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Port of lading"
             rules="required"
           >
           <label for="portOfLoading">Port of lading</label>
           <v-autocomplete
+            v-model.trim="models.port_of_loading"
             id="portOfLoading"
             placeholder="Select port of lading"
-            v-model.trim="models.port_of_loading"
-            :items="selectData.portOfLoading"
             item-text="name"
+            :items="selectData.portOfLoading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -470,18 +486,19 @@
         <!-- Voyage number -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Voyage Number"
             rules="required|numeric"
           >
           <label class="labelText" for="voyageNumber">Voyage number</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.voyage_number"
             id="voyageNumber"
             placeholder="Input voyage number"
-            v-model.trim="models.voyage_number"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -495,7 +512,7 @@
         <!-- Final destination -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Final Destination"
             rules="required"
           >
@@ -512,12 +529,13 @@
             required
           ></v-text-field> -->
           <v-autocomplete
+            v-model.trim="models.final_destination"
             id="finalDestination"
             placeholder="Select final destination"
-            v-model.trim="models.final_destination"
-            :items="selectData.finalDestination"
             item-text="name"
+            :items="selectData.finalDestination"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -529,18 +547,19 @@
         <!-- Port of discharge -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Port of discharge"
             rules="required"
           >
           <label class="labelText" for="portOfDischarge">Port of discharge</label>
           <v-autocomplete
+            v-model.trim="models.port_of_discharges"
             id="portOfDischarge"
             placeholder="Select port of discharge"
-            v-model.trim="models.port_of_discharges"
-            :items="selectData.portOfDischarge"
             item-text="name"
+            :items="selectData.portOfDischarge"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -555,18 +574,19 @@
         <!-- Gross weight -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Gross weight"
-            rules="required|numeric"
+            rules="required"
           >
           <label class="labelText" for="grossWeight">Gross weight</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.gross_weight"
             id="grossWeight"
             placeholder="Input gross weight"
-            v-model.trim="models.gross_weight"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             suffix="kg"
             solo clearable
@@ -579,18 +599,19 @@
         <!-- Package -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Package"
             rules="required"
           >
           <label class="labelText" for="package">Package</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.package"
             id="package"
             placeholder="Input package"
-            v-model.trim="models.package"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -605,18 +626,19 @@
         <!-- Measurement -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Measurement"
-            rules="required|numeric"
+            rules="required"
           >
           <label class="labelText" for="grossWeight">Measurement</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
             id="grossWeight"
             placeholder="Input measurement"
             v-model.trim="models.measurment"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             suffix="cbm"
             solo clearable
@@ -629,18 +651,19 @@
         <!-- Number of package -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Number of package"
             rules="required"
           >
           <label class="labelText" for="numberOfPackage">Number of package</label>
           <v-text-field
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.number_of_package"
             id="numberOfPackage"
             placeholder="Input number of package"
-            v-model.trim="models.number_of_package"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -655,18 +678,19 @@
         <!-- Description of goods -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Description of goods"
             rules="required"
           >
           <label class="labelText" for="descriptionOfGoods">Description of goods</label>
           <v-textarea
-            :loading="loading"
-            :disabled="loading"
             id="descriptionOfGoods"
             placeholder="Input description of goods"
             v-model.trim="models.description_of_goods"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -678,18 +702,19 @@
         <!-- Marks and number -->
         <v-col cols="12" sm="6">
           <validation-provider
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
             name="Marks and number"
             rules="required"
           >
           <label class="labelText" for="marksAndNumber">Marks and number</label>
           <v-textarea
-            :loading="loading"
-            :disabled="loading"
+            v-model.trim="models.marks_and_number"
             id="marksAndNumber"
             placeholder="Input marks and number"
-            v-model.trim="models.marks_and_number"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
+            :success="valid"
             class="mt-3"
             solo clearable
             required
@@ -716,7 +741,7 @@
 </template>
 <script>
 import _ from 'lodash';
-import { required, email, double, numeric } from 'vee-validate/dist/rules';
+import { required, email, numeric } from 'vee-validate/dist/rules';
 import { extend, ValidationProvider, ValidationObserver, setInteractionMode } from 'vee-validate';
 import { initialEdo } from '@/utils';
 
@@ -727,11 +752,7 @@ extend ('required', {
 });
 extend ('numeric', {
   ...numeric,
-  message: '{_field_} must be valid number'
-})
-extend ('double', {
-  ...double,
-  message: '{_field_} must be valid decimal'
+  message: '{_field_} must be valid numeric.'
 })
 extend ('email', {
   ...email,
@@ -751,8 +772,7 @@ export default {
       finalDestination: { type: Array, required: true, default: [] }
     }
   },
-
-  data () {
+  data() {
     return {
       menuHouseBLDate: false,
       menuArrivalDate: false,
@@ -770,7 +790,7 @@ export default {
         house_bl_number: "",
 
         notify_address: "",
-        no_of_quantity: "",
+        number_of_quantity: "",
 
         mbl_number: "",
         house_bl_date: "",
@@ -798,20 +818,18 @@ export default {
       },
     }
   },
-
   computed: {
-    houseBlDateFormatted () {
+    house_bl_date_formatted() {
       if (!this.models.house_bl_date) return "";
       return this.formatDate (this.models.house_bl_date);
     },
-    arrivalDateFormatted () {
+    arrival_date_formatted() {
       if (!this.models.arrival_date) return "";
       return this.formatDate (this.models.arrival_date);
     }
   },
-
   methods: {
-    formatDate (date) {
+    formatDate(date) {
       if (!date) return null
 
       const [year, month, day] = date.split('-')
@@ -837,19 +855,6 @@ export default {
     goBack (e) {
       this.$router.back();
     },
-
-    // onChangeConsigneeName (params) {
-    //   if (!params) {
-    //     this.models.consignee_email = ""
-    //     this.models.consignee_address = ""
-    //     return
-    //   }
-    //   const consigneSelected = _.find(this.selectData.consigneeName, { consignee_name: params });
-    //   if (!consigneSelected) { return }
-    //   const { consignee_email, consignee_address } = consigneSelected
-    //   this.models.consignee_email = consignee_email && consignee_email
-    //   this.models.consignee_address = consignee_address && consignee_address
-    // }
   }
 };
 </script>

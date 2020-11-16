@@ -71,7 +71,7 @@
 
       <!-- filter e-do -->
       <v-col class="text-right">
-        <v-btn large @click.stop="dialog = !dialog" :disabled="$fetchState.pending">
+        <v-btn large @click.stop="dialog_filter = !dialog_filter" :disabled="$fetchState.pending">
           Filter By <v-icon>mdi-filter-outline</v-icon>
         </v-btn>
       </v-col>
@@ -120,46 +120,58 @@
               :page.sync="page"
               :items-per-page.sync="itemsPerPage"
               class="elevation-0 py-5"
-              @page-count="pageCount = $event"
-              @pagination="pagination = $event"
+              @page-count.once="pageCount = $event"
+              @pagination.once="pagination = $event"
               loading-text="Loading... Please wait"
-              hide-default-footer
             >
+              <!-- hide-default-footer -->
+              <!-- Released at -->
               <template v-slot:[`item.released_at`]="{ item }">
                 <div class="py-md-6 text-subtitle-2">
-                  {{ item.released_at || '-' }}
+                  {{ datetime_formated(item.released_at) }}
                 </div>
               </template>
+              <!-- end Relased at -->
 
+              <!-- House BL number -->
               <template v-slot:[`item.house_bl_number`]="{ item }">
                 <div class="py-md-6 text-subtitle-2">
                   {{ item.house_bl_number }}
                 </div>
               </template>
+              <!-- end House BL number -->
 
+              <!-- e-DO number -->
               <template v-slot:[`item.edo_number`]="{ item }">
                 <div class="py-md-6 text-subtitle-2">
                   {{ item.edo_number }}
                 </div>
               </template>
+              <!-- end e-DO number -->
 
+              <!-- Consignee name -->
               <template v-slot:[`item.consignee_name`]="{ item }">
                 <div class="py-md-6 text-subtitle-2">
                   {{ item.consignee_name }}
                 </div>
               </template>
+              <!-- end Consignee name -->
 
+              <!-- Created at -->
               <template v-slot:[`item.created_at`]="{ item }">
                 <div class="py-md-6 text-subtitle-2">
-                  {{ item.created_at }}
+                  {{ datetime_formated(item.created_at) }}
                 </div>
               </template>
+              <!-- end Created at -->
 
+              <!-- Status e-DO -->
               <template v-slot:[`item.status`]="{ item }">
                 <div class="py-md-6 text-subtitle-2" :style="`color: ${getColor(item.status)}`">
                   {{ item.status }}
                 </div>
               </template>
+              <!-- end Status e-DO -->
 
               <template v-slot:[`item.actions`]="{ item }">
                 <v-row no-gutters class="py-md-6 font-weight-bold">
@@ -193,11 +205,13 @@
                 </v-row>
               </template>
 
+              <!-- Detail action -->
               <template v-slot:[`item.detail`]="{ item }">
                   <v-btn text nuxt class="text-capitalize" :to="`${$route.path}/detail/${item.edo_id}`">
                   Detail
                 </v-btn>
               </template>
+              <!-- end Detail action -->
             </v-data-table>
             <!-- end table e-do -->
           </v-skeleton-loader>
@@ -205,32 +219,34 @@
       </v-tabs-items>
       </v-col>
       <!-- end tabs item -->
+
+      <!-- <v-col cols="12">
+        <v-row justify="space-between" align="center"> -->
+          <!-- page count -->
+          <!-- <v-col cols="12" sm="6">
+            <v-skeleton-loader :loading="$fetchState.pending" type="text">
+              <div>Showing {{ pagination.pageStop - pagination.pageStart }} of {{ pagination.itemsLength }} data</div>
+            </v-skeleton-loader>
+          </v-col> -->
+          <!-- end page count -->
+
+          <!-- <v-col cols="12" sm="6" md="3">
+            <v-pagination
+              circle
+              v-model="page"
+              :length="pagination.pageCount"
+            ></v-pagination>
+          </v-col>
+        </v-row>
+      </v-col> -->
     </v-row>
 
-    <v-row justify="space-between" align="center">
-      <!-- page count -->
-      <v-col cols="12" sm="6">
-        <v-skeleton-loader :loading="$fetchState.pending" type="text">
-          <div>Showing {{ pagination.pageStop - pagination.pageStart }} of {{ pagination.itemsLength }} data</div>
-        </v-skeleton-loader>
-      </v-col>
-      <!-- end page count -->
-
-      <v-col cols="12" sm="6" md="3">
-        <v-pagination
-          circle
-          v-model="page"
-          :length="pagination.pageCount"
-        ></v-pagination>
-      </v-col>
-    </v-row>
-
-    <v-dialog v-model="dialog" scrollable :overlay="false" max-width="500" transition="dialog-transition">
+    <v-dialog v-model="dialog_filter" scrollable :overlay="false" max-width="500" transition="dialog-transition">
       <v-card>
         <v-toolbar flat>
           <span class="headline">Filter by</span>
           <v-spacer />
-          <v-btn icon @click.stop="dialog = !dialog">
+          <v-btn icon @click.stop="dialog_filter = !dialog_filter">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -251,17 +267,14 @@
                   min-width="290px"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <v-combobox
+                    <v-text-field
                       v-model="dateFrom"
-                      chips
-                      small-chips
-                      clear-icon
+                      label="Start date from"
+                      prepend-inner-icon="mdi-calendar"
                       clearable
-                      readonly
-                      label="Start from"
                       v-bind="attrs"
                       v-on="on"
-                    ></v-combobox>
+                    ></v-text-field>
                   </template>
                   <v-date-picker v-model="dateFrom" no-title>
                     <v-spacer></v-spacer>
@@ -280,30 +293,27 @@
                   ref="menuDateTo"
                   v-model="menuDateTo"
                   :close-on-content-click="false"
-                  :return-value.sync="dateToSearch"
+                  :return-value.sync="dateTo"
                   transition="slide-x-reverse-transition"
                   offset-y
                   min-width="290px"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <v-combobox
-                      v-model="dateToSearch"
-                      chips
-                      small-chips
-                      clear-icon
+                    <v-text-field
+                      v-model="dateTo"
+                      label="End date to"
+                      prepend-inner-icon="mdi-calendar"
                       clearable
-                      readonly
-                      label="To"
                       v-bind="attrs"
                       v-on="on"
-                    ></v-combobox>
+                    ></v-text-field>
                   </template>
-                  <v-date-picker v-model="dateToSearch" no-title>
+                  <v-date-picker v-model="dateTo" no-title>
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="menuDateTo = false">
                       Cancel
                     </v-btn>
-                    <v-btn text color="primary" @click="$refs.menuDateTo.save(dateToSearch)">
+                    <v-btn text color="primary" @click="$refs.menuDateTo.save(dateTo)">
                       OK
                     </v-btn>
                   </v-date-picker>
@@ -339,6 +349,7 @@
                 <v-text-field
                   label="House BL Number"
                   v-model="houseBlSearch"
+                  clearable
                 ></v-text-field>
               </v-col>
 
@@ -346,6 +357,7 @@
                 <v-text-field
                   label="Vessel Name"
                   v-model="vesselSearch"
+                  clearable
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -356,7 +368,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false">Cancel</v-btn>
+          <v-btn color="primary" text @click.stop="dialog_filter = false">Cancel</v-btn>
           <v-btn color="primary">Filter now</v-btn>
         </v-card-actions>
       </v-card>
@@ -444,13 +456,14 @@ export default {
       tabelData: [],
       tabelDataFilter: [],
 
-      dialog: false,
+      dialog_filter: false,
 
+      // filter
       menuDateFrom: false,
       menuDateTo: false,
       dateFrom: null,
-      dateToSearch: null,
-      statusSearch: null,
+      dateTo: null,
+      statusSearch: "ALL",
       houseBlSearch: null,
       vesselSearch: null,
 
@@ -459,7 +472,8 @@ export default {
         requested: null,
         approved: null,
         rejected: null,
-        picked_up: null
+        picked_up: null,
+        hold_on: null
       }
     }
   },
@@ -479,9 +493,22 @@ export default {
       this.tabItems[1].data = history;
     },
 
-    statusSearch (val) {
-      const newEdo = val === 'ALL' ? this.tabelData : _.filter (this.tabelData, { status: val })
-      this.tabItems[1].data = newEdo
+    // statusSearch (val) {
+    //   const newEdo = val === 'ALL' ? this.tabelData : _.filter (this.tabelData, { status: val })
+    //   this.tabItems[1].data = newEdo
+    // },
+
+    houseBlSearch(newVal) {
+      let filtered_edo = !newVal
+        ? this.tabelData
+        : _.filter(this.tabelData, { house_bl_number: newVal })
+      this.tabItems[1].data = filtered_edo
+    },
+    vesselSearch(newVal) {
+      let filtered_edo = !newVal
+        ? this.tabelData
+        : _.filter(this.tabelData, { ocean_vessel: newVal })
+      this.tabItems[1].data = filtered_edo
     }
   },
   async fetch () {
@@ -504,7 +531,6 @@ export default {
         this.$toast.clear()
       })
     },
-
     /**
      * Get All e-DO
      */
@@ -609,6 +635,29 @@ export default {
       }
     },
     /**
+     * Submit filter
+     */
+    on_submit_filter() {
+      let filtered_status_edo = this.statusSearch === 'ALL' || this.statusSearch === undefined
+        ? this.tabelData
+        : _.filter(this.tabelData, { status: this.statusSearch })
+      let filtered_datebetween_edo = _.filter(filtered_status_edo, (data) => {
+          if (!this.dateFrom && !this.dateTo) { return true }
+          else if (!this.dateTo) {
+            return this.$moment(data.created_at).isSameOrAfter(this.dateFrom)
+          }
+          else if (!this.dateFrom) {
+            return this.$moment(data.created_at).isSameOrBefore(this.dateTo)
+          }
+          else {
+            return this.$moment(data.created_at).isBetween(this.dateFrom, this.dateTo)
+          }
+        })
+
+      this.tabItems[1].data = filtered_datebetween_edo || filtered_status_edo
+      this.dialog_filter = false
+    },
+    /**
      * Action Reject
      */
     async handle_reject () {
@@ -626,7 +675,16 @@ export default {
         this.$toast.clear()
         this.$toast.global.app_error (`e-DO ${this.reject.edo.edo_number} failed to Reject.`)
       }
-    }
+    },
+    /**
+     * Datetime format
+     */
+    datetime_formated(params) {
+      const date_formated = this.$moment(params)
+
+      if (!date_formated.isValid()) return "-"
+      return date_formated.format("DD/MM/YYYY - hh:mm:ss")
+    },
   }
 }
 </script>

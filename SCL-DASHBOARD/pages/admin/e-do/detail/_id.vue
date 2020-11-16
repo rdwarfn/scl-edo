@@ -226,7 +226,7 @@
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
             <div class="text-h5">
-              {{ edo. house_bl_date }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+              {{ $moment(edo. house_bl_date).format("DD/MM/YYYY") }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
         </v-row>
@@ -237,7 +237,7 @@
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
             <div class="text-h5">
-              {{ edo. arrival_date }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+              {{ $moment(edo. arrival_date).format("DD/MM/YYYY") }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- Place of Receipt -->

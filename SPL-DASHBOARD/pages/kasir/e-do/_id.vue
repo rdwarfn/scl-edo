@@ -1,6 +1,7 @@
 <template>
   <div class="px-5 py-5">
     <v-row>
+      <!-- Alert Status e-DO -->
       <v-col cols="12">
         <template>
           <v-alert
@@ -15,9 +16,11 @@
           </v-alert>
         </template>
       </v-col>
+      <!-- end Alert Status e-DO -->
     </v-row>
 
     <v-row>
+      <!-- Card Status e-DO -->
       <v-col cols="12" sm="6">
         <v-skeleton-loader :loading="$fetchState.pending" type="image" min-width="90" height="104">
           <card-status-edo
@@ -29,11 +32,13 @@
           />
         </v-skeleton-loader>
       </v-col>
+      <!-- end Card Status e-DO -->
     </v-row>
 
     <v-row>
       <v-col cols="12" sm="6">
         <v-row>
+          <!-- Created At -->
           <v-col cols="12" sm>
             <div class="label">Created At</div>
             <div class="font-weight-bold">
@@ -41,7 +46,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Created At -->
 
+          <!-- Created By -->
           <v-col cols="12" sm>
             <div class="label">Created By</div>
             <div class="font-weight-bold text-capitalize">
@@ -49,7 +56,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Created By -->
 
+          <!-- Status e-DO -->
           <v-col cols="12" sm>
             <div class="label">Status</div>
             <div class="font-weight-bold" :style="{color: colors(edo.status)}">
@@ -57,17 +66,22 @@
               <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Status e-DO -->
         </v-row>
       </v-col>
 
       <v-col cols="12" sm>
         <v-row justify-sm="end">
+          <!-- QrCode -->
           <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
             <qrcode
               :value="edo.edo_number"
               :options="{width: 80, height: 80}"
             />
           </v-skeleton-loader>
+          <!-- end QrCode -->
+
+          <!-- e-DO Number -->
           <div class="ml-3 d-flex flex-column justify-center">
             <div class="label">e-DO Number</div>
             <div class="font-weight-bold">
@@ -75,6 +89,7 @@
               <v-skeleton-loader v-if="!edo.status" loading type="text"></v-skeleton-loader>
             </div>
           </div>
+          <!-- end e-DO Number -->
         </v-row>
       </v-col>
     </v-row>
@@ -83,6 +98,7 @@
     <v-row>
       <v-col>
         <v-row>
+          <!-- Shipper name -->
           <v-col cols="12" sm>
             <div class="label">Shipper name</div>
             <div class="text-h5">
@@ -90,7 +106,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Shipper name -->
 
+          <!-- Consignee name -->
           <v-col cols="12" sm>
             <div class="label">Consignee name</div>
             <div class="text-h5">
@@ -98,19 +116,22 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Consignee name -->
         </v-row>
 
 
         <v-row>
+          <!-- Shipper e-mail -->
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
               {{ edo. shipper_email || '-' }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Shipper e-mail -->
 
+          <!-- Consignee e-mail -->
           <v-col cols="12" sm>
             <div class="label">Consignee e-mail</div>
             <div class="text-h5">
@@ -118,31 +139,35 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Consignee e-mail -->
         </v-row>
 
 
         <v-row>
+          <!-- Shipper address -->
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Shipper address</div>
             <div class="text-h5">
               {{ edo. shipper_address }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Shipper address -->
 
+          <!-- Consignee address -->
           <v-col cols="12" sm>
-            <!-- belum ada field api -->
             <div class="label">Consignee address</div>
             <div class="text-h5">
               {{ edo. consignee_address }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Consignee address -->
         </v-row>
 
 
         <v-row>
+          <!-- Notify -->
           <v-col cols="12" sm>
             <div class="label">Notify</div>
             <div class="text-h5">
@@ -150,7 +175,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Notify -->
 
+          <!-- House BL Number -->
           <v-col cols="12" sm>
             <div class="label">House BL Number</div>
             <div class="text-h5">
@@ -158,10 +185,12 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end House BL Number -->
         </v-row>
 
 
         <v-row>
+          <!-- Notify address -->
           <v-col cols="12" sm>
             <div class="label">Notify Address</div>
             <div class="text-h5">
@@ -169,27 +198,32 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Notify address -->
         </v-row>
 
 
         <v-row>
+          <!-- MBL number -->
           <v-col cols="12" sm>
             <div class="label">MB/L Number</div>
             <div class="text-h5">{{ edo. mbl_number }}</div>
           </v-col>
+          <!-- end MBL number -->
 
+          <!-- House BL date -->
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <!-- belum ada field api -->
             <div class="text-h5">
               {{ edo. house_bl_date }}
                 <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end House BL date -->
         </v-row>
 
 
         <v-row>
+          <!-- Arrival date -->
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
             <div class="text-h5">
@@ -197,7 +231,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Arrival date -->
 
+          <!-- Place of receipt -->
           <v-col cols="12" sm>
             <div class="label">Place of receipt</div>
             <div class="text-h5">
@@ -205,10 +241,12 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Place of receipt -->
         </v-row>
 
 
         <v-row>
+          <!-- Container seal number -->
           <v-col cols="12" sm>
             <div class="label">Container/Seal number</div>
             <div class="text-h5">
@@ -216,7 +254,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Container seal number -->
 
+          <!-- Ocean vessel -->
           <v-col cols="12" sm>
             <div class="label">Ocean vessel</div>
             <div class="text-h5">
@@ -224,18 +264,22 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Ocean vessel -->
         </v-row>
 
 
         <v-row>
+          <!-- Port of lading -->
           <v-col cols="12" sm>
-            <div class="label">Port of loading</div>
+            <div class="label">Port of lading</div>
             <div class="text-h5">
               {{ edo. port_of_loading }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Port of lading -->
 
+          <!-- Voyage number -->
           <v-col cols="12" sm>
             <div class="label">Voyage Number</div>
             <div class="text-h5">
@@ -243,10 +287,12 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Voyage number -->
         </v-row>
 
 
         <v-row>
+          <!-- Final destination -->
           <v-col cols="12" sm>
             <div class="label">Final Destination</div>
             <div class="text-h5">
@@ -254,7 +300,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Final destination -->
 
+          <!-- Port of discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
             <div class="text-h5">
@@ -262,10 +310,12 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Port of discharges -->
         </v-row>
 
 
         <v-row>
+          <!-- Gross weight -->
           <v-col cols="12" sm>
             <div class="label">Gross weight (Kg)</div>
             <div class="text-h5">
@@ -273,7 +323,9 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Gross weight -->
 
+          <!-- Package -->
           <v-col cols="12" sm>
             <div class="label">Package</div>
             <div class="text-h5">
@@ -281,19 +333,22 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Package -->
         </v-row>
 
 
         <v-row>
+          <!-- Number of package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <!-- belum ada field di api -->
             <div class="text-h5">
-              {{ edo. package_number }}
+              {{ edo. number_of_package }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Number of package -->
 
+          <!-- Measurement -->
           <v-col cols="12" sm>
             <div class="label">Measurement</div>
             <div class="text-h5">
@@ -301,10 +356,12 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Measurement -->
         </v-row>
 
 
         <v-row>
+          <!-- Description of goods -->
           <v-col cols="12" sm>
             <div class="label">Description of goods</div>
             <div class="text-h5">
@@ -312,15 +369,17 @@
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Description of goods -->
 
+          <!-- Marks and number -->
           <v-col cols="12" sm>
             <div class="label">Marks and number</div>
-
             <div class="text-h5">
               {{ edo. marks_and_number }}
               <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+          <!-- end Marks and number -->
         </v-row>
       </v-col>
     </v-row>
@@ -346,10 +405,12 @@ export default {
     crumbs: [{
       to: '/',
       text: 'Dashboard',
+      exact: true,
       replace: true,
       // disabled: false,
     },{
       to: `/kasir/e-do`,
+      exact: true,
       text: 'Detail e-DO',
       disabled: true,
     }]

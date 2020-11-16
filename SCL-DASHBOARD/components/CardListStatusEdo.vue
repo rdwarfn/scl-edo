@@ -66,12 +66,12 @@
 
     <!-- On Hold -->
     <v-col cols="12" sm="6" md="3">
-      <v-skeleton-loader :loading="!count.rejected" type="image" min-width="90" height="104">
+      <v-skeleton-loader :loading="!count.hold_on" type="image" min-width="90" height="104">
         <card-status-edo
           :color="colors.warning"
-          title="On Hold"
+          title="Hold On"
           icon="mdi-delta"
-          :count="count.rejected"
+          :count="count.hold_on"
         />
       </v-skeleton-loader>
     </v-col>

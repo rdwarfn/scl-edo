@@ -1,7 +1,7 @@
 <template>
   <edit-edo-form
-    @onSubmit="onSubmit"
-    :loading="$fetchState.pending || isLoading"
+    @onSubmit="on_submit"
+    :loading="isLoading || $fetchState.pending"
     :selectData="dataSelect"
     :models="models">
   </edit-edo-form>
@@ -9,7 +9,6 @@
 
 <script>
 import EditEdoForm from '@/components/forms/EditEdo.vue';
-import Notification from '@/components/Snack.vue';
 import qs from 'querystring';
 
 import { initialEdo } from '@/utils';
@@ -27,9 +26,9 @@ export default {
       disabled: true
     }]
   },
-  components: { EditEdoForm, Notification },
+  components: { EditEdoForm },
 
-  data () {
+  data() {
     return {
       isLoading: false,
       dataSelect: {
@@ -44,13 +43,13 @@ export default {
     }
   },
 
-  fetch () {
+  fetch() {
     this.$toast.global.app_loading()
     Promise.all ([
-      this.getEdoByNumber (),
-      this.getAllConsignee (),
-      this.getAllPortOfLoading (),
-      this.getAllPortOfDischarge ()
+      this.get_edo_by_number (),
+      this.get_all_consignee (),
+      this.get_all_port_of_loading (),
+      this.get_all_port_of_discharge ()
     ])
     .finally(() => {
       this.$toast.clear()
@@ -59,11 +58,14 @@ export default {
   fetchOnServer: false,
 
   methods: {
-    async onSubmit (params, e) {
-      this.$toast.global.app_loading()
-      this.isLoading = true
-      let edonumber = this.$route.params.id
+    /**
+     * On submit e-DO
+     */
+    async on_submit (params, e) {
       try {
+        this.$toast.global.app_loading()
+        this.isLoading = true
+        let edonumber = this.$route.params.id
         const validate = await params.observer.validate()
         if (validate) {
           const response = await this.$axios.put (`/api/e_do/${params.data.edo_id}`, qs.stringify(params.data))
@@ -80,8 +82,10 @@ export default {
         this.$router.back()
       }
     },
-
-    async getEdoByNumber () {
+    /**
+     * Get e-DO by number
+     */
+    async get_edo_by_number() {
       let edonumber = this.$route.params.id
       await this.$axios.get (`/api/e_do/search?e_do_number=${edonumber}`)
         .then (response => {
@@ -95,8 +99,10 @@ export default {
           })
         })
     },
-
-    async getAllConsignee () {
+    /**
+     * Get all consignee
+     */
+    async get_all_consignee() {
       await this.$axios.get ('/api/e_do/consignee')
       .then (response => {
         this.dataSelect.consigneeName = response.data.data
@@ -109,8 +115,10 @@ export default {
         })
       })
     },
-
-    async getAllPortOfLoading () {
+    /**
+     * Get all
+     */
+    async get_all_port_of_loading() {
       await this.$axios.get ('/api/e_do/port_of_lading')
       .then (response => {
         this.dataSelect.portOfLoading = response.data.data
@@ -124,7 +132,7 @@ export default {
       })
     },
 
-    async getAllPortOfDischarge () {
+    async get_all_port_of_discharge() {
       await this.$axios.get ('/api/e_do/port_of_discharge')
       .then (response => {
         this.dataSelect.portOfDischarge = response.data.data;
@@ -138,7 +146,7 @@ export default {
       })
     },
 
-    setNotification (params) {
+    setNotification(params) {
       this.$store.commit ('setNotif', params)
     }
   }
