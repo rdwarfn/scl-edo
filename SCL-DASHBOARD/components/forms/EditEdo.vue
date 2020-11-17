@@ -317,7 +317,7 @@
                 rules="required"
               >
               <v-text-field
-                v-model="house_bl_date_formatted"
+                v-model="house_bl_date_formated"
                 id="houseBlDate"
                 hint="DD/MM/YYYY"
                 persistent-hint
@@ -766,7 +766,8 @@ export default {
       shipperName: { type: Array, required: true, default: [] },
       consigneeName: { type: Array, required: true, default: [] },
       portOfLoading: { type: Array, required: true, default: [] },
-      portOfDischarge: { type: Array, required: true, default: [] }
+      portOfDischarge: { type: Array, required: true, default: [] },
+      finalDestination: { type: Array, required: true, default: [] },
     },
 
     models: {

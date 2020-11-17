@@ -27,7 +27,7 @@ export default {
   },
   {
     title: 'Data Master',
-    to: '/superadmin/data-master',
+    to: '/dokumen/data-master',
     icon: 'mdi-database-outline'
   },
   {
