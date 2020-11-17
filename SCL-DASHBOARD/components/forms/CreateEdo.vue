@@ -488,7 +488,7 @@
           <validation-provider
             v-slot="{ errors, valid }"
             name="Voyage Number"
-            rules="required|numeric"
+            rules="required"
           >
           <label class="labelText" for="voyageNumber">Voyage number</label>
           <v-text-field

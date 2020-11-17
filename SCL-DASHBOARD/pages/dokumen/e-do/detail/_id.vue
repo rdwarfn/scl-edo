@@ -19,21 +19,27 @@
 
 
     <v-row class="mt-8">
-      <v-col cols="auto">
+      <v-col cols="12" sm="6">
+        <v-row no-gutters>
         <!-- Print action -->
-        <v-btn class="mr-3" @click="crete_pdf" :disabled="!isCanPrint" :loading="loadingDelete || $fetchState.pending">
-          Print <v-icon class="ml-2">mdi-printer</v-icon>
-        </v-btn>
+          <v-col cols="12" sm="auto" class="mb-5">
+            <v-btn class="mr-3" @click.prevent="crete_pdf" :disabled="!isCanPrint" :loading="loadingDelete || $fetchState.pending">
+              Print <v-icon class="ml-2">mdi-printer</v-icon>
+            </v-btn>
+          </v-col>
         <!-- end Print action -->
 
         <!-- Edit action -->
-        <v-btn nuxt :to="`/dokumen/e-do/edit/${edo.edo_number}`" :dark="isCanEdit" color="#00D1B2" :disabled="!isCanEdit" :loading="loadingDelete || $fetchState.pending">
-          Edit <v-icon class="ml-2">mdi-pencil-outline</v-icon>
-        </v-btn>
+          <v-col cols="12" sm="auto">
+            <v-btn nuxt :to="`/dokumen/e-do/edit/${edo.edo_number}`" :dark="isCanEdit" color="#00D1B2" :disabled="!isCanEdit" :loading="loadingDelete || $fetchState.pending">
+              Edit <v-icon class="ml-2">mdi-pencil-outline</v-icon>
+            </v-btn>
+          </v-col>
         <!-- end Edit action -->
+        </v-row>
       </v-col>
 
-      <v-col class="text-right">
+      <v-col cols="12" sm="6" class="text-sm-right">
         <!-- Delete action -->
         <v-btn @click.stop="modalDeleteDialog = true" :dark="isCandDelete" color="#FF3860" :disabled="!isCandDelete" :loading="loadingDelete || $fetchState.pending">
           Delete <v-icon class="ml-2">mdi-trash-can-outline</v-icon>
@@ -78,30 +84,48 @@
         </v-row>
       </v-col>
 
-      <v-col>
+      <v-col cols="12" sm="6">
         <v-row justify="end">
           <!-- QrCode -->
-          <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
-            <qrcode
-              :value="edo.edo_number"
-              :options="{width: 80, height: 80}"
-            />
-          </v-skeleton-loader>
+          <v-col cols="12" sm="auto">
+            <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
+              <qrcode
+                :value="edo.edo_number"
+                :options="{width: 80, height: 80}"
+              />
+            </v-skeleton-loader>
+          </v-col>
           <!-- end QrCode -->
 
           <!-- e-DO Number -->
-          <div class="ml-3 d-flex flex-column justify-center">
-            <div class="label">e-DO Number</div>
-            <div class="font-weight-bold">
-              {{ edo.edo_number }}
-              <v-skeleton-loader v-if="!edo.status" loading type="text"></v-skeleton-loader>
+          <v-col cols="12" sm="auto">
+            <div class="ml-3 d-flex flex-column justify-center">
+              <div class="label">e-DO Number</div>
+              <div class="font-weight-bold">
+                {{ edo.edo_number }}
+                <v-skeleton-loader v-if="!edo.status" loading type="text"></v-skeleton-loader>
+              </div>
             </div>
-          </div>
+          </v-col>
           <!-- end e-DO Number -->
         </v-row>
       </v-col>
     </v-row>
+
     <v-divider class="my-8" />
+
+    <template>
+      <v-row v-show="isShowNotes">
+        <v-col cols="12" sm>
+          <div class="label-reject">Notes</div>
+          <div class="text-h5">
+            {{ edo.status_description || '-' }}
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-divider v-show="isShowNotes" class="my-8" />
+    </template>
 
     <v-row>
       <v-col>
@@ -468,6 +492,7 @@ export default {
     isCandDelete () { return this.isNotEmpty && isAdminCanDelete (this.edo.status) },
     isCanEdit () { return this.isNotEmpty && isAdminCanEdit (this.edo.status) },
     isCanPrint () { return this.isNotEmpty && isAdminCanPrint (this.edo.status) },
+    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' },
     computeConfirmDelete () { return this.confirmDelete === this.edo.edo_number },
     created_at_formated () {
       const dateFormated = this.$moment(this.edo.created_at, "DD-MM-YYYY hh:mm:ss", 'id')
@@ -895,5 +920,8 @@ export default {
 <style lang="scss" scoped>
   .label {
     color: #B5B5B5 !important;
+  }
+  .label-reject {
+    color: #FF3860 !important;
   }
 </style>
