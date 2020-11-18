@@ -71,7 +71,7 @@
 
       <!-- filter e-do -->
       <v-col class="text-right">
-        <v-btn large @click.stop="dialog_filter = !dialog_filter" :disabled="$fetchState.pending">
+        <v-btn large @click.stop="dialog_filter = true" :disabled="$fetchState.pending">
           Filter By <v-icon>mdi-filter-outline</v-icon>
         </v-btn>
       </v-col>
@@ -337,6 +337,9 @@
                   }, {
                     text: 'Released',
                     value: 'RELEASED'
+                  }, {
+                    text: 'On Hold',
+                    value: 'HOLD ON'
                   }]"
                   v-model="statusSearch"
                   item-text="text"
@@ -369,7 +372,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click.stop="dialog_filter = false">Cancel</v-btn>
-          <v-btn color="primary">Filter now</v-btn>
+          <v-btn color="primary" @click.prevent="on_submit_filter">Filter now</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -430,7 +433,7 @@ export default {
         edo: {},
       },
 
-      currentItem: 'tab-history',
+      currentItem: 'tab-new-edo',
       tabItems: [{
           text: 'New Edo',
           headers: HeaderTableTabNewEDO,
@@ -596,6 +599,9 @@ export default {
         await this.getAll()
       }
     },
+    /**
+     * End Block Approve/Paid Action
+     */
 
     /**
      * Block Reject Actions
@@ -635,6 +641,29 @@ export default {
       }
     },
     /**
+     * Action Reject
+     */
+    async handle_reject () {
+      try {
+        this.$toast.global.app_loading ()
+        const response = await this.$axios.put(
+          `/api/e_do/reject/${this.reject.edo.edo_id}`,
+          qs.stringify(this.reject.formDialog)
+        )
+        if (response) {
+          this.$toast.clear()
+          this.$toast.global.app_success (`e-DO ${this.reject.edo.edo_number} successfully Rejected.`)
+        }
+      } catch (error) {
+        this.$toast.clear()
+        this.$toast.global.app_error (`e-DO ${this.reject.edo.edo_number} failed to Reject.`)
+      }
+    },
+    /**
+     * End Block Reject Actions
+     */
+
+    /**
      * Submit filter
      */
     on_submit_filter() {
@@ -656,25 +685,6 @@ export default {
 
       this.tabItems[1].data = filtered_datebetween_edo || filtered_status_edo
       this.dialog_filter = false
-    },
-    /**
-     * Action Reject
-     */
-    async handle_reject () {
-      try {
-        this.$toast.global.app_loading ()
-        const response = await this.$axios.put(
-          `/api/e_do/reject/${this.reject.edo.edo_id}`,
-          qs.stringify(this.reject.formDialog)
-        )
-        if (response) {
-          this.$toast.clear()
-          this.$toast.global.app_success (`e-DO ${this.reject.edo.edo_number} successfully Rejected.`)
-        }
-      } catch (error) {
-        this.$toast.clear()
-        this.$toast.global.app_error (`e-DO ${this.reject.edo.edo_number} failed to Reject.`)
-      }
     },
     /**
      * Datetime format

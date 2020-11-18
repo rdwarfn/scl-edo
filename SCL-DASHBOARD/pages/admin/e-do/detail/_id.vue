@@ -233,7 +233,7 @@
             <div class="label">No. of quantity</div>
             <div class="text-h5">
               {{ edo. number_of_quantity || '-' }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+              <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Number of quantity -->

@@ -301,7 +301,7 @@
                     text: 'Released',
                     value: 'RELEASED'
                   }, {
-                    text: 'Hold On',
+                    text: 'On Hold',
                     value: 'HOLD ON'
                   }]"
                   v-model="statusSearch"
