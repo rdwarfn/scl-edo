@@ -69,7 +69,7 @@
       <v-skeleton-loader :loading="!count.hold_on" type="image" min-width="90" height="104">
         <card-status-edo
           :color="colors.warning"
-          title="Hold On"
+          title="On Hold"
           icon="mdi-delta"
           :count="count.hold_on"
         />

@@ -231,6 +231,16 @@
             </div>
           </v-col>
           <!-- end Notify address -->
+
+          <!-- Number of quantity -->
+          <v-col cols="12" sm>
+            <div class="label">No. of quantity</div>
+            <div class="text-h5">
+              {{ edo. number_of_quantity || '-' }}
+              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            </div>
+          </v-col>
+          <!-- end Number of quantity -->
         </v-row>
 
 
@@ -492,7 +502,7 @@ export default {
     isCandDelete () { return this.isNotEmpty && isAdminCanDelete (this.edo.status) },
     isCanEdit () { return this.isNotEmpty && isAdminCanEdit (this.edo.status) },
     isCanPrint () { return this.isNotEmpty && isAdminCanPrint (this.edo.status) },
-    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' },
+    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' || this.edo.status === 'HOLD ON' },
     computeConfirmDelete () { return this.confirmDelete === this.edo.edo_number },
     created_at_formated () {
       const dateFormated = this.$moment(this.edo.created_at, "DD-MM-YYYY hh:mm:ss", 'id')

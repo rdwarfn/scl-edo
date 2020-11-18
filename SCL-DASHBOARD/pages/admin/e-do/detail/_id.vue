@@ -29,15 +29,15 @@
     </dialog-rejection-edo>
     <!-- End Dialog Reject -->
 
-
-    <!-- dialog house bl number - on hold -->
-    <dialog-house-bl-number
-      :dialog="house_bl.showDialog"
-      :loading="house_bl.loading"
-      @onSubmit="on_dialog_house_bl_on_hold_submit"
-      @onCancel="close_dialog_house_bl_on_hold"
-    ></dialog-house-bl-number>
-    <!-- end dialog house bl number - on hold -->
+    <!-- Dilog On Hold -->
+    <dialog-on-hold
+      :loading="onHold.loading"
+      :dialog="onHold.showDialog"
+      :edo-number="edo.edo_number"
+      @onSubmit="on_submit_dialog_on_hold"
+      @onCancel="onHold.showDialog = false"
+    ></dialog-on-hold>
+    <!-- End On Hold -->
 
     <!-- Alert Status e-DO -->
     <v-alert
@@ -66,7 +66,7 @@
 
       <v-col class="text-right">
         <!-- Action Hold -->
-        <v-btn v-show="iNotHoldOn" class="mr-3" color="warning" @click.prevent="open_dialog_house_bl_on_hold" :disabled="!isCanReissue" :loading="$fetchState.pending">
+        <v-btn v-show="iNotHoldOn" class="mr-3" color="warning" @click.stop="onHold.showDialog = true" :disabled="!isCanReissue" :loading="$fetchState.pending">
           Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
         </v-btn>
 
@@ -129,7 +129,21 @@
         </v-row>
       </v-col>
     </v-row>
+
     <v-divider class="my-8" />
+
+    <template>
+      <v-row v-show="isShowNotes">
+        <v-col cols="12" sm>
+          <div class="label-reject">Notes</div>
+          <div class="text-h5">
+            {{ edo.status_description || '-' }}
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-divider v-show="isShowNotes" class="my-8" />
+    </template>
 
     <v-row>
       <v-col>
@@ -213,6 +227,16 @@
               {{ edo. notify }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
+
+          <!-- Number of quantity -->
+          <v-col cols="12" sm>
+            <div class="label">No. of quantity</div>
+            <div class="text-h5">
+              {{ edo. number_of_quantity || '-' }}
+              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            </div>
+          </v-col>
+          <!-- end Number of quantity -->
         </v-row>
 
 
@@ -374,6 +398,7 @@ import _ from 'lodash';
 import qs from 'querystring';
 import pdfmake from 'pdfmake';
 import DialogRejectionEdo from '@/components/DialogRejectionEdo.vue';
+import DialogOnHold from '@/components/DialogOnHold.vue';
 import {
   getColorStatus,
   isCanReject,
@@ -390,11 +415,12 @@ import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
 setInteractionMode ('eager');
 export default {
   components: {
-    DialogHouseBlNumber,
     ValidationObserver,
     ValidationProvider,
+    DialogHouseBlNumber,
+    DialogRejectionEdo,
+    DialogOnHold,
   },
-
   meta: {
     crumbs: [{
       to: '/admin',
@@ -432,6 +458,14 @@ export default {
       house_bl: {
         showDialog: false,
         loading: false
+      },
+      onHold: {
+        showDialog: false,
+        loading: false,
+        formDialog: {
+          house_bl_number: null,
+          description: null,
+        }
       }
     }
   },
@@ -445,7 +479,6 @@ export default {
     })
   },
   fetchOnServer: false,
-
   watch: {
     edo (val) {
       const user_role = this.$auth.hasScope('admin') ? 'Superadmin' : ''
@@ -475,6 +508,7 @@ export default {
     isCanSend () { return this.isNotEmpty && isCanSendToConsignee(this.edo.status) },
     isCanReject () { return this.isNotEmpty && isCanReject (this.edo.status) },
     iNotHoldOn() { return this.isNotEmpty && this.edo.status !== "HOLD ON"},
+    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' || this.edo.status === 'HOLD ON' },
 
     isCanReissue () {
       if (this.isNotEmpty && _.upperCase(this.edo.status) === 'PAID') {
@@ -487,7 +521,6 @@ export default {
       // }
     },
   },
-
   methods: {
     colors (params) { return getColorStatus (params) },
     /**
@@ -516,33 +549,33 @@ export default {
     /**
      * Close dialog house bl - on hold
      */
-    close_dialog_house_bl_on_hold() {
-      this.house_bl.showDialog = false
+    close_dialog_on_hold() {
+      this.onHold.showDialog = false
     },
     /**
-     * On submit house bl - on hold
+     * On submit dialog on hold
      */
-    on_dialog_house_bl_on_hold_submit(data) {
-      console.log(data);
-      this.handle_reissue_on_hold(this.edo.edo_id, this.edo.edo_number, data.form)
+    on_submit_dialog_on_hold({ form }) {
+      this.onHold.formDialog = _.assign(this.onHold.formDialog, form)
+      this.handle_reissue_on_hold(this.edo.edo_id, this.edo.edo_number, this.onHold.formDialog)
     },
     /**
      * Handle Action Reissued / On Hold
      */
-    async handle_reissue_on_hold(edo_id, edo_number, house_bl_number) {
+    async handle_reissue_on_hold(edo_id, edo_number, data_form) {
       this.$toast.global.app_loading ();
-      this.house_bl.loading = true
+      this.onHold.loading = true
       try {
-        const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(house_bl_number))
+        const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(data_form))
         this.$toast.clear()
         this.$toast.global.app_success(`e-DO ${edo_number} successfully Hold.`)
       } catch (error) {
         this.$toast.clear()
         this.$toast.global.app_error(`${error.response.data.status}`)
       } finally {
-        this.house_bl.loading = false
+        this.onHold.loading = false
         this.$fetch ();
-        this.close_dialog_house_bl_on_hold();
+        this.close_dialog_on_hold();
       }
     },
 /**
@@ -645,7 +678,6 @@ export default {
         this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to Paid.`)
       }
     },
-
     to_data_url (url, callback) {
       let xhr = new XMLHttpRequest()
       xhr.onload = function () {
@@ -1042,5 +1074,8 @@ export default {
 <style lang="scss" scoped>
   .label {
     color: #B5B5B5 !important;
+  }
+  .label-reject {
+    color: #FF3860 !important;
   }
 </style>
