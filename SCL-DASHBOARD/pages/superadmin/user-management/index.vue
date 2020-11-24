@@ -171,7 +171,6 @@
               >
                 <v-text-field
                   v-model="userPassword"
-                  disabled
                   :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show ? 'text' : 'password'"
                   @click:append="show = !show"

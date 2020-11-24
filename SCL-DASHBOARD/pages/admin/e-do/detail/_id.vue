@@ -59,7 +59,7 @@
         </v-btn>
 
         <!-- Action Send to Consignee  -->
-        <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="">
+        <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="on_send_consignee">
           Send to Consignee <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
       </v-col>
@@ -410,6 +410,7 @@ import {
   setInteractionMode
 } from 'vee-validate';
 import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
+import { error } from 'console';
 
 
 setInteractionMode ('eager');
@@ -524,6 +525,24 @@ export default {
   methods: {
     colors (params) { return getColorStatus (params) },
     /**
+     * Send to consignee
+     */
+    async on_send_consignee () {
+      try {
+        this.$toast.global.app_loading()
+        const response = await this.$axios.get(`/api/e_do/send_to_consignee/${this.edo.edo_id}`)
+      } catch (error) {
+        const { response: { data: { message } } } = error
+        this.$toast.global.app_error (`Failed send to consignee. ${message}`)
+      } finally {
+        this.$fetch()
+      }
+    },
+    /**
+     * end Send to consignee
+     */
+
+    /**
      * Get e-DO By ID
      */
     async get_edo_by_id () {
@@ -563,9 +582,9 @@ export default {
      * Handle Action Reissued / On Hold
      */
     async handle_reissue_on_hold(edo_id, edo_number, data_form) {
-      this.$toast.global.app_loading ();
-      this.onHold.loading = true
       try {
+        this.$toast.global.app_loading ();
+        this.onHold.loading = true
         const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(data_form))
         this.$toast.clear()
         this.$toast.global.app_success(`e-DO ${edo_number} successfully Hold.`)
@@ -696,7 +715,7 @@ export default {
       let edo = this.edo;
       let dateNow = this.$moment().format('DD/MM/YYYY');
 
-      this.to_data_url(require('@/static/logo-scl-new.png'), function (dataURL) {
+      this.to_data_url(require('@/static/logo.png'), function (dataURL) {
         let docDefinition = {
           content: [
             {

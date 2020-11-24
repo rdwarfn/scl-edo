@@ -551,7 +551,7 @@ export default {
       let edo = this.edo;
       let dateNow = this.$moment().format('DD/MM/YYYY');
 
-      this.to_data_url(require('@/static/logo-scl-new.png'), function (dataURL) {
+      this.to_data_url(require('@/static/logo.png'), function (dataURL) {
         let docDefinition = {
           content: [
             {

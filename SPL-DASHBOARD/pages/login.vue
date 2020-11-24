@@ -43,49 +43,6 @@
           </v-card-actions>
       </v-form>
     </v-card>
-
-
-    <v-dialog v-model="dialog" width="500">
-      <v-card>
-        <v-toolbar flat>
-          <v-toolbar-title class="text-h5 font-weight-bold">Forgot Password</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="dialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-divider />
-
-        <v-form ref="formForgot" v-model="formForgotValid" lazy-validation>
-          <v-card-text class="pt-5">
-            <label for="email">Your e-mail</label>
-            <v-text-field
-              id="email"
-              v-model="forgot.email"
-              type="email"
-              outlined
-              class="mt-2"
-              :disabled="isSubmiting"
-              :loading="isSubmiting"
-              :rules="[rules.required]"
-              required
-            ></v-text-field>
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions class="justify-end py-5">
-            <v-btn :disabled="isSubmiting" text @click="dialog = false">
-              Cancel
-            </v-btn>
-
-            <v-btn :loading="isSubmiting" :disabled="!valid" color="primary" @click="dialog = false">
-              Send
-            </v-btn>
-          </v-card-actions>
-        </v-form>
-      </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
@@ -132,17 +89,6 @@ export default {
         } finally {
           this.$refs.form.reset();
           this.isSubmiting = false
-        }
-      }
-    },
-
-    async forgotPassword (e) {
-      if (this.$refs.formForgotPassworrd.validate()) {
-        this.isSubmiting = true
-        try {
-          
-        } catch (error) {
-          
         }
       }
     }
