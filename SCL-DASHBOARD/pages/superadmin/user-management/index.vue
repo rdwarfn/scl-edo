@@ -43,7 +43,7 @@
           </v-col>
 
           <v-col cols="auto">
-            <v-btn color="primary" nuxt :to="`superadmin/user-management/create`"
+            <v-btn color="primary" nuxt :to="`/superadmin/user-management/create`"
               :disabled="$fetchState.pending" :loading="$fetchState.pending">
               Create new user <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
             </v-btn>
@@ -87,7 +87,7 @@
 
             <template v-slot:[`item.created_at`]="{ item }">
               <div class="py-md-5 my-md-4 text-subtitle-2">
-                {{ item.created_at }}
+                {{ $moment(item.created_at).format('DD/MM/YYYY - hh:mm:ss') }}
               </div>
             </template>
 
@@ -254,6 +254,7 @@ export default {
       role: '',
     },
     userPassword: '',
+    passwordEncrypted: '',
     defaultUser: {
       email: '',
       name: '',
@@ -298,6 +299,7 @@ export default {
     _edit(params) {
       this.editedIndex = _.indexOf(this.users, params)
       this.editedUser = _.assign({}, params)
+      this.passwordEncrypted = params.password
       this.userPassword = params.password
       this.dialog = true
     },
@@ -306,6 +308,7 @@ export default {
       this.dialog = false
       this.$nextTick(() => {
         this.editedUser = _.assign({}, this.defaultUser)
+        this.passwordEncrypted = ''
         this.userPassword = ''
       })
     },
@@ -314,6 +317,7 @@ export default {
       this.dialogDelete = false
       this.$nextTick(() => {
         this.editedUser = _.assign({}, this.defaultUser)
+        this.passwordEncrypted = ''
         this.userPassword = ''
         this.editedIndex = -1
       })
@@ -324,7 +328,13 @@ export default {
       this._close()
       this.$toast.global.app_loading ()
       try {
-        const response = await this.$axios.put (`/api/e_do/users/${this.editedUser.user_id}`, qs.stringify(this.editedUser))
+        let dataForm;
+        if (!_.isEqual(this.passwordEncrypted, this.userPassword)) {
+          dataForm = _.assign(this.editedUser, { password: this.userPassword })
+        } else {
+          dataForm = this.editedUser
+        }
+        const response = await this.$axios.put (`/api/e_do/users/${this.editedUser.user_id}`, qs.stringify(dataForm))
         if (response) {
           this.$toast.global.app_success (`User ${this.editedUser.name} successfully updated.`)
         }
@@ -348,9 +358,11 @@ export default {
         this.$toast.global.app_loading ();
         const response = await this.$axios.delete (`/api/e_do/users/${this.editedUser.user_id}`)
         if (response) {
+          this.$toast.clear()
           this.$toast.global.app_success (`User ${this.editedUser.name} successfully deleted.`)
         }
       } catch (error) {
+        this.$toast.clear()
         this.$toast.global.app_error (`User ${item.name} failed to delete.`)
       } finally {
         this._closeDelete()

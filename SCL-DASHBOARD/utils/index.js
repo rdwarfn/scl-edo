@@ -29,7 +29,10 @@ export const getColorStatus = (params) => {
       return '#00D1B2';
 
     case 'HOLD ON':
-      return '#FFDD57'
+      return '#FFDD57';
+
+    case 'ON HOLD':
+      return '#FFDD57';
   }
 }
 
@@ -71,7 +74,9 @@ export const contextDocumentDetailEdo = (params) => {
 }
 
 
-export const isCanSendToConsignee = (status) => _.upperCase (status) === 'UNPAID';
+export const isCanSendToConsignee = (status) => _.upperCase (status) === 'UNPAID' || _.upperCase(status) === 'PAID';
+
+export const isCanPaid = (status) => _.upperCase(status) === 'UNPAID' || _.upperCase(status) === 'HOLD ON' || _.upperCase(status) === 'ON HOLD';
 
 export const isCanReject = (status) => _.upperCase (status) === 'UNPAID';
 

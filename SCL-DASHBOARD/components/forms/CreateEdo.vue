@@ -319,7 +319,7 @@
                 readonly
                 v-bind="attrs"
                 v-on="on"
-                solo required clearable
+                solo required
               ></v-text-field>
               </validation-provider>
             </template>

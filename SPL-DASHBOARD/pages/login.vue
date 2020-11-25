@@ -35,7 +35,6 @@
             :rules="[rules.required]"
             required
           ></v-text-field>
-          <v-btn text color="primary" @click.stop="dialog = !dialog">Forgot password</v-btn>
 
           <v-card-actions class="mt-n3">
             <v-spacer />
@@ -82,12 +81,16 @@ export default {
         this.isSubmiting = true
         this.$toast.global.app_loading()
         try {
-          await this.$store.dispatch('UserLogin', this.login)
+          const response = await this.$store.dispatch('UserLogin', this.login)
+          this.$toast.clear()
+          if (response) {
+            this.$refs.form.reset();
+          }
         } catch (error) {
+          this.$toast.clear()
           const msg = error.response.data && ', ' + error.response.data.message
           this.$toast.global.app_error ('Login failed' + msg)
         } finally {
-          this.$refs.form.reset();
           this.isSubmiting = false
         }
       }

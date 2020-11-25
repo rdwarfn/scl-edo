@@ -55,9 +55,9 @@
           <!-- Created at -->
           <v-col cols="12" sm>
             <div class="label">Created At</div>
-            <div class="font-weight-bold">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold">
               {{ created_at_formated }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Created at -->
@@ -65,9 +65,9 @@
           <!-- Created By -->
           <v-col cols="12" sm>
             <div class="label">Created By</div>
-            <div class="font-weight-bold text-capitalize">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold text-capitalize">
               {{ edo.created_by }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Created By -->
@@ -75,9 +75,9 @@
           <!-- Status e-DO -->
           <v-col cols="12" sm>
             <div class="label">Status</div>
-            <div class="font-weight-bold" :style="{color: colors(edo.status)}">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold" :style="{color: colors(edo.status)}">
               {{ edo.status }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" loading type="text"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Status e-DO -->
@@ -88,12 +88,12 @@
         <v-row justify="end">
           <!-- QrCode -->
           <v-col cols="12" sm="auto">
-            <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
-              <qrcode
-                :value="edo.edo_number"
-                :options="{width: 80, height: 80}"
-              />
-            </v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" loading type="image" width="80" height="80"></v-skeleton-loader>
+            <qrcode
+              v-else
+              :value="edo.edo_number"
+              :options="{width: 80, height: 80}"
+            />
           </v-col>
           <!-- end QrCode -->
 
@@ -101,9 +101,9 @@
           <v-col cols="12" sm="auto">
             <div class="ml-3 d-flex flex-column justify-center">
               <div class="label">e-DO Number</div>
-              <div class="font-weight-bold">
+              <v-skeleton-loader v-if="$fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+              <div v-else class="font-weight-bold">
                 {{ edo.edo_number }}
-                <v-skeleton-loader v-if="!edo.status" loading type="text"></v-skeleton-loader>
               </div>
             </div>
           </v-col>
@@ -133,9 +133,9 @@
           <!-- Shipper name -->
           <v-col cols="12" sm>
             <div class="label">Shipper name</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. shipper_name }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Shipper name -->
@@ -143,9 +143,9 @@
           <!-- Consignee name -->
           <v-col cols="12" sm>
             <div class="label">Consignee name</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. consignee_name }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Consignee name -->
@@ -156,9 +156,9 @@
           <!-- Shipper e-mail -->
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. shipper_email || '-' }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Shipper e-mail -->
@@ -166,9 +166,9 @@
           <!-- Consignee e-mail -->
           <v-col cols="12" sm>
             <div class="label">Consignee e-mail</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. consignee_email }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Consignee e-mail -->
@@ -179,9 +179,9 @@
           <!-- Shipper address -->
           <v-col cols="12" sm>
             <div class="label">Shipper address</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. shipper_address }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Shipper address -->
@@ -189,9 +189,9 @@
           <!-- Consignee address -->
           <v-col cols="12" sm>
             <div class="label">Consignee address</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. consignee_address }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Consignee address -->
@@ -202,9 +202,9 @@
           <!-- Notify -->
           <v-col cols="12" sm>
             <div class="label">Notify</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. notify }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Notify -->
@@ -212,9 +212,9 @@
           <!-- House BL number -->
           <v-col cols="12" sm>
             <div class="label">House BL Number</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. house_bl_number }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end House BL number -->
@@ -225,9 +225,9 @@
           <!-- Notify address -->
           <v-col cols="12" sm>
             <div class="label">Notify Address</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. notify }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Notify address -->
@@ -235,9 +235,9 @@
           <!-- Number of quantity -->
           <v-col cols="12" sm>
             <div class="label">No. of quantity</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. number_of_quantity || '-' }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Number of quantity -->
@@ -255,9 +255,9 @@
           <!-- House BL date -->
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ $moment(edo. house_bl_date).format("DD/MM/YYYY") }}
-                <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end House BL date -->
@@ -268,9 +268,9 @@
           <!-- Arrival date -->
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ $moment(edo. arrival_date).format("DD/MM/YYYY") }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Arrival date -->
@@ -278,9 +278,9 @@
           <!-- Place of receipt -->
           <v-col cols="12" sm>
             <div class="label">Place of receipt</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. place_of_receipt }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Place of receipt -->
@@ -291,9 +291,9 @@
           <!-- Container seal number -->
           <v-col cols="12" sm>
             <div class="label">Container/Seal number</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. container_seal_number }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Container seal number -->
@@ -301,9 +301,9 @@
           <!-- Ocean vessel -->
           <v-col cols="12" sm>
             <div class="label">Ocean vessel</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. ocean_vessel }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Ocean vessel -->
@@ -314,9 +314,9 @@
           <!-- Port of lading -->
           <v-col cols="12" sm>
             <div class="label">Port of lading</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. port_of_loading }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Port of lading -->
@@ -324,9 +324,9 @@
           <!-- Voyage number -->
           <v-col cols="12" sm>
             <div class="label">Voyage Number</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. voyage_number }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Voyage number -->
@@ -337,9 +337,9 @@
           <!-- Final destination -->
           <v-col cols="12" sm>
             <div class="label">Final Destination</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. final_destination }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Final destination -->
@@ -347,9 +347,9 @@
           <!-- Port of discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. port_of_discharges }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Port of discharges -->
@@ -360,9 +360,9 @@
           <!-- Gross weight -->
           <v-col cols="12" sm>
             <div class="label">Gross weight (Kg)</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. gross_weight }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Gross weight -->
@@ -370,9 +370,9 @@
           <!-- Package -->
           <v-col cols="12" sm>
             <div class="label">Package</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. package }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Package -->
@@ -383,9 +383,9 @@
           <!-- Number of package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. number_of_package }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Number of package -->
@@ -393,9 +393,9 @@
           <!-- Measurement -->
           <v-col cols="12" sm>
             <div class="label">Measurement</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. measurment }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Measurement -->
@@ -406,9 +406,9 @@
           <!-- Description of goods -->
           <v-col cols="12" sm>
             <div class="label">Description of goods</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. description_of_goods }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Description of goods -->
@@ -416,9 +416,9 @@
           <!-- Marks and number -->
           <v-col cols="12" sm>
             <div class="label">Marks and number</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. marks_and_number }}
-              <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Marks and number -->
@@ -439,7 +439,7 @@
 <script>
 import { getColorStatus, isCanReject, isCanSendToConsignee } from '@/utils';
 import Notification from '@/components/Snack.vue';
-const _ = require('lodash');
+import _ from 'lodash';
 import pdfmake from 'pdfmake';
 
 import {
@@ -466,7 +466,7 @@ export default {
   async fetch () {
     this.$toast.global.app_loading()
     try {
-      const response = await this.$axios.get(`/api/e_do/${this.$route.params.id}`)
+      const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
       if (response) {
         const { data } = response.data
         this.edo = data[0]
@@ -502,7 +502,7 @@ export default {
     isCandDelete () { return this.isNotEmpty && isAdminCanDelete (this.edo.status) },
     isCanEdit () { return this.isNotEmpty && isAdminCanEdit (this.edo.status) },
     isCanPrint () { return this.isNotEmpty && isAdminCanPrint (this.edo.status) },
-    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' || this.edo.status === 'HOLD ON' },
+    isShowNotes() { return this.isNotEmpty && _.isEqual(this.edo.status, 'REJECTED') || _.isEqual(this.edo.status, 'HOLD ON') || _.isEqual(this.edo.status, 'ON HOLD') },
     computeConfirmDelete () { return this.confirmDelete === this.edo.edo_number },
     created_at_formated () {
       const dateFormated = this.$moment(this.edo.created_at, "DD-MM-YYYY hh:mm:ss", 'id')
@@ -516,16 +516,14 @@ export default {
     async handle_delete_edo (e) {
       this.$toast.global.app_loading ();
       this.loadingDelete    = true;
-      const edonumber       = this.edo.edo_number;
-      const edoid           = this.edo.edo_id;
       try {
-        const result = await this.$axios.delete (`/api/e_do/${edoid}`);
+        const result = await this.$axios.delete (`/api/e_do/${this.edo.edo_id}`);
         if (result) {
-          this.$toast.global.app_success (`e-DO ${edonumber} successfully deleted.`)
+          this.$toast.global.app_success (`e-DO ${this.edo.edo_number} successfully deleted.`)
         }
       } catch (error) {
         const msg   = error.response.message && ` ,${error.response.message}` || '';
-        this.$toast.global.app_error (`e-DO ${edonumber} failed to delete`, msg);
+        this.$toast.global.app_error (`e-DO ${this.edo.edo_number} failed to delete`, msg);
       } finally {
         this.loadingDelete = false;
         this.modalDeleteDialog= false;

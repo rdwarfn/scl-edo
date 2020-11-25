@@ -97,9 +97,9 @@ export default {
       this.$emit('onSubmit', {
         form: this.form
       });
-      setTimeout(() => {
-        this.reset();
-      }, 1000);
+      this.reset();
+      // setTimeout(() => {
+      // }, 1000);
     },
     onCancel() {
       this.$emit('onCancel');

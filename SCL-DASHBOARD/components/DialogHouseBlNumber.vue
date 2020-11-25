@@ -72,12 +72,9 @@ export default {
   methods: {
     _onSubmit() {
       this.$emit('onSubmit', {
-        form: this.form,
-        observer: this.observer
+        form: this.form
       });
-      setTimeout(() => {
-        this.reset();
-      }, 3000);
+      this.reset();
     },
     _onCancel() {
       this.$emit('onCancel');

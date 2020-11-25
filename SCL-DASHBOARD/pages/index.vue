@@ -6,7 +6,6 @@ import _  from 'lodash';
 export default {
   middleware ({ store, redirect }) {
     let role = _.upperCase(store.state.auth.user.role);
-    console.log(role);
     if (!store.state.auth.loggedIn) {
       return redirect ('/login');
     } else {

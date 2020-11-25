@@ -52,11 +52,11 @@
         </v-col>
 
         <v-col cols="12" sm="6" md="4">
-          <label for="password" class="text-body-1">Password</label>
+          <label for="password" class="text-body-1">New Password</label>
           <v-text-field
             id="password"
             class="mt-3"
-            placeholder="Input password"
+            placeholder="Input new password"
             v-model="password"
             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show2 ? 'text' : 'password'"
@@ -146,7 +146,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.isSubmiting = true
         this.$toast.global.app_loading ();
-        this.$axios.post(`/api/e_do/edit_password/${this.$auth.user.id}`, qs.stringify(this.password))
+        this.$axios.put(`/api/e_do/edit_password/${this.$auth.user.id}`, qs.stringify(this.password))
         .then(response => {
           this.$auth.setUser({ ...this.$auth.user, currentPassword: this.password })
           this.$toast.global.app_success (`Password successfully updated.`);

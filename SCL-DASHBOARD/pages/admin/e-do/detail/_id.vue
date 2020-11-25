@@ -59,21 +59,25 @@
         </v-btn>
 
         <!-- Action Send to Consignee  -->
-        <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="on_send_consignee">
+        <!-- <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="on_send_consignee">
           Send to Consignee <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
+        </v-btn> -->
+
+        <v-btn :dark="isCanPaid" color="#00D1B2" :disabled="$fetchState.pending || !isCanPaid" :loading="$fetchState.pending"  @click.stop="paid.showHouseBLDialog = true">
+          Paid <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
       </v-col>
 
       <v-col class="text-right">
         <!-- Action Hold -->
-        <v-btn v-show="iNotHoldOn" class="mr-3" color="warning" @click.stop="onHold.showDialog = true" :disabled="!isCanReissue" :loading="$fetchState.pending">
+        <v-btn class="mr-3" color="warning" @click.stop="onHold.showDialog = true" :disabled="!isCanReissue" :loading="$fetchState.pending">
           Hold this e-DO <v-icon class="ml-2">mdi-delta</v-icon>
         </v-btn>
 
         <!-- Action Paid -->
-        <v-btn dark v-show="!iNotHoldOn" class="mr-3" color="#00D1B2" @click.stop="paid.showHouseBLDialog = true" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+        <!-- <v-btn dark v-show="!iNotHoldOn" class="mr-3" color="#00D1B2" @click.stop="paid.showHouseBLDialog = true" :disabled="$fetchState.pending" :loading="$fetchState.pending">
           Paid <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
-        </v-btn>
+        </v-btn> -->
 
         <!-- Action Reject -->
         <v-btn :dark="isCanReject" color="#FF3860" :disabled="!isCanReject" :loading="$fetchState.pending" @click.prevent="open_dialog_house_bl_reject">
@@ -89,22 +93,25 @@
           <!-- Created By e-DO -->
           <v-col>
             <div class="label">Created At</div>
-            <div class="font-weight-bold">
-              {{ edo.created_at }} <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold">
+              {{ $moment(edo.created_at).format("DD/MM/YYYY - hh:mm:ss") }}
             </div>
           </v-col>
           <!-- Created By e-DO -->
           <v-col>
             <div class="label">Created By</div>
-            <div class="font-weight-bold text-capitalize">
-              {{ edo.created_by }} <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold text-capitalize">
+              {{ edo.created_by }}
             </div>
           </v-col>
           <!-- Status e-DO -->
           <v-col>
             <div class="label">Status</div>
-            <div class="font-weight-bold" :style="{color: colors(edo.status)}">
-              {{ edo.status }} <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" loading type="table-cell"></v-skeleton-loader>
+            <div v-else class="font-weight-bold" :style="{color: colors(edo.status)}">
+              {{ edo.status }}
             </div>
           </v-col>
         </v-row>
@@ -113,17 +120,17 @@
       <v-col>
         <v-row no-gutters justify="end">
           <!-- QrCode-->
-          <v-skeleton-loader :loading="!edo.edo_number" type="image" width="80" height="80">
-            <qrcode
-              :value="edo.edo_number"
-              :options="{width: 80, height: 80}"
-            />
-          </v-skeleton-loader>
+          <v-skeleton-loader v-if="$fetchState.pending" loading type="image" width="80" height="80"></v-skeleton-loader>
+          <qrcode v-else
+            :value="edo.edo_number"
+            :options="{width: 80, height: 80}"
+          />
           <!-- e-DO Number -->
           <div class="ml-3 d-flex flex-column justify-center">
             <div class="label">e-DO Number</div>
-            <div class="font-weight-bold">
-              {{ edo.edo_number }} <v-skeleton-loader v-if="!edo.status" loading type="text"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" loading type="text"></v-skeleton-loader>
+            <div v-else class="font-weight-bold">
+              {{ edo.edo_number }}
             </div>
           </div>
         </v-row>
@@ -151,15 +158,17 @@
           <!-- Shipper Name -->
           <v-col cols="12" sm>
             <div class="label">Shipper name</div>
-            <div class="text-h5">
-              {{ edo. shipper_name }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. shipper_name }}
             </div>
           </v-col>
           <!-- Consignee Name -->
           <v-col cols="12" sm>
             <div class="label">Consignee name</div>
-            <div class="text-h5">
-              {{ edo. consignee_name }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. consignee_name }}
             </div>
           </v-col>
         </v-row>
@@ -169,15 +178,17 @@
           <!-- Shipper e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Shipper e-mail</div>
-            <div class="text-h5">
-              {{ edo. shipper_email || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. shipper_email || '-' }}
             </div>
           </v-col>
           <!-- Consignee e-Mail -->
           <v-col cols="12" sm>
             <div class="label">Consignee e-mail</div>
-            <div class="text-h5">
-              {{ edo. consignee_email }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. consignee_email }}
             </div>
           </v-col>
         </v-row>
@@ -187,15 +198,17 @@
           <!-- Shipper Address -->
           <v-col cols="12" sm>
             <div class="label">Shipper address</div>
-            <div class="text-h5">
-              {{ edo. shipper_address || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. shipper_address || '-' }}
             </div>
           </v-col>
           <!-- Consignee Address -->
           <v-col cols="12" sm>
             <div class="label">Consignee address</div>
-            <div class="text-h5">
-              {{ edo. consignee_address || '-' }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. consignee_address || '-' }}
             </div>
           </v-col>
         </v-row>
@@ -205,15 +218,17 @@
           <!-- Notify -->
           <v-col cols="12" sm>
             <div class="label">Notify</div>
-            <div class="text-h5">
-              {{ edo. notify }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. notify }}
             </div>
           </v-col>
           <!-- House BL Number -->
           <v-col cols="12" sm>
             <div class="label">House BL Number</div>
-            <div class="text-h5">
-              {{ edo. house_bl_number }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. house_bl_number }}
             </div>
           </v-col>
         </v-row>
@@ -223,17 +238,18 @@
           <!-- Notify Address -->
           <v-col cols="12" sm>
             <div class="label">Notify Address</div>
-            <div class="text-h5">
-              {{ edo. notify }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. notify }}
             </div>
           </v-col>
 
           <!-- Number of quantity -->
           <v-col cols="12" sm>
             <div class="label">No. of quantity</div>
-            <div class="text-h5">
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
               {{ edo. number_of_quantity || '-' }}
-              <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             </div>
           </v-col>
           <!-- end Number of quantity -->
@@ -249,8 +265,9 @@
           <!-- House BL Date -->
           <v-col cols="12" sm>
             <div class="label">House BL Date</div>
-            <div class="text-h5">
-              {{ $moment(edo. house_bl_date).format("DD/MM/YYYY") }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ $moment(edo. house_bl_date).format("DD/MM/YYYY") }}
             </div>
           </v-col>
         </v-row>
@@ -260,15 +277,17 @@
           <!-- Arrival Date -->
           <v-col cols="12" sm>
             <div class="label">Arrival Date (ETA)</div>
-            <div class="text-h5">
-              {{ $moment(edo. arrival_date).format("DD/MM/YYYY") }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ $moment(edo. arrival_date).format("DD/MM/YYYY") }}
             </div>
           </v-col>
           <!-- Place of Receipt -->
           <v-col cols="12" sm>
             <div class="label">Place of receipt</div>
-            <div class="text-h5">
-              {{ edo. place_of_receipt }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. place_of_receipt }}
             </div>
           </v-col>
         </v-row>
@@ -278,15 +297,17 @@
           <!-- Container / Seal Number -->
           <v-col cols="12" sm>
             <div class="label">Container/Seal number</div>
-            <div class="text-h5">
-              {{ edo. container_seal_number }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. container_seal_number }}
             </div>
           </v-col>
           <!-- Ocean Vessel -->
           <v-col cols="12" sm>
             <div class="label">Ocean vessel</div>
-            <div class="text-h5">
-              {{ edo. ocean_vessel }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. ocean_vessel }}
             </div>
           </v-col>
         </v-row>
@@ -296,15 +317,17 @@
           <!-- Port of lading -->
           <v-col cols="12" sm>
             <div class="label">Port of lading</div>
-            <div class="text-h5">
-              {{ edo. port_of_loading }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. port_of_loading }}
             </div>
           </v-col>
           <!-- Voyage Number -->
           <v-col cols="12" sm>
             <div class="label">Voyage Number</div>
-            <div class="text-h5">
-              {{ edo. voyage_number }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. voyage_number }}
             </div>
           </v-col>
         </v-row>
@@ -314,15 +337,17 @@
           <!-- Final Destination -->
           <v-col cols="12" sm>
             <div class="label">Final Destination</div>
-            <div class="text-h5">
-              {{ edo. final_destination }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. final_destination }}
             </div>
           </v-col>
           <!-- Port of Discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
-            <div class="text-h5">
-              {{ edo. port_of_discharges }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. port_of_discharges }}
             </div>
           </v-col>
         </v-row>
@@ -332,15 +357,17 @@
           <!-- Gross Weight -->
           <v-col cols="12" sm>
             <div class="label">Gross weight (Kg)</div>
-            <div class="text-h5">
-              {{ edo. gross_weight }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. gross_weight }}
             </div>
           </v-col>
           <!-- Package -->
           <v-col cols="12" sm>
             <div class="label">Package</div>
-            <div class="text-h5">
-              {{ edo. package }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. package }}
             </div>
           </v-col>
         </v-row>
@@ -350,15 +377,17 @@
           <!-- Number of Package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
-            <div class="text-h5">
-              {{ edo. number_of_package }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. number_of_package }}
             </div>
           </v-col>
           <!-- Measurement -->
           <v-col cols="12" sm>
             <div class="label">Measurement</div>
-            <div class="text-h5">
-              {{ edo. measurment }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. measurment }}
             </div>
           </v-col>
         </v-row>
@@ -368,15 +397,17 @@
           <!-- Description of goods -->
           <v-col cols="12" sm>
             <div class="label">Description of goods</div>
-            <div class="text-h5">
-              {{ edo. description_of_goods }}  <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. description_of_goods }}
             </div>
           </v-col>
           <!-- Marks and Number -->
           <v-col cols="12" sm>
             <div class="label">Marks and number</div>
-            <div class="text-h5">
-              {{ edo. marks_and_number }} <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. marks_and_number }}
             </div>
           </v-col>
         </v-row>
@@ -401,6 +432,7 @@ import DialogRejectionEdo from '@/components/DialogRejectionEdo.vue';
 import DialogOnHold from '@/components/DialogOnHold.vue';
 import {
   getColorStatus,
+  isCanPaid,
   isCanReject,
   isCanSendToConsignee
 } from '@/utils';
@@ -410,7 +442,6 @@ import {
   setInteractionMode
 } from 'vee-validate';
 import DialogHouseBlNumber from '@/components/DialogHouseBlNumber.vue';
-import { error } from 'console';
 
 
 setInteractionMode ('eager');
@@ -484,14 +515,11 @@ export default {
     edo (val) {
       const user_role = this.$auth.hasScope('admin') ? 'Superadmin' : ''
       if (val.status !== 'UNPAID' && val.status !== 'PAID' && val.status !== 'REISSUED') {
-        let statusReleased = val.status === 'RELEASED' &&
-          `e-DO ${val.edo_number} has been Released at ${(val.released_at)}`
-
-        let statusRejected = val.status === 'REJECTED' &&
-          `e-DO ${val.edo_number} has been Rejected at ${val.rejected_at}`
-
-        let statusOnHold = val.status == 'HOLD ON' &&
-          `e-DO ${val.edo_number} is Hold by ${user_role} ${this.$store.state.auth.user.name}`
+        let statusReleased = _.isEqual(val.status, 'RELEASED') && `e-DO ${val.edo_number} has been Released at ${(val.released_at)}`
+        let statusRejected = _.isEqual(val.status, 'REJECTED') && `e-DO ${val.edo_number} has been Rejected at ${val.rejected_at}`
+        let statusOnHold = _.isEqual(val.status, 'ON HOLD') || _.isEqual(val.status, 'HOLD ON')
+          ? `e-DO ${val.edo_number} is Hold by ${user_role} ${this.$store.state.auth.user.name}`
+          : null
 
         this.alertStatus.message = statusReleased || statusRejected || statusOnHold
         this.alertStatus.color = statusReleased ? 'purple' : statusRejected ? 'error' : 'warning'
@@ -507,9 +535,10 @@ export default {
   computed: {
     isNotEmpty () { return !_.isEmpty(this.edo) },
     isCanSend () { return this.isNotEmpty && isCanSendToConsignee(this.edo.status) },
-    isCanReject () { return this.isNotEmpty && isCanReject (this.edo.status) },
+    isCanPaid () { return this.isNotEmpty && isCanPaid(this.edo.status) },
+    isCanReject () { return this.isNotEmpty && isCanReject(this.edo.status) },
     iNotHoldOn() { return this.isNotEmpty && this.edo.status !== "HOLD ON"},
-    isShowNotes() { return this.isNotEmpty && this.edo.status === 'REJECTED' || this.edo.status === 'HOLD ON' },
+    isShowNotes() { return this.isNotEmpty && _.isEqual(this.edo.status, 'REJECTED') || _.isEqual(this.edo.status, 'HOLD ON') || _.isEqual(this.edo.status, 'ON HOLD') },
 
     isCanReissue () {
       if (this.isNotEmpty && _.upperCase(this.edo.status) === 'PAID') {
@@ -525,29 +554,11 @@ export default {
   methods: {
     colors (params) { return getColorStatus (params) },
     /**
-     * Send to consignee
-     */
-    async on_send_consignee () {
-      try {
-        this.$toast.global.app_loading()
-        const response = await this.$axios.get(`/api/e_do/send_to_consignee/${this.edo.edo_id}`)
-      } catch (error) {
-        const { response: { data: { message } } } = error
-        this.$toast.global.app_error (`Failed send to consignee. ${message}`)
-      } finally {
-        this.$fetch()
-      }
-    },
-    /**
-     * end Send to consignee
-     */
-
-    /**
      * Get e-DO By ID
      */
     async get_edo_by_id () {
       try {
-        const response = await this.$axios.get(`/api/e_do/${this.$route.params.id}`)
+        const response = await this.$axios.get(`/api/e_do/search?e_do_number=${this.$route.params.id}`)
         if (response.status === 200) {
           const { data } = response.data
           this.edo = data[0]
@@ -586,17 +597,30 @@ export default {
         this.$toast.global.app_loading ();
         this.onHold.loading = true
         const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(data_form))
+        if (response) {
+           await this.on_send_consignee()
+        }
         this.$toast.clear()
         this.$toast.global.app_success(`e-DO ${edo_number} successfully Hold.`)
       } catch (error) {
         this.$toast.clear()
-        this.$toast.global.app_error(`${error.response.data.status}`)
+        this.$toast.global.app_error(`${error.response.data.message}`)
       } finally {
         this.onHold.loading = false
         this.$fetch ();
         this.close_dialog_on_hold();
       }
     },
+    /**
+     * Send to consignee
+     */
+    async on_send_consignee () {
+      await this.$axios.get(`/api/e_do/send_to_consignee/${this.edo.edo_id}`)
+    },
+    /**
+     * end Send to consignee
+     */
+
 /**
  * End Block Reissued Action
  */
@@ -635,7 +659,14 @@ export default {
       try {
         this.paidRejectLoading = true
         this.reject.formDialog = _.assign(this.reject.formDialog, data.form)
-        await this.handle_reject()
+        const response = await this.handle_reject()
+        if (response) {
+          this.$toast.clear()
+          this.$toast.global.app_success(`e-DO ${this.edo.edo_number} successfully rejected.`)
+        }
+      } catch (error) {
+        this.$toast.clear()
+        this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to reject.`)
       } finally {
         this.paidRejectLoading = false
         this.reject.showDescriptionDialog = false
@@ -646,19 +677,11 @@ export default {
      * Action Reject
      */
     async handle_reject() {
-      try {
-        this.$toast.global.app_loading()
-        const response = await this.$axios.put(
-          `/api/e_do/reject/${this.edo.edo_id}`,
-          qs.stringify(this.reject.formDialog)
-        )
-        if (response) {
-          this.$toast.global.app_success(`e-DO ${this.edo.edo_number} successfully rejected.`)
-        }
-      } catch (error) {
-        this.$toast.clear()
-        this.$toast.global.app_error(`e-DO ${this.edo.edo_number} failed to reject.`)
-      }
+      const response = await this.$axios.put(
+        `/api/e_do/reject/${this.edo.edo_id}`,
+        qs.stringify(this.reject.formDialog)
+      )
+      return response
     },
 /**
  * End BLock Reject Action

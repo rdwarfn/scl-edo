@@ -207,7 +207,7 @@
 
               <!-- Detail action -->
               <template v-slot:[`item.detail`]="{ item }">
-                  <v-btn text nuxt class="text-capitalize" :to="`${$route.path}/detail/${item.edo_id}`">
+                  <v-btn text nuxt class="text-capitalize" :to="`${$route.path}/detail/${item.edo_number}`">
                   Detail
                 </v-btn>
               </template>
@@ -589,6 +589,7 @@ export default {
         if (response) {
           this.$toast.clear()
           this.$toast.global.app_success (`e-DO ${this.paid.edo.edo_number} successfully Paid.`)
+          await this.on_send_consignee()
         }
       } catch (error) {
         this.$toast.clear()
@@ -596,11 +597,21 @@ export default {
       } finally {
         this.paidRejectLoading = false
         this.close_dialog_paid()
-        await this.getAll()
+        await this.get_all()
       }
     },
     /**
      * End Block Approve/Paid Action
+     */
+
+    /**
+     * Send to consignee
+     */
+    async on_send_consignee () {
+      await this.$axios.get(`/api/e_do/send_to_consignee/${this.paid.edo.edo_id}`)
+    },
+    /**
+     * end Send to consignee
      */
 
     /**

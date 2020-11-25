@@ -59,12 +59,10 @@ export default {
       this.isLoading = true
       try {
         const response = this.$axios.post ('/api/e_do', qs.stringify(params.data))
-        console.log(response);
         if (response) {
           this.$toast.global.app_success (`Success create edo`);
         }
       } catch (error) {
-        console.log(error);
         this.$toast.global.app_error ('Failed create edo')
       } finally {
         this.isLoading = false

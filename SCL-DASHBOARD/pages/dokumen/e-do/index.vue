@@ -168,7 +168,7 @@
                 <v-btn
                 text nuxt
                 class="text-capitalize"
-                :to="`${$route.path}/detail/${item.edo_id}`">
+                :to="`${$route.path}/detail/${item.edo_number}`">
                 Detail
               </v-btn>
             </template>
