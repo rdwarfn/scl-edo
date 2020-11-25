@@ -409,6 +409,7 @@ export default {
       disabled: true
     }]
   },
+  middleware: 'adminscl',
   components: {
     CardListStatusEdo,
     DialogHouseBlNumber,

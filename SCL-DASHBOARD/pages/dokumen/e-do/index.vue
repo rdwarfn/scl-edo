@@ -363,6 +363,7 @@ export default {
       href: '/dokumen/e-do'
     }]
   },
+  middleware: 'dokumenscl',
 
   data () {
     return {

@@ -453,6 +453,7 @@ export default {
     DialogRejectionEdo,
     DialogOnHold,
   },
+  middleware: 'adminscl',
   meta: {
     crumbs: [{
       to: '/admin',

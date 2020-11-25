@@ -26,6 +26,7 @@ export default {
       disabled: true
     }]
   },
+  middleware: 'dokumenscl',
   components: { EditEdoForm },
 
   data() {
@@ -67,18 +68,20 @@ export default {
       try {
         this.$toast.global.app_loading()
         this.isLoading = true
-        let edonumber = this.$route.params.id
         const validate = await params.observer.validate()
         if (validate) {
           const response = await this.$axios.put(`/api/e_do/${params.data.edo_id}`, qs.stringify(params.data))
           if (response) {
-            this.$toast.global.app_success(`e-DO ${edonumber} successfully updated.`)
+            this.$toast.clear()
+            this.$toast.global.app_success(`e-DO ${this.$route.params.id} successfully updated.`)
           }
         }
       } catch (error) {
-        console.log(JSON.stringify(error))
+        console.log(JSON.stringify(error.response))
         const response = error.response && error.response
-        this.$toast.global.app_error(`e-DO ${edonumber} failed to update`)
+        const { response: { data: { status } }} = error
+        this.$toast.clear()
+        this.$toast.global.app_error(status)
       } finally {
         this.isLoading = false
         this.$router.back()

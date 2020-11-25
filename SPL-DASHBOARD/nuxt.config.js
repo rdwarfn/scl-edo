@@ -1,11 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // env: {
-  //   baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-  //   API_URL: 'https://cors-anywhere.herokuapp.com/https://api-scl.herokuapp.com'
-  // },
-  // Global page headers (https://go.nuxtjs.dev/config-head)
+  loading: {
+    color: 'rgb(0, 209, 178)',
+    height: '5px'
+  },
   /*
   ** Nuxt target
   */
@@ -91,13 +90,12 @@ export default {
           user: false,
           logout: false
         },
-        tokenRequired: true,
         tokenType: false,
-        autoFetchUser: false,
-        watchLoggedIn: false,
-        // rewriteRedirects: false
+        // rewriteRedirects: fa,lse
       }
-    }
+    },
+    autoFetchUser: false,
+    resetOnError: true,
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

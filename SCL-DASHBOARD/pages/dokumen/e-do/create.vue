@@ -19,6 +19,7 @@ export default {
       disabled: true
     }]
   },
+  middleware: 'dokumenscl',
   components: { CreateEdoForm },
 
   data () {

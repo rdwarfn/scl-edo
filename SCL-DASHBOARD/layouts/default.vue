@@ -19,12 +19,13 @@ import Appbar from '@/components/Appbar.vue';
 import _ from 'lodash';
 
 export default {
-  middleware ({ store, redirect }) {
-    if (!store.state.auth.loggedIn)
-      return redirect('/')
-  },
-
   components: { DrawerDashboard, Appbar },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      setTimeout(() => this.$nuxt.$loading.finish(), 1500)
+    })
+  },
 
   methods: {
     getColorNotif (params) {

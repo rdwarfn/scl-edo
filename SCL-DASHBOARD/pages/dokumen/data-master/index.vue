@@ -90,6 +90,7 @@ export default {
       disabled: true
     }]
   },
+  middleware: 'dokumenscl',
   components: {
     ConsigneeForm,
     POLForm,

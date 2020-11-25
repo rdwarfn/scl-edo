@@ -1,13 +1,18 @@
 
 export default {
+  loading: {
+    color: 'rgb(0, 209, 178)',
+    height: '5px'
+  },
   /*
   ** Nuxt target
   */
-  target: 'server',
+  ssr: false,
+  target: 'static',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - SCL e-DO',
+    // titleTemplate: '%s - SCL e-DO',
     title: 'SCL e-DO',
     meta: [
       { charset: 'utf-8' },
@@ -65,8 +70,6 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    // proxy: true,
-    // baseURL: 'https://backend-scl.herokuapp.com',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT'

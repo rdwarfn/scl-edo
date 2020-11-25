@@ -462,6 +462,7 @@ export default {
       disabled: true,
     }]
   },
+  middleware: 'dokumenscl',
 
   async fetch () {
     this.$toast.global.app_loading()

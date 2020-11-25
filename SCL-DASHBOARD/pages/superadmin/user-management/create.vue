@@ -122,6 +122,7 @@ export default {
       text: 'Create User',
     }]
   },
+  middleware: 'superadminscl',
 
   data () {
     return {

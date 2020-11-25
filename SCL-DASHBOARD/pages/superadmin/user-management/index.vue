@@ -232,6 +232,7 @@ export default {
       text: 'User Management'
     }]
   },
+  middleware: 'superadminscl',
 
   data: () => ({
     search: '',
