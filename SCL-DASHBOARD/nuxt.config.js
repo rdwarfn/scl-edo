@@ -7,12 +7,12 @@ export default {
   /*
   ** Nuxt target
   */
-  // ssr: false,
-  // target: 'static',
+  ssr: false,
+  target: 'static',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    // titleTemplate: '%s - SCL e-DO',
+    titleTemplate: '%s',
     title: 'SCL e-DO',
     meta: [
       { charset: 'utf-8' },
@@ -46,8 +46,7 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
-    // '@nuxtjs/dotenv',
+    '@nuxtjs/vuetify'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -160,58 +159,6 @@ export default {
       }
     ]
   },
-
-  // pwa: {
-  //   workbox: {
-  //     // General
-  //     workboxVersion: require('workbox-cdn/package.json').version,
-  //     // workboxURL: undefined,
-  //     workboxURL: 'https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js',
-  //     importScripts: [],
-  //     autoRegister: true,
-  //     dev: undefined,
-
-  //     // Config
-  //     config: {},
-  //     clientsClaim: true,
-  //     skipWaiting: true,
-  //     offlineAnalytics: false,
-  //     workboxExtensions: [],
-
-  //     // Precache
-  //     preCaching: [],
-  //     cacheOptions: {
-  //       cacheId: undefined,
-  //       directoryIndex: '/',
-  //       revision: undefined
-  //     },
-  //     cachingExtensions: [],
-  //     cleanupOutdatedCaches: true,
-
-  //     // Offline
-  //     offline: true,
-  //     offlineStrategy: 'NetworkFirst',
-  //     offlinePage: null,
-  //     offlineAssets: ['_nuxt/*'],
-
-  //     // Runtime Caching
-  //     runtimeCaching: [],
-  //     routingExtensions: [],
-  //     cacheAssets: true,
-  //     assetsURLPattern: '/_nuxt/',
-  //     pagesURLPattern: '/',
-
-  //     // Sw
-  //     swTemplate: undefined,
-  //     swUrl: undefined,
-  //     swScope: 'routerBase',
-  //     swDest: undefined,
-
-  //     // Router
-  //     routerBase: undefined,
-  //     publicPath: '/_nuxt'
-  //   }
-  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
