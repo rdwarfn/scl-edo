@@ -45,14 +45,14 @@ export default {
     }
   },
 
-  fetch() {
+  async fetch() {
     this.$toast.global.app_loading()
-    Promise.all ([
+    await Promise.all ([
       this.get_edo_by_number(),
       // this.get_all_consignee(),
-      this.get_all_port_of_loading(),
-      this.get_all_port_of_discharge(),
-      this.get_all_final_destination()
+      // this.get_all_port_of_loading(),
+      // this.get_all_port_of_discharge(),
+      // this.get_all_final_destination()
     ])
     .finally(() => {
       this.$toast.clear()

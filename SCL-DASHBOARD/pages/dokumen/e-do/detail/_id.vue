@@ -233,13 +233,13 @@
           <!-- end Notify address -->
 
           <!-- Number of quantity -->
-          <v-col cols="12" sm>
+          <!-- <v-col cols="12" sm>
             <div class="label">No. of quantity</div>
             <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
               {{ edo. number_of_quantity || '-' }}
             </div>
-          </v-col>
+          </v-col> -->
           <!-- end Number of quantity -->
         </v-row>
 
@@ -362,24 +362,11 @@
             <div class="label">Gross weight (Kg)</div>
             <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
-              {{ edo. gross_weight }}
+              {{ edo. gross_weight }} KGM
             </div>
           </v-col>
           <!-- end Gross weight -->
 
-          <!-- Package -->
-          <v-col cols="12" sm>
-            <div class="label">Package</div>
-            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
-            <div v-else class="text-h5">
-              {{ edo. package }}
-            </div>
-          </v-col>
-          <!-- end Package -->
-        </v-row>
-
-
-        <v-row>
           <!-- Number of package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
@@ -390,12 +377,25 @@
           </v-col>
           <!-- end Number of package -->
 
-          <!-- Measurement -->
-          <v-col cols="12" sm>
-            <div class="label">Measurement</div>
+          <!-- Package -->
+          <!-- <v-col cols="12" sm>
+            <div class="label">Package</div>
             <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
-              {{ edo. measurment }}
+              {{ edo. package }}
+            </div>
+          </v-col> -->
+          <!-- end Package -->
+        </v-row>
+
+
+        <v-row>
+          <!-- Measurement -->
+          <v-col cols="12" sm>
+            <div class="label">Measurement (CBM)</div>
+            <v-skeleton-loader v-if="loadingDelete || $fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. measurment }} M3
             </div>
           </v-col>
           <!-- end Measurement -->
@@ -836,7 +836,7 @@ export default {
                                   style: 'label'
                                 },
                                 {
-                                  text: `${edo.gross_weight} Kgm`,
+                                  text: `${edo.gross_weight} KGM`,
                                   style: 'content'
                                 }
                               ],
@@ -851,7 +851,7 @@ export default {
                                   style: 'label'
                                 },
                                 {
-                                  text: edo.measurment,
+                                  text: `${edo.measurment} M3`,
                                   style: 'content'
                                 }
                               ],
@@ -862,11 +862,11 @@ export default {
                             {
                               text: [
                                 {
-                                  text: 'Package\n',
+                                  text: 'Number Of Package\n',
                                   style: 'label'
                                 },
                                 {
-                                  text: edo.package,
+                                  text: edo.number_of_package,
                                   style: 'content'
                                 }
                               ],

@@ -34,9 +34,9 @@ export default {
   plugins: [
     '@/plugins/axios',
     '@/plugins/vuex-persist',
-    '@/plugins/vuelidate',
+    '@/plugins/vee-validate',
     '@/plugins/qrcode-generate',
-    { src: '@/plugins/vue-qrcode', mode: 'client' },
+    '@/plugins/vue-qrcode.client',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

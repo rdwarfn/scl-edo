@@ -235,7 +235,7 @@
         <!-- end Notify address -->
 
         <!-- No of quantity -->
-        <v-col cols="12" sm="6">
+        <!-- <v-col cols="12" sm="6">
           <validation-provider
             v-slot="{ errors, valid }"
             name="No. of quantity"
@@ -257,7 +257,7 @@
               required
             ></v-text-field>
           </validation-provider>
-        </v-col>
+        </v-col> -->
         <!-- end No of quantity -->
       </v-row>
 
@@ -467,18 +467,16 @@
             rules="required"
           >
           <label for="portOfLoading">Port of lading</label>
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.port_of_loading"
             id="portOfLoading"
-            placeholder="Select port of lading"
-            item-text="name"
-            :items="selectData.portOfLoading"
+            placeholder="Input port of lading"
             :error-messages="errors"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end port of loading -->
@@ -528,18 +526,18 @@
             solo clearable
             required
           ></v-text-field> -->
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.final_destination"
             id="finalDestination"
-            placeholder="Select final destination"
-            item-text="name"
-            :items="selectData.finalDestination"
+            placeholder="Input final destination"
             :error-messages="errors"
+            :disabled="loading"
+            :loading="loading"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end Final destination -->
@@ -552,18 +550,18 @@
             rules="required"
           >
           <label class="labelText" for="portOfDischarge">Port of discharge</label>
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.port_of_discharges"
             id="portOfDischarge"
-            placeholder="Select port of discharge"
-            item-text="name"
-            :items="selectData.portOfDischarge"
+            placeholder="Input port of discharge"
             :error-messages="errors"
+            :disabled="loading"
+            :loading="loading"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end Port of discharge -->
@@ -596,8 +594,32 @@
         </v-col>
         <!-- end Gross weight -->
 
-        <!-- Package -->
+        <!-- Number of package -->
         <v-col cols="12" sm="6">
+          <validation-provider
+            v-slot="{ errors, valid }"
+            name="Number of package"
+            rules="required"
+          >
+          <label class="labelText" for="numberOfPackage">Number of package</label>
+          <v-text-field
+            v-model.trim="models.number_of_package"
+            id="numberOfPackage"
+            placeholder="Input number of package"
+            :loading="loading"
+            :disabled="loading"
+            :error-messages="errors"
+            :success="valid"
+            class="mt-3"
+            solo clearable
+            required
+          ></v-text-field>
+          </validation-provider>
+        </v-col>
+        <!-- end Number of package -->
+
+        <!-- Package -->
+        <!-- <v-col cols="12" sm="6">
           <validation-provider
             v-slot="{ errors, valid }"
             name="Package"
@@ -617,7 +639,7 @@
             required
           ></v-text-field>
           </validation-provider>
-        </v-col>
+        </v-col> -->
         <!-- end Package -->
       </v-row>
 
@@ -647,30 +669,6 @@
           </validation-provider>
         </v-col>
         <!-- end Measurement -->
-
-        <!-- Number of package -->
-        <v-col cols="12" sm="6">
-          <validation-provider
-            v-slot="{ errors, valid }"
-            name="Number of package"
-            rules="required"
-          >
-          <label class="labelText" for="numberOfPackage">Number of package</label>
-          <v-text-field
-            v-model.trim="models.number_of_package"
-            id="numberOfPackage"
-            placeholder="Input number of package"
-            :loading="loading"
-            :disabled="loading"
-            :error-messages="errors"
-            :success="valid"
-            class="mt-3"
-            solo clearable
-            required
-          ></v-text-field>
-          </validation-provider>
-        </v-col>
-        <!-- end Number of package -->
       </v-row>
 
 
@@ -763,14 +761,7 @@ export default {
   components: { ValidationProvider, ValidationObserver },
 
   props: {
-    loading: { type: Boolean, required: true , default: false },
-    selectData: {
-      shipperName: { type: Array, required: true, default: [] },
-      consigneeName: { type: Array, required: true, default: [] },
-      portOfLoading: { type: Array, required: true, default: [] },
-      portOfDischarge: { type: Array, required: true, default: [] },
-      finalDestination: { type: Array, required: true, default: [] }
-    }
+    loading: { type: Boolean, required: true , default: false }
   },
   data() {
     return {

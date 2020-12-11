@@ -4,12 +4,14 @@
     <v-row class="my-5">
       <v-col cols="12" sm="6">
         <div  style="color: #B5B5B5; font-size: 14px;">Created at</div>
-        <div class="text-subtitle-1 text-capitalize"> {{ created_at_formated }} </div>
+        <v-skeleton-loader v-if="loading" type="table-cell"></v-skeleton-loader>
+        <div v-else class="text-subtitle-1 text-capitalize"> {{ created_at_formated }} </div>
       </v-col>
 
       <v-col cols="12" sm="6">
         <div  style="color: #B5B5B5; font-size: 14px;">Created by</div>
-        <div class="text-subtitle-1 text-capitalize"> {{ models.created_by }} </div>
+        <v-skeleton-loader v-if="loading" type="table-cell"></v-skeleton-loader>
+        <div v-else class="text-subtitle-1 text-capitalize"> {{ models.created_by }} </div>
       </v-col>
     </v-row>
     <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
@@ -247,11 +249,11 @@
         <!-- end Notify address -->
 
         <!-- No of quantity -->
-        <v-col cols="12" sm="6">
+        <!-- <v-col cols="12" sm="6">
           <validation-provider
             v-slot="{ errors, valid }"
             name="No. of quantity"
-            rules="required|numeric"
+            rules="required"
           >
             <label class="labelText" for="noOfQuantity">No. of quantity</label>
             <v-text-field
@@ -269,7 +271,7 @@
               required
             ></v-text-field>
           </validation-provider>
-        </v-col>
+        </v-col> -->
         <!-- end No of quantity -->
       </v-row>
 
@@ -305,7 +307,7 @@
           <v-menu
             v-model="menu_house_bl_date"
             :close-on-content-click="false"
-            transition="scale-transition"
+            transition="slide-x-reverse-transition"
             offset-y
             max-width="290px"
             min-width="290px"
@@ -353,7 +355,7 @@
           <v-menu
             v-model="menu_arrival_date"
             :close-on-content-click="false"
-            transition="scale-transition"
+            transition="slide-x-transition"
             offset-y
             max-width="290px"
             min-width="290px"
@@ -478,18 +480,18 @@
             rules="required"
           >
           <label for="portOfLoading">Port of lading</label>
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.port_of_loading"
             id="portOfLoading"
-            placeholder="Select port of lading"
-            item-text="name"
-            :items="selectData.portOfLoading"
+            placeholder="Input port of lading"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end port of loading -->
@@ -528,18 +530,18 @@
             rules="required"
           >
           <label class="labelText" for="finalDestination">Final destination</label>
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.final_destination"
             id="finalDestination"
-            placeholder="Select final destination"
-            item-text="name"
-            :items="selectData.finalDestination"
+            placeholder="Input final destination"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end Final destination -->
@@ -552,18 +554,18 @@
             rules="required"
           >
           <label class="labelText" for="portOfDischarge">Port of discharge</label>
-          <v-autocomplete
+          <v-text-field
             v-model.trim="models.port_of_discharges"
             id="portOfDischarge"
-            placeholder="Select port of discharge"
-            item-text="name"
-            :items="selectData.portOfDischarge"
+            placeholder="Input port of discharge"
+            :loading="loading"
+            :disabled="loading"
             :error-messages="errors"
             :success="valid"
             class="mt-3"
             solo clearable
             required
-          ></v-autocomplete>
+          ></v-text-field>
           </validation-provider>
         </v-col>
         <!-- end Port of discharge -->
@@ -578,7 +580,7 @@
             name="Gross weight"
             rules="required"
           >
-          <label class="labelText" for="grossWeight">Gross weight</label>
+          <label class="labelText" for="grossWeight">Gross weight <small>(Kg)</small></label>
           <v-text-field
             v-model.trim="models.gross_weight"
             id="grossWeight"
@@ -596,8 +598,32 @@
         </v-col>
         <!-- end Gross weight -->
 
-        <!-- Package -->
+        <!-- Number of package -->
         <v-col cols="12" sm="6">
+          <validation-provider
+            v-slot="{ errors, valid }"
+            name="Number of package"
+            rules="required"
+          >
+          <label class="labelText" for="numberOfPackage">Number of package</label>
+          <v-text-field
+            v-model.trim="models.number_of_package"
+            id="numberOfPackage"
+            placeholder="Input number of package"
+            :loading="loading"
+            :disabled="loading"
+            :error-messages="errors"
+            :success="valid"
+            class="mt-3"
+            solo clearable
+            required
+          ></v-text-field>
+          </validation-provider>
+        </v-col>
+        <!-- end Number of package -->
+
+        <!-- Package -->
+        <!-- <v-col cols="12" sm="6">
           <validation-provider
             v-slot="{ errors, valid }"
             name="Package"
@@ -617,44 +643,20 @@
             required
           ></v-text-field>
           </validation-provider>
-        </v-col>
+        </v-col> -->
         <!-- end Package -->
       </v-row>
 
 
       <v-row>
-        <!-- Number of package -->
-        <v-col cols="12" sm="6">
-          <validation-provider
-            v-slot="{ errors, valid }"
-            name="Number of package"
-            rules="required|numeric"
-          >
-          <label class="labelText" for="numberOfPackage">Number of package</label>
-          <v-text-field
-            v-model.trim="models.number_of_package"
-            id="numberOfPackage"
-            placeholder="Input number of package"
-            :loading="loading"
-            :disabled="loading"
-            :error-messages="errors"
-            :success="valid"
-            class="mt-3"
-            solo clearable
-            required
-          ></v-text-field>
-          </validation-provider>
-        </v-col>
-        <!-- end Number of package -->
-
         <!-- Measurement -->
         <v-col cols="12" sm="6">
           <validation-provider
             v-slot="{ errors, valid }"
             name="Measurement"
-            rules="required|numeric"
+            rules="required"
           >
-          <label class="labelText" for="grossWeight">Measurement</label>
+          <label class="labelText" for="grossWeight">Measurement <small>(CBM)</small></label>
           <v-text-field
             id="grossWeight"
             placeholder="Input measurement"
@@ -784,7 +786,7 @@ export default {
       house_bl_number: { type: String, required: true, default: "" },
 
       notify_address: { type: String, required: true, default: "" },
-      number_of_quantity: { type: [Number, String], required: true, default: 1 },
+      // number_of_quantity: { type: [Number, String], required: true, default: 1 },
 
       mbl_number: { type: String, required: true, default: "" },
       house_bl_date: { type: String, required: true, default: "" },
@@ -802,7 +804,7 @@ export default {
       port_of_discharges: { type: String, required: true, default: "" },
 
       gross_weight: { type: String, required: true, default: "" },
-      package: { type: String, required: true, default: "" },
+      // package: { type: String, required: true, default: "" },
 
       number_of_package: { type: String, required: true, default: "" },
       measurment: { type: String, required: true, default: "" },

@@ -42,11 +42,6 @@ export const setDisabledActions = params => {
   return _.upperCase (params) !== "UNPAID"
 }
 
-export const validateEmail = (params) => {
-  const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return pattern.test(params)
-}
-
 export const contextDocumentDetailEdo = (params) => {
   let ctx;
   switch (_.upperCase(params)) {
@@ -74,7 +69,7 @@ export const contextDocumentDetailEdo = (params) => {
 }
 
 
-export const isCanSendToConsignee = (status) => _.upperCase (status) === 'UNPAID' || _.upperCase(status) === 'PAID';
+export const isCanSendToConsignee = (status) => _.upperCase(status) === 'PAID';
 
 export const isCanPaid = (status) => _.upperCase(status) === 'UNPAID' || _.upperCase(status) === 'HOLD ON' || _.upperCase(status) === 'ON HOLD';
 
@@ -135,7 +130,7 @@ export const initialEdo = {
     house_bl_number: "",
 
     notify_address: "",
-    number_of_quantity: "",
+    // number_of_quantity: "",
 
     mbl_number: "",
     house_bl_date: "",
@@ -153,7 +148,7 @@ export const initialEdo = {
     port_of_discharges: "",
 
     gross_weight: "",
-    package: "",
+    // package: "",
 
     number_of_package: "",
     measurment: "",

@@ -7,101 +7,128 @@
       @close="showMessage = false"
     />
 
-    <v-form v-model="valid" ref="form" lazy-validation>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <label for="email" class="text-body-1">E-mail</label>
-          <v-text-field
-            id="email"
-            class="mt-3"
-            placeholder="Input e-mail"
-            type="email"
-            v-model="form.email"
-            :rules="[rules.emailRules, isValidEmail]"
-            solo validate-on-blur
-            required :loading="isSubmiting"
-          ></v-text-field>
-        </v-col>
+    <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
+      <v-form @submit="handleSubmit(on_submit)">
+        <v-row>
+          <v-col cols="12" sm="6">
+            <validation-provider v-slot="{ valid, errors }" rules="required|email" name="e-mail">
+              <label for="email" class="text-body-1">E-mail</label>
+              <v-text-field
+                v-model="form.email"
+                id="email"
+                class="mt-3"
+                placeholder="Input e-mail"
+                type="email"
+                :rules="errors"
+                :success="valid"
+                :loading="isSubmiting"
+                solo
+                required
+                clearable
+              />
+            </validation-provider>
+          </v-col>
 
-        <v-col cols="12" sm="6">
-          <label for="name" class="text-body-1">Name</label>
-          <v-text-field
-            id="name"
-            class="mt-3"
-            placeholder="Input name"
-            v-model="form.name"
-            :rules="rules.nameRules"
-            solo validate-on-blur
-            required :loading="isSubmiting"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-
-
-      <v-row>
-        <v-col cols="12" sm="6">
-          <label for="role" class="text-body-1">Role</label>
-          <v-select
-            id="role"
-            class="mt-3 text-capitalize"
-            placeholder="Select role"
-            v-model="form.role"
-            :items="roleItems"
-            :rules="[rules.roleRules]"
-            solo validate-on-blur
-            required :loading="isSubmiting"
-          ></v-select>
-        </v-col>
-      </v-row>
+          <v-col cols="12" sm="6">
+            <validation-provider v-slot="{ valid, errors }" rules="required" name="name">
+              <label for="name" class="text-body-1">Name</label>
+              <v-text-field
+                v-model="form.name"
+                id="name"
+                class="mt-3"
+                placeholder="Input name"
+                :rules="errors"
+                :success="valid"
+                :loading="isSubmiting"
+                solo
+                required
+                clearable
+              />
+            </validation-provider>
+          </v-col>
+        </v-row>
 
 
-      <v-row>
-        <v-col cols="12" sm="6">
-          <label for="password" class="text-body-1">Password</label>
-          <v-text-field
-            id="password"
-            class="mt-3"
-            placeholder="Input password"
-            v-model="form.password"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show1 ? 'text' : 'password'"
-            @click:append="show1 = !show1"
-            :rules="rules.passwordRules"
-            solo validate-on-blur
-            required :loading="isSubmiting"
-          ></v-text-field>
-        </v-col>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <validation-provider v-slot="{ valid, errors }" rules="required" name="role">
+              <label for="role" class="text-body-1">Role</label>
+              <v-select
+                v-model="form.role"
+                id="role"
+                class="mt-3 text-capitalize"
+                placeholder="Select role"
+                :items="roleItems"
+                :rules="errors"
+                :success="valid"
+                :loading="isSubmiting"
+                solo
+                required
+                clearable
+              />
+            </validation-provider>
+          </v-col>
+        </v-row>
 
-        <v-col cols="12" sm="6">
-          <label for="rePassword" class="text-body-1">Re-type Password</label>
-          <v-text-field
-            id="rePassword"
-            class="mt-3"
-            placeholder="Input password again"
-            v-model="rePassword"
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show2 ? 'text' : 'password'"
-            @click:append="show2 = !show2"
-            :rules="[rules.rePasswordRules, passwordConfirm]"
-            solo validate-on-blur
-            required :loading="isSubmiting"
-          ></v-text-field>
-        </v-col>
-      </v-row>
 
-      <v-row>
-        <v-col>
-          <v-btn text color="red" @click="cancel">
-            Cancel
-          </v-btn>
-        </v-col>
-        <v-col>
-          <v-btn :loading="isSubmiting" color="primary" @click="submit" :disabled="!valid">
-            Create
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-form>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <validation-provider v-slot="{ valid, errors }" rules="required" name="password">
+              <label for="password" class="text-body-1">Password</label>
+              <v-text-field
+                v-model="form.password"
+                id="password"
+                class="mt-3"
+                placeholder="Input password"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+                :rules="errors"
+                :success="valid"
+                :loading="isSubmiting"
+                solo
+                required
+                clearable
+              />
+            </validation-provider>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <validation-provider v-slot="{ valid, errors }" rules="required" name="re-type password">
+              <label for="rePassword" class="text-body-1">Re-type Password</label>
+              <v-text-field
+                v-model="rePassword"
+                id="rePassword"
+                class="mt-3"
+                placeholder="Input password again"
+                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show2 ? 'text' : 'password'"
+                @click:append="show2 = !show2"
+                :rules="errors"
+                :success="valid"
+                :loading="isSubmiting"
+                solo
+                required
+                clearable
+              />
+            </validation-provider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col>
+            <v-btn text color="red" @click="cancel">
+              Cancel
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn :loading="isSubmiting" color="primary" @click="submit" :disabled="invalid">
+              Create
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+    </validation-observer>
   </v-container>
 </template>
 

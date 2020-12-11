@@ -51,21 +51,29 @@
     </v-alert>
     <!-- end Alert Status e-DO -->
 
-    <v-row class="mt-8">
-      <v-col cols="auto">
+    <v-row align="center" class="mt-8">
+      <v-col cols="12" sm>
         <!-- Action Print -->
-        <v-btn class="mr-3" @click="crete_pdf" :disabled="$fetchState.pending" :loading="$fetchState.pending">
-          Print <v-icon class="ml-2">mdi-printer</v-icon>
-        </v-btn>
+        <v-row align="center">
+          <v-col cols="12" sm="auto">
+            <v-btn @click="crete_pdf" :disabled="$fetchState.pending" :loading="$fetchState.pending">
+              Print <v-icon class="ml-2">mdi-printer</v-icon>
+            </v-btn>
+          </v-col>
 
-        <!-- Action Send to Consignee  -->
-        <!-- <v-btn :dark="isCanSend" color="#00D1B2" :disabled="!isCanSend" :loading="$fetchState.pending" @click.prevent="on_send_consignee">
-          Send to Consignee <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
-        </v-btn> -->
+          <v-col cols="12" sm="auto">
+            <v-btn :dark="isCanPaid" color="#00D1B2" :disabled="$fetchState.pending || !isCanPaid" :loading="$fetchState.pending"  @click.stop="paid.showHouseBLDialog = true">
+              Paid <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
+            </v-btn>
+          </v-col>
 
-        <v-btn :dark="isCanPaid" color="#00D1B2" :disabled="$fetchState.pending || !isCanPaid" :loading="$fetchState.pending"  @click.stop="paid.showHouseBLDialog = true">
-          Paid <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
-        </v-btn>
+          <!-- Action Send to Consignee  -->
+          <v-col cols="12" sm="auto" v-show="isCanSend">
+            <v-btn dark color="#00D1B2" :loading="$fetchState.pending" link :href="`mailto:${edo.consignee_email}`">
+              Send to Consignee <v-icon class="ml-2">mdi-checkbox-marked-circle-outline</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
 
       <v-col class="text-right">
@@ -245,13 +253,13 @@
           </v-col>
 
           <!-- Number of quantity -->
-          <v-col cols="12" sm>
+          <!-- <v-col cols="12" sm>
             <div class="label">No. of quantity</div>
             <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
               {{ edo. number_of_quantity || '-' }}
             </div>
-          </v-col>
+          </v-col> -->
           <!-- end Number of quantity -->
         </v-row>
 
@@ -334,20 +342,20 @@
 
 
         <v-row>
-          <!-- Final Destination -->
-          <v-col cols="12" sm>
-            <div class="label">Final Destination</div>
-            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
-            <div v-else class="text-h5">
-              {{ edo. final_destination }}
-            </div>
-          </v-col>
           <!-- Port of Discharges -->
           <v-col cols="12" sm>
             <div class="label">Port of discharges</div>
             <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
               {{ edo. port_of_discharges }}
+            </div>
+          </v-col>
+          <!-- Final Destination -->
+          <v-col cols="12" sm>
+            <div class="label">Final Destination</div>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. final_destination }}
             </div>
           </v-col>
         </v-row>
@@ -359,21 +367,9 @@
             <div class="label">Gross weight (Kg)</div>
             <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
-              {{ edo. gross_weight }}
+              {{ edo. gross_weight }} KGM
             </div>
           </v-col>
-          <!-- Package -->
-          <v-col cols="12" sm>
-            <div class="label">Package</div>
-            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
-            <div v-else class="text-h5">
-              {{ edo. package }}
-            </div>
-          </v-col>
-        </v-row>
-
-
-        <v-row>
           <!-- Number of Package -->
           <v-col cols="12" sm>
             <div class="label">Number of Package</div>
@@ -382,12 +378,24 @@
               {{ edo. number_of_package }}
             </div>
           </v-col>
-          <!-- Measurement -->
-          <v-col cols="12" sm>
-            <div class="label">Measurement</div>
+          <!-- Package -->
+          <!-- <v-col cols="12" sm>
+            <div class="label">Package</div>
             <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
             <div v-else class="text-h5">
-              {{ edo. measurment }}
+              {{ edo. package }}
+            </div>
+          </v-col> -->
+        </v-row>
+
+
+        <v-row>
+          <!-- Measurement -->
+          <v-col cols="12" sm>
+            <div class="label">Measurement (CBM)</div>
+            <v-skeleton-loader v-if="$fetchState.pending" type="table-cell"></v-skeleton-loader>
+            <div v-else class="text-h5">
+              {{ edo. measurment }} M3
             </div>
           </v-col>
         </v-row>
@@ -597,10 +605,7 @@ export default {
       try {
         this.$toast.global.app_loading ();
         this.onHold.loading = true
-        const response = await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(data_form))
-        if (response) {
-           await this.on_send_consignee()
-        }
+        await this.$axios.put(`/api/e_do/reissued/${edo_id}`, qs.stringify(data_form))
         this.$toast.clear()
         this.$toast.global.app_success(`e-DO ${edo_number} successfully Hold.`)
       } catch (error) {
@@ -1025,7 +1030,7 @@ export default {
                                   style: 'label'
                                 },
                                 {
-                                  text: `${edo.gross_weight} Kgm`,
+                                  text: `${edo.gross_weight} KGM`,
                                   style: 'content'
                                 }
                               ],
@@ -1040,7 +1045,7 @@ export default {
                                   style: 'label'
                                 },
                                 {
-                                  text: edo.measurment,
+                                  text: `${edo.measurment} M3`,
                                   style: 'content'
                                 }
                               ],
@@ -1051,11 +1056,11 @@ export default {
                             {
                               text: [
                                 {
-                                  text: 'Package\n',
+                                  text: 'Number Of Package\n',
                                   style: 'label'
                                 },
                                 {
-                                  text: edo.package,
+                                  text: edo.number_of_package,
                                   style: 'content'
                                 }
                               ],

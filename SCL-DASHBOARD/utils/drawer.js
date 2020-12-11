@@ -26,11 +26,6 @@ export default {
     icon: 'mdi-home-outline'
   },
   {
-    title: 'Data Master',
-    to: '/dokumen/data-master',
-    icon: 'mdi-database-outline'
-  },
-  {
     title: 'Setting',
     to: '/setting',
     icon: 'mdi-cog-outline'

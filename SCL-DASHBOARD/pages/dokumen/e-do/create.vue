@@ -1,5 +1,5 @@
 <template>
-  <create-edo-form @onSubmit="onSubmit" :loading="isLoading" :selectData="dataSelect">
+  <create-edo-form @onSubmit="onSubmit" :loading="isLoading">
   </create-edo-form>
 </template>
 
@@ -24,39 +24,29 @@ export default {
 
   data () {
     return {
-      isLoading: false,
-      dataSelect: {
-        shipperName: ["a", "b"],
-        consigneeName: [],
-        portOfLoading: [],
-        portOfDischarge: [],
-        finalDestination: [],
-      }
+      isLoading: false
     }
   },
 
-  async fetch () {
-    this.isLoading = true;
-    this.$toast.global.app_loading();
+  // async fetch () {
+  //   this.isLoading = true;
+  //   this.$toast.global.app_loading();
 
-    await Promise.all([
-      this.geAllConsignee (),
-      this.getAllPortOfLading (),
-      this.getAllPortOfDischarge (),
-      this.getAllFinalDestination ()
-    ])
-    .finally (() => {
-      this.isLoading = false;
-      this.$toast.clear();
-    });
-  },
-  fetchOnServer: false,
+  //   await Promise.all([
+  //     this.geAllConsignee (),
+  //     this.getAllPortOfLading (),
+  //     this.getAllPortOfDischarge (),
+  //     this.getAllFinalDestination ()
+  //   ])
+  //   .finally (() => {
+  //     this.isLoading = false;
+  //     this.$toast.clear();
+  //   });
+  // },
+  // fetchOnServer: false,
 
   methods: {
     onSubmit (params) {
-      // params.observer.validate()
-      // .then (success => {
-      // })
       this.isLoading = true
       try {
         const response = this.$axios.post ('/api/e_do', qs.stringify(params.data))
